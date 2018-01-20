@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/he/git/coflowSim_online/master/datastructures/mapper.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/mapper.cpp.o"
   "/home/he/git/coflowSim_online/master/datastructures/reducer.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/reducer.cpp.o"
   "/home/he/git/coflowSim_online/master/main.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/main.cpp.o"
+  "/home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

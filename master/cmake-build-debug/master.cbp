@@ -121,6 +121,12 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/main.cpp">
 			<Option target="master"/>
 		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/TraceProducer.h">
+			<Option target="master"/>
+		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -312,6 +312,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+traceProducer/TraceProducer.o: traceProducer/TraceProducer.cpp.o
+
+.PHONY : traceProducer/TraceProducer.o
+
+# target to build an object file
+traceProducer/TraceProducer.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o
+.PHONY : traceProducer/TraceProducer.cpp.o
+
+traceProducer/TraceProducer.i: traceProducer/TraceProducer.cpp.i
+
+.PHONY : traceProducer/TraceProducer.i
+
+# target to preprocess a source file
+traceProducer/TraceProducer.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.i
+.PHONY : traceProducer/TraceProducer.cpp.i
+
+traceProducer/TraceProducer.s: traceProducer/TraceProducer.cpp.s
+
+.PHONY : traceProducer/TraceProducer.s
+
+# target to generate assembly for a file
+traceProducer/TraceProducer.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.s
+.PHONY : traceProducer/TraceProducer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -342,6 +369,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... traceProducer/TraceProducer.o"
+	@echo "... traceProducer/TraceProducer.i"
+	@echo "... traceProducer/TraceProducer.s"
 .PHONY : help
 
 

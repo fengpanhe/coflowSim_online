@@ -12,6 +12,9 @@ class CoflowCollection {
 public:
     CoflowCollection();
 
+    const vector<Coflow *> &getCoflows() const;
+
+    bool addCoflow(Coflow* flow);
 private:
     vector<Coflow*> coflows;
 

@@ -11,5 +11,5 @@ Line i: <Coflow ID> <Arrival time (ms)> <Number of mappers> <Location of map-m> 
 ## machine-define.txt Format
 ```
 Line 1: <Number of machines(one per line)>
-Line i: <Machine ID> <Arrival time (ms)> <Number of mappers> <Location of map-m> <Number of reducers> <Location of reduce-r:Shuffle megabytes of reduce-r>
+Line i: <Machine ID> 
 ```

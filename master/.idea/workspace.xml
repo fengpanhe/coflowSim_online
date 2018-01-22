@@ -47,10 +47,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoflowBenchmarkTraceProducer.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CoflowBenchmarkTraceProducer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/traceProducer/CoflowBenchmarkTraceProducer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="880">
+            <state relative-caret-position="1276">
               <caret line="61" column="60" lean-forward="true" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
               <folding>
                 <element signature="e#36#54#0" expanded="true" />
@@ -59,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="machine.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="machine.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datastructures/machine.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
@@ -273,12 +273,12 @@
       <workItem from="1516371218042" duration="649000" />
       <workItem from="1516372687993" duration="15000" />
       <workItem from="1516372727291" duration="11936000" />
-      <workItem from="1516451626121" duration="25011000" />
+      <workItem from="1516451626121" duration="25646000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40456000" />
+    <option name="totallyTimeSpent" value="41091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-6" width="1920" height="1086" extended-state="6" />
@@ -722,21 +722,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/traceProducer/CoflowBenchmarkTraceProducer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="61" column="60" lean-forward="true" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
-          <folding>
-            <element signature="e#36#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datastructures/machine.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/traceProducer/CoflowBenchmarkTraceProducer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1276">
+          <caret line="61" column="60" lean-forward="true" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
+          <folding>
+            <element signature="e#36#54#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

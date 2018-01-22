@@ -8,12 +8,14 @@
 
 class Machine {
 public:
-    Machine(int machineID);
+    Machine(int machineID, char * machineIP, int machinePORT):machineID(machineID),machineIP(machineIP),machinePORT(machinePORT);
 
     int getMachineID() const;
     void setMachineID(int machineID);
-private:
-    int machineID;
+private:/
+    const int machineID;
+    const char * machineIP;
+    const int machinePORT;
 };
 
 

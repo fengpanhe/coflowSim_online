@@ -6,7 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/master.dir/datastructures/machine.cpp.o"
   "CMakeFiles/master.dir/datastructures/mapper.cpp.o"
   "CMakeFiles/master.dir/datastructures/reducer.cpp.o"
-  "CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o"
+  "CMakeFiles/master.dir/traceProducer/producer.cpp.o"
+  "CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
   "master.pdb"
   "master"
 )

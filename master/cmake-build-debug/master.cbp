@@ -121,10 +121,16 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/main.cpp">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp">
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/TraceProducer.h">
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/producer.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/producer.h">
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/CMakeLists.txt">

@@ -225,28 +225,52 @@ CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides: CMakeFiles/master.d
 CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides.build: CMakeFiles/master.dir/datastructures/reducer.cpp.o
 
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o: CMakeFiles/master.dir/flags.make
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o: ../traceProducer/TraceProducer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o"
-	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o -c /home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp
+CMakeFiles/master.dir/traceProducer/producer.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../traceProducer/producer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/master.dir/traceProducer/producer.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/traceProducer/producer.cpp.o -c /home/he/git/coflowSim_online/master/traceProducer/producer.cpp
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.i"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp > CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.i
+CMakeFiles/master.dir/traceProducer/producer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/traceProducer/producer.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/traceProducer/producer.cpp > CMakeFiles/master.dir/traceProducer/producer.cpp.i
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.s"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/traceProducer/TraceProducer.cpp -o CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.s
+CMakeFiles/master.dir/traceProducer/producer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/traceProducer/producer.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/traceProducer/producer.cpp -o CMakeFiles/master.dir/traceProducer/producer.cpp.s
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.requires:
+CMakeFiles/master.dir/traceProducer/producer.cpp.o.requires:
 
-.PHONY : CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.requires
+.PHONY : CMakeFiles/master.dir/traceProducer/producer.cpp.o.requires
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.provides: CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.requires
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.provides.build
-.PHONY : CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.provides
+CMakeFiles/master.dir/traceProducer/producer.cpp.o.provides: CMakeFiles/master.dir/traceProducer/producer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/producer.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/traceProducer/producer.cpp.o.provides
 
-CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.provides.build: CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o
+CMakeFiles/master.dir/traceProducer/producer.cpp.o.provides.build: CMakeFiles/master.dir/traceProducer/producer.cpp.o
+
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../traceProducer/CoflowBenchmarkTraceProducer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o -c /home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp > CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.i
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp -o CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.s
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.requires:
+
+.PHONY : CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.requires
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.provides: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.provides
+
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.provides.build: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 
 
 # Object files for target master
@@ -258,7 +282,8 @@ master_OBJECTS = \
 "CMakeFiles/master.dir/datastructures/machine.cpp.o" \
 "CMakeFiles/master.dir/datastructures/mapper.cpp.o" \
 "CMakeFiles/master.dir/datastructures/reducer.cpp.o" \
-"CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o"
+"CMakeFiles/master.dir/traceProducer/producer.cpp.o" \
+"CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
 
 # External object files for target master
 master_EXTERNAL_OBJECTS =
@@ -270,10 +295,11 @@ master: CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o
 master: CMakeFiles/master.dir/datastructures/machine.cpp.o
 master: CMakeFiles/master.dir/datastructures/mapper.cpp.o
 master: CMakeFiles/master.dir/datastructures/reducer.cpp.o
-master: CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o
+master: CMakeFiles/master.dir/traceProducer/producer.cpp.o
+master: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 master: CMakeFiles/master.dir/build.make
 master: CMakeFiles/master.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable master"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable master"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/master.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -288,7 +314,8 @@ CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/coflowColle
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/machine.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/mapper.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/reducer.cpp.o.requires
-CMakeFiles/master.dir/requires: CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/traceProducer/producer.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.requires
 
 .PHONY : CMakeFiles/master.dir/requires
 

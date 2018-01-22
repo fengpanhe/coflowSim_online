@@ -11,41 +11,29 @@
 
 class Flow {
 public:
-    Flow(Mapper* mapper, Reducer* reducer, double flowSizeMB):mapper(mapper),reducer(reducer),flowSizeMB(flowSizeMB){
+    Flow(int mapperID, int reducerID, double flowSizeMB):mapperID(mapperID),reducerID(reducerID),flowSizeMB(flowSizeMB){
         this->remainMB = flowSizeMB;
+        this->currentMbs = 0;
     }
 
-    const Mapper *getMapper() const {
-        return mapper;
-    }
+    const int getMapperID() const;
 
-    const Reducer *getReducer() const {
-        return reducer;
-    }
+    const int getReducerID() const;
 
-    const double getFlowSizeMB() const {
-        return flowSizeMB;
-    }
+    const double getFlowSizeMB() const;
 
-    double getRemainMB() const {
-        return remainMB;
-    }
+    double getRemainMB() const;
 
-    double getCurrentMbs() const {
-        return currentMbs;
-    }
+    void setRemainMB(double remainMB);
 
-    void setRemainMB(double remainMB) {
-        Flow::remainMB = remainMB;
-    }
+    double getCurrentMbs() const;
 
-    void setCurrentMbs(double currentMbs) {
-        Flow::currentMbs = currentMbs;
-    }
+    void setCurrentMbs(double currentMbs);
 
+    void toString();
 private:
-    const Mapper* mapper;
-    const Reducer* reducer;
+    const int mapperID;
+    const int reducerID;
     const double flowSizeMB;
     double remainMB;
     double currentMbs;

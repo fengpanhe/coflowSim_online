@@ -312,32 +312,59 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-traceProducer/TraceProducer.o: traceProducer/TraceProducer.cpp.o
+traceProducer/CoflowBenchmarkTraceProducer.o: traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 
-.PHONY : traceProducer/TraceProducer.o
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.o
 
 # target to build an object file
-traceProducer/TraceProducer.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.o
-.PHONY : traceProducer/TraceProducer.cpp.o
+traceProducer/CoflowBenchmarkTraceProducer.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 
-traceProducer/TraceProducer.i: traceProducer/TraceProducer.cpp.i
+traceProducer/CoflowBenchmarkTraceProducer.i: traceProducer/CoflowBenchmarkTraceProducer.cpp.i
 
-.PHONY : traceProducer/TraceProducer.i
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.i
 
 # target to preprocess a source file
-traceProducer/TraceProducer.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.i
-.PHONY : traceProducer/TraceProducer.cpp.i
+traceProducer/CoflowBenchmarkTraceProducer.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.i
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.cpp.i
 
-traceProducer/TraceProducer.s: traceProducer/TraceProducer.cpp.s
+traceProducer/CoflowBenchmarkTraceProducer.s: traceProducer/CoflowBenchmarkTraceProducer.cpp.s
 
-.PHONY : traceProducer/TraceProducer.s
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.s
 
 # target to generate assembly for a file
-traceProducer/TraceProducer.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/TraceProducer.cpp.s
-.PHONY : traceProducer/TraceProducer.cpp.s
+traceProducer/CoflowBenchmarkTraceProducer.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.s
+.PHONY : traceProducer/CoflowBenchmarkTraceProducer.cpp.s
+
+traceProducer/producer.o: traceProducer/producer.cpp.o
+
+.PHONY : traceProducer/producer.o
+
+# target to build an object file
+traceProducer/producer.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/producer.cpp.o
+.PHONY : traceProducer/producer.cpp.o
+
+traceProducer/producer.i: traceProducer/producer.cpp.i
+
+.PHONY : traceProducer/producer.i
+
+# target to preprocess a source file
+traceProducer/producer.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/producer.cpp.i
+.PHONY : traceProducer/producer.cpp.i
+
+traceProducer/producer.s: traceProducer/producer.cpp.s
+
+.PHONY : traceProducer/producer.s
+
+# target to generate assembly for a file
+traceProducer/producer.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/traceProducer/producer.cpp.s
+.PHONY : traceProducer/producer.cpp.s
 
 # Help Target
 help:
@@ -369,9 +396,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... traceProducer/TraceProducer.o"
-	@echo "... traceProducer/TraceProducer.i"
-	@echo "... traceProducer/TraceProducer.s"
+	@echo "... traceProducer/CoflowBenchmarkTraceProducer.o"
+	@echo "... traceProducer/CoflowBenchmarkTraceProducer.i"
+	@echo "... traceProducer/CoflowBenchmarkTraceProducer.s"
+	@echo "... traceProducer/producer.o"
+	@echo "... traceProducer/producer.i"
+	@echo "... traceProducer/producer.s"
 .PHONY : help
 
 

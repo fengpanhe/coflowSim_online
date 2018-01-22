@@ -3,5 +3,37 @@
 //
 
 #include "flow.h"
+#include <iostream>
+using namespace std;
 
+void Flow::toString(){
+    cout << "flow:" << this->mapperID << " -> " << this->reducerID << " : " << remainMB << "/" << this->flowSizeMB << " : " << this->currentMbs << "MBs" << endl;
+}
 
+const int Flow::getMapperID() const {
+    return mapperID;
+}
+
+const int Flow::getReducerID() const {
+    return reducerID;
+}
+
+const double Flow::getFlowSizeMB() const {
+    return flowSizeMB;
+}
+
+double Flow::getRemainMB() const {
+    return remainMB;
+}
+
+void Flow::setRemainMB(double remainMB) {
+    Flow::remainMB = remainMB;
+}
+
+double Flow::getCurrentMbs() const {
+    return currentMbs;
+}
+
+void Flow::setCurrentMbs(double currentMbs) {
+    Flow::currentMbs = currentMbs;
+}

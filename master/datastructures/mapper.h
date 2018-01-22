@@ -14,6 +14,7 @@ public:
     void setMachine(Machine *machine);
 
 private:
+
     Machine * machine;
 
 };

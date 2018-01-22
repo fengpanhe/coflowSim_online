@@ -14,9 +14,17 @@ public:
 
     const vector<Coflow *> &getCoflows() const;
 
-    bool addCoflow(Coflow* flow);
+    bool addCoflow(Coflow* coflow);
+
+    Coflow* getCoflowByindex(int index);
+
+    int getCoflowNum() const;
+
+    void setCoflowNum(int coflowNum);
+
 private:
     vector<Coflow*> coflows;
+    int coflowNum;
 
 };
 

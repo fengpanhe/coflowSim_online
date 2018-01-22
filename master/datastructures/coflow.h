@@ -12,9 +12,15 @@ using namespace std;
 
 class Coflow {
 public:
-    Coflow(int coflowID, double statrtTime):coflowID(coflowID),startTime(startTime){}
-    void addFlow(Mapper* mapper, Reducer* reducer, double flowSizeMB);
+    Coflow(int coflowID, double startTime):coflowID(coflowID),startTime(startTime){}
 
+    void addFlow(int mapperID, int reducerID, double flowSizeMB);
+
+    const int getCoflowID() const;
+
+    const double getStartTime() const;
+
+    void toString();
 private:
     const int coflowID;
     const double startTime;

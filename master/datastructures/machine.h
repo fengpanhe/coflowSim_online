@@ -6,13 +6,17 @@
 #define MASTER_MACHINE_H
 
 
-class Machine {
+#include "../socket/socketManage.h"
+
+class Machine : public SocketManage {
 public:
-    Machine(int machineID, char * machineIP, int machinePORT):machineID(machineID),machineIP(machineIP),machinePORT(machinePORT);
+    Machine(int machineID, char * machineIP, int machinePORT):machineID(machineID),machineIP(machineIP),machinePORT(machinePORT){}
 
     int getMachineID() const;
-    void setMachineID(int machineID);
-private:/
+
+    void run() override;
+
+private:
     const int machineID;
     const char * machineIP;
     const int machinePORT;

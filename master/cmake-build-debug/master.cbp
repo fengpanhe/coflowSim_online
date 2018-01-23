@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/coflowSim/coflowSim.h">
+			<Option target="master"/>
+		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/coflow.cpp">
 			<Option target="master"/>
 		</Unit>
@@ -118,7 +124,34 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/reducer.h">
 			<Option target="master"/>
 		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/lib/locker.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/lib/thread.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/lib/threadpool.h">
+			<Option target="master"/>
+		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/main.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/reciver.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/reciver.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/sender.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/sender.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/socketManage.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/socket/socketManage.h">
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp">

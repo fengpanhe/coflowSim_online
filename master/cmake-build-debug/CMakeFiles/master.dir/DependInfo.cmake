@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o"
   "/home/he/git/coflowSim_online/master/datastructures/coflow.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflow.cpp.o"
   "/home/he/git/coflowSim_online/master/datastructures/coflowCollection.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o"
   "/home/he/git/coflowSim_online/master/datastructures/flow.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/flow.cpp.o"
@@ -11,6 +12,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/he/git/coflowSim_online/master/datastructures/mapper.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/mapper.cpp.o"
   "/home/he/git/coflowSim_online/master/datastructures/reducer.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/reducer.cpp.o"
   "/home/he/git/coflowSim_online/master/main.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/main.cpp.o"
+  "/home/he/git/coflowSim_online/master/socket/reciver.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/socket/reciver.cpp.o"
+  "/home/he/git/coflowSim_online/master/socket/sender.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/socket/sender.cpp.o"
+  "/home/he/git/coflowSim_online/master/socket/socketManage.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/socket/socketManage.cpp.o"
   "/home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
   "/home/he/git/coflowSim_online/master/traceProducer/producer.cpp" "/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/producer.cpp.o"
   )

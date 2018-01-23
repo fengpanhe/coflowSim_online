@@ -123,6 +123,33 @@ master/fast:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/build
 .PHONY : master/fast
 
+coflowSim/coflowSim.o: coflowSim/coflowSim.cpp.o
+
+.PHONY : coflowSim/coflowSim.o
+
+# target to build an object file
+coflowSim/coflowSim.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o
+.PHONY : coflowSim/coflowSim.cpp.o
+
+coflowSim/coflowSim.i: coflowSim/coflowSim.cpp.i
+
+.PHONY : coflowSim/coflowSim.i
+
+# target to preprocess a source file
+coflowSim/coflowSim.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.i
+.PHONY : coflowSim/coflowSim.cpp.i
+
+coflowSim/coflowSim.s: coflowSim/coflowSim.cpp.s
+
+.PHONY : coflowSim/coflowSim.s
+
+# target to generate assembly for a file
+coflowSim/coflowSim.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.s
+.PHONY : coflowSim/coflowSim.cpp.s
+
 datastructures/coflow.o: datastructures/coflow.cpp.o
 
 .PHONY : datastructures/coflow.o
@@ -312,6 +339,87 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+socket/reciver.o: socket/reciver.cpp.o
+
+.PHONY : socket/reciver.o
+
+# target to build an object file
+socket/reciver.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.o
+.PHONY : socket/reciver.cpp.o
+
+socket/reciver.i: socket/reciver.cpp.i
+
+.PHONY : socket/reciver.i
+
+# target to preprocess a source file
+socket/reciver.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.i
+.PHONY : socket/reciver.cpp.i
+
+socket/reciver.s: socket/reciver.cpp.s
+
+.PHONY : socket/reciver.s
+
+# target to generate assembly for a file
+socket/reciver.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.s
+.PHONY : socket/reciver.cpp.s
+
+socket/sender.o: socket/sender.cpp.o
+
+.PHONY : socket/sender.o
+
+# target to build an object file
+socket/sender.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.o
+.PHONY : socket/sender.cpp.o
+
+socket/sender.i: socket/sender.cpp.i
+
+.PHONY : socket/sender.i
+
+# target to preprocess a source file
+socket/sender.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.i
+.PHONY : socket/sender.cpp.i
+
+socket/sender.s: socket/sender.cpp.s
+
+.PHONY : socket/sender.s
+
+# target to generate assembly for a file
+socket/sender.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.s
+.PHONY : socket/sender.cpp.s
+
+socket/socketManage.o: socket/socketManage.cpp.o
+
+.PHONY : socket/socketManage.o
+
+# target to build an object file
+socket/socketManage.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.o
+.PHONY : socket/socketManage.cpp.o
+
+socket/socketManage.i: socket/socketManage.cpp.i
+
+.PHONY : socket/socketManage.i
+
+# target to preprocess a source file
+socket/socketManage.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.i
+.PHONY : socket/socketManage.cpp.i
+
+socket/socketManage.s: socket/socketManage.cpp.s
+
+.PHONY : socket/socketManage.s
+
+# target to generate assembly for a file
+socket/socketManage.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.s
+.PHONY : socket/socketManage.cpp.s
+
 traceProducer/CoflowBenchmarkTraceProducer.o: traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 
 .PHONY : traceProducer/CoflowBenchmarkTraceProducer.o
@@ -375,6 +483,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... master"
+	@echo "... coflowSim/coflowSim.o"
+	@echo "... coflowSim/coflowSim.i"
+	@echo "... coflowSim/coflowSim.s"
 	@echo "... datastructures/coflow.o"
 	@echo "... datastructures/coflow.i"
 	@echo "... datastructures/coflow.s"
@@ -396,6 +507,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... socket/reciver.o"
+	@echo "... socket/reciver.i"
+	@echo "... socket/reciver.s"
+	@echo "... socket/sender.o"
+	@echo "... socket/sender.i"
+	@echo "... socket/sender.s"
+	@echo "... socket/socketManage.o"
+	@echo "... socket/socketManage.i"
+	@echo "... socket/socketManage.s"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.o"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.i"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.s"

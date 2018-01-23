@@ -8,6 +8,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/master.dir/datastructures/reducer.cpp.o"
   "CMakeFiles/master.dir/traceProducer/producer.cpp.o"
   "CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
+  "CMakeFiles/master.dir/socket/sender.cpp.o"
+  "CMakeFiles/master.dir/socket/reciver.cpp.o"
+  "CMakeFiles/master.dir/socket/socketManage.cpp.o"
+  "CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o"
   "master.pdb"
   "master"
 )

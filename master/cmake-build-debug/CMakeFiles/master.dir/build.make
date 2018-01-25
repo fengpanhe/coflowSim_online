@@ -177,57 +177,9 @@ CMakeFiles/master.dir/datastructures/machine.cpp.o.provides: CMakeFiles/master.d
 CMakeFiles/master.dir/datastructures/machine.cpp.o.provides.build: CMakeFiles/master.dir/datastructures/machine.cpp.o
 
 
-CMakeFiles/master.dir/datastructures/mapper.cpp.o: CMakeFiles/master.dir/flags.make
-CMakeFiles/master.dir/datastructures/mapper.cpp.o: ../datastructures/mapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/master.dir/datastructures/mapper.cpp.o"
-	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/datastructures/mapper.cpp.o -c /home/he/git/coflowSim_online/master/datastructures/mapper.cpp
-
-CMakeFiles/master.dir/datastructures/mapper.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/datastructures/mapper.cpp.i"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/datastructures/mapper.cpp > CMakeFiles/master.dir/datastructures/mapper.cpp.i
-
-CMakeFiles/master.dir/datastructures/mapper.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/datastructures/mapper.cpp.s"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/datastructures/mapper.cpp -o CMakeFiles/master.dir/datastructures/mapper.cpp.s
-
-CMakeFiles/master.dir/datastructures/mapper.cpp.o.requires:
-
-.PHONY : CMakeFiles/master.dir/datastructures/mapper.cpp.o.requires
-
-CMakeFiles/master.dir/datastructures/mapper.cpp.o.provides: CMakeFiles/master.dir/datastructures/mapper.cpp.o.requires
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/mapper.cpp.o.provides.build
-.PHONY : CMakeFiles/master.dir/datastructures/mapper.cpp.o.provides
-
-CMakeFiles/master.dir/datastructures/mapper.cpp.o.provides.build: CMakeFiles/master.dir/datastructures/mapper.cpp.o
-
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.o: CMakeFiles/master.dir/flags.make
-CMakeFiles/master.dir/datastructures/reducer.cpp.o: ../datastructures/reducer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/master.dir/datastructures/reducer.cpp.o"
-	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/datastructures/reducer.cpp.o -c /home/he/git/coflowSim_online/master/datastructures/reducer.cpp
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/datastructures/reducer.cpp.i"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/datastructures/reducer.cpp > CMakeFiles/master.dir/datastructures/reducer.cpp.i
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/datastructures/reducer.cpp.s"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/datastructures/reducer.cpp -o CMakeFiles/master.dir/datastructures/reducer.cpp.s
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.o.requires:
-
-.PHONY : CMakeFiles/master.dir/datastructures/reducer.cpp.o.requires
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides: CMakeFiles/master.dir/datastructures/reducer.cpp.o.requires
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides.build
-.PHONY : CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides
-
-CMakeFiles/master.dir/datastructures/reducer.cpp.o.provides.build: CMakeFiles/master.dir/datastructures/reducer.cpp.o
-
-
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: CMakeFiles/master.dir/flags.make
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../traceProducer/producer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/master.dir/traceProducer/producer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/master.dir/traceProducer/producer.cpp.o"
 	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/traceProducer/producer.cpp.o -c /home/he/git/coflowSim_online/master/traceProducer/producer.cpp
 
 CMakeFiles/master.dir/traceProducer/producer.cpp.i: cmake_force
@@ -251,7 +203,7 @@ CMakeFiles/master.dir/traceProducer/producer.cpp.o.provides.build: CMakeFiles/ma
 
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: CMakeFiles/master.dir/flags.make
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../traceProducer/CoflowBenchmarkTraceProducer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o"
 	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o -c /home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp
 
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.i: cmake_force
@@ -275,7 +227,7 @@ CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.provides.
 
 CMakeFiles/master.dir/socket/sender.cpp.o: CMakeFiles/master.dir/flags.make
 CMakeFiles/master.dir/socket/sender.cpp.o: ../socket/sender.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/master.dir/socket/sender.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/master.dir/socket/sender.cpp.o"
 	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/socket/sender.cpp.o -c /home/he/git/coflowSim_online/master/socket/sender.cpp
 
 CMakeFiles/master.dir/socket/sender.cpp.i: cmake_force
@@ -297,33 +249,9 @@ CMakeFiles/master.dir/socket/sender.cpp.o.provides: CMakeFiles/master.dir/socket
 CMakeFiles/master.dir/socket/sender.cpp.o.provides.build: CMakeFiles/master.dir/socket/sender.cpp.o
 
 
-CMakeFiles/master.dir/socket/reciver.cpp.o: CMakeFiles/master.dir/flags.make
-CMakeFiles/master.dir/socket/reciver.cpp.o: ../socket/reciver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/master.dir/socket/reciver.cpp.o"
-	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/socket/reciver.cpp.o -c /home/he/git/coflowSim_online/master/socket/reciver.cpp
-
-CMakeFiles/master.dir/socket/reciver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/socket/reciver.cpp.i"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/socket/reciver.cpp > CMakeFiles/master.dir/socket/reciver.cpp.i
-
-CMakeFiles/master.dir/socket/reciver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/socket/reciver.cpp.s"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/socket/reciver.cpp -o CMakeFiles/master.dir/socket/reciver.cpp.s
-
-CMakeFiles/master.dir/socket/reciver.cpp.o.requires:
-
-.PHONY : CMakeFiles/master.dir/socket/reciver.cpp.o.requires
-
-CMakeFiles/master.dir/socket/reciver.cpp.o.provides: CMakeFiles/master.dir/socket/reciver.cpp.o.requires
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.o.provides.build
-.PHONY : CMakeFiles/master.dir/socket/reciver.cpp.o.provides
-
-CMakeFiles/master.dir/socket/reciver.cpp.o.provides.build: CMakeFiles/master.dir/socket/reciver.cpp.o
-
-
 CMakeFiles/master.dir/socket/socketManage.cpp.o: CMakeFiles/master.dir/flags.make
 CMakeFiles/master.dir/socket/socketManage.cpp.o: ../socket/socketManage.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/master.dir/socket/socketManage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/master.dir/socket/socketManage.cpp.o"
 	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/socket/socketManage.cpp.o -c /home/he/git/coflowSim_online/master/socket/socketManage.cpp
 
 CMakeFiles/master.dir/socket/socketManage.cpp.i: cmake_force
@@ -345,28 +273,100 @@ CMakeFiles/master.dir/socket/socketManage.cpp.o.provides: CMakeFiles/master.dir/
 CMakeFiles/master.dir/socket/socketManage.cpp.o.provides.build: CMakeFiles/master.dir/socket/socketManage.cpp.o
 
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o: CMakeFiles/master.dir/flags.make
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o: ../coflowSim/coflowSim.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o"
-	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o -c /home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../scheduler/scheduler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/master.dir/scheduler/scheduler.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/scheduler/scheduler.cpp.o -c /home/he/git/coflowSim_online/master/scheduler/scheduler.cpp
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/coflowSim/coflowSim.cpp.i"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp > CMakeFiles/master.dir/coflowSim/coflowSim.cpp.i
+CMakeFiles/master.dir/scheduler/scheduler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/scheduler/scheduler.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/scheduler/scheduler.cpp > CMakeFiles/master.dir/scheduler/scheduler.cpp.i
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/coflowSim/coflowSim.cpp.s"
-	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp -o CMakeFiles/master.dir/coflowSim/coflowSim.cpp.s
+CMakeFiles/master.dir/scheduler/scheduler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/scheduler/scheduler.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/scheduler/scheduler.cpp -o CMakeFiles/master.dir/scheduler/scheduler.cpp.s
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.requires:
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o.requires:
 
-.PHONY : CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.requires
+.PHONY : CMakeFiles/master.dir/scheduler/scheduler.cpp.o.requires
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.provides: CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.requires
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.provides.build
-.PHONY : CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.provides
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o.provides: CMakeFiles/master.dir/scheduler/scheduler.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/scheduler.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/scheduler/scheduler.cpp.o.provides
 
-CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.provides.build: CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o.provides.build: CMakeFiles/master.dir/scheduler/scheduler.cpp.o
+
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.o: ../scheduler/coflowManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/master.dir/scheduler/coflowManager.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/scheduler/coflowManager.cpp.o -c /home/he/git/coflowSim_online/master/scheduler/coflowManager.cpp
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/scheduler/coflowManager.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/scheduler/coflowManager.cpp > CMakeFiles/master.dir/scheduler/coflowManager.cpp.i
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/scheduler/coflowManager.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/scheduler/coflowManager.cpp -o CMakeFiles/master.dir/scheduler/coflowManager.cpp.s
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.requires
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.provides: CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.provides
+
+CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.provides.build: CMakeFiles/master.dir/scheduler/coflowManager.cpp.o
+
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/lib/epollFunctions.cpp.o: ../lib/epollFunctions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/master.dir/lib/epollFunctions.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/lib/epollFunctions.cpp.o -c /home/he/git/coflowSim_online/master/lib/epollFunctions.cpp
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/lib/epollFunctions.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/lib/epollFunctions.cpp > CMakeFiles/master.dir/lib/epollFunctions.cpp.i
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/lib/epollFunctions.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/lib/epollFunctions.cpp -o CMakeFiles/master.dir/lib/epollFunctions.cpp.s
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.o.requires:
+
+.PHONY : CMakeFiles/master.dir/lib/epollFunctions.cpp.o.requires
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.o.provides: CMakeFiles/master.dir/lib/epollFunctions.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/lib/epollFunctions.cpp.o.provides
+
+CMakeFiles/master.dir/lib/epollFunctions.cpp.o.provides.build: CMakeFiles/master.dir/lib/epollFunctions.cpp.o
+
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o: CMakeFiles/master.dir/flags.make
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../scheduler/machineManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/master.dir/scheduler/machineManager.cpp.o"
+	/usr/lib/hardening-wrapper/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/master.dir/scheduler/machineManager.cpp.o -c /home/he/git/coflowSim_online/master/scheduler/machineManager.cpp
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/master.dir/scheduler/machineManager.cpp.i"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/he/git/coflowSim_online/master/scheduler/machineManager.cpp > CMakeFiles/master.dir/scheduler/machineManager.cpp.i
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/master.dir/scheduler/machineManager.cpp.s"
+	/usr/lib/hardening-wrapper/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/he/git/coflowSim_online/master/scheduler/machineManager.cpp -o CMakeFiles/master.dir/scheduler/machineManager.cpp.s
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/master.dir/scheduler/machineManager.cpp.o.requires
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o.provides: CMakeFiles/master.dir/scheduler/machineManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/machineManager.cpp.o.provides.build
+.PHONY : CMakeFiles/master.dir/scheduler/machineManager.cpp.o.provides
+
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o.provides.build: CMakeFiles/master.dir/scheduler/machineManager.cpp.o
 
 
 # Object files for target master
@@ -376,14 +376,14 @@ master_OBJECTS = \
 "CMakeFiles/master.dir/datastructures/coflow.cpp.o" \
 "CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o" \
 "CMakeFiles/master.dir/datastructures/machine.cpp.o" \
-"CMakeFiles/master.dir/datastructures/mapper.cpp.o" \
-"CMakeFiles/master.dir/datastructures/reducer.cpp.o" \
 "CMakeFiles/master.dir/traceProducer/producer.cpp.o" \
 "CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o" \
 "CMakeFiles/master.dir/socket/sender.cpp.o" \
-"CMakeFiles/master.dir/socket/reciver.cpp.o" \
 "CMakeFiles/master.dir/socket/socketManage.cpp.o" \
-"CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o"
+"CMakeFiles/master.dir/scheduler/scheduler.cpp.o" \
+"CMakeFiles/master.dir/scheduler/coflowManager.cpp.o" \
+"CMakeFiles/master.dir/lib/epollFunctions.cpp.o" \
+"CMakeFiles/master.dir/scheduler/machineManager.cpp.o"
 
 # External object files for target master
 master_EXTERNAL_OBJECTS =
@@ -393,14 +393,14 @@ master: CMakeFiles/master.dir/datastructures/flow.cpp.o
 master: CMakeFiles/master.dir/datastructures/coflow.cpp.o
 master: CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o
 master: CMakeFiles/master.dir/datastructures/machine.cpp.o
-master: CMakeFiles/master.dir/datastructures/mapper.cpp.o
-master: CMakeFiles/master.dir/datastructures/reducer.cpp.o
 master: CMakeFiles/master.dir/traceProducer/producer.cpp.o
 master: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 master: CMakeFiles/master.dir/socket/sender.cpp.o
-master: CMakeFiles/master.dir/socket/reciver.cpp.o
 master: CMakeFiles/master.dir/socket/socketManage.cpp.o
-master: CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o
+master: CMakeFiles/master.dir/scheduler/scheduler.cpp.o
+master: CMakeFiles/master.dir/scheduler/coflowManager.cpp.o
+master: CMakeFiles/master.dir/lib/epollFunctions.cpp.o
+master: CMakeFiles/master.dir/scheduler/machineManager.cpp.o
 master: CMakeFiles/master.dir/build.make
 master: CMakeFiles/master.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable master"
@@ -416,14 +416,14 @@ CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/flow.cpp.o.
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/coflow.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/machine.cpp.o.requires
-CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/mapper.cpp.o.requires
-CMakeFiles/master.dir/requires: CMakeFiles/master.dir/datastructures/reducer.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/traceProducer/producer.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/socket/sender.cpp.o.requires
-CMakeFiles/master.dir/requires: CMakeFiles/master.dir/socket/reciver.cpp.o.requires
 CMakeFiles/master.dir/requires: CMakeFiles/master.dir/socket/socketManage.cpp.o.requires
-CMakeFiles/master.dir/requires: CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/scheduler/scheduler.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/scheduler/coflowManager.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/lib/epollFunctions.cpp.o.requires
+CMakeFiles/master.dir/requires: CMakeFiles/master.dir/scheduler/machineManager.cpp.o.requires
 
 .PHONY : CMakeFiles/master.dir/requires
 

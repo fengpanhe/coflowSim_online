@@ -10,7 +10,7 @@
 
 class Machine : public SocketManage {
 public:
-    Machine(int machineID, char * machineIP, int machinePORT):machineID(machineID),machineIP(machineIP),machinePORT(machinePORT){}
+    Machine(int machineID):machineID(machineID){}
 
     int getMachineID() const;
 
@@ -18,8 +18,6 @@ public:
 
 private:
     const int machineID;
-    const char * machineIP;
-    const int machinePORT;
 };
 
 

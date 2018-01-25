@@ -16,16 +16,14 @@ CoflowBenchmarkTraceProducer::CoflowBenchmarkTraceProducer(string coflowBenchFil
     this->logicMachinePortNum = 0;
 }
 
-CoflowCollection* CoflowBenchmarkTraceProducer::prepareCoflows() {
+bool CoflowBenchmarkTraceProducer::prepareCoflows(vector<Coflow*>* & coflows) {
     fstream CBfin;
     CBfin.open(this->coflowBenchFilePath);
 
-    auto* coflows = new CoflowCollection();
     int coflowNum;
 
     CBfin >> this->logicMachinePortNum;
     CBfin >> coflowNum;
-    coflows->setCoflowNum(coflowNum);
 
     char buffer[4096];
     CBfin.getline(buffer, 4096, '\n');
@@ -34,11 +32,11 @@ CoflowCollection* CoflowBenchmarkTraceProducer::prepareCoflows() {
 
     while(!CBfin.eof() && i < coflowNum){
         CBfin.getline(buffer, 4096, '\n');
-        coflows->addCoflow(prepareOneCoflow(buffer));
+        coflows->push_back(prepareOneCoflow(buffer));
         i++;
     }
     CBfin.close();
-    return coflows;
+    return true;
 }
 
 vector<Machine*>* CoflowBenchmarkTraceProducer::prepareMachines() {

@@ -123,33 +123,6 @@ master/fast:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/build
 .PHONY : master/fast
 
-coflowSim/coflowSim.o: coflowSim/coflowSim.cpp.o
-
-.PHONY : coflowSim/coflowSim.o
-
-# target to build an object file
-coflowSim/coflowSim.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.o
-.PHONY : coflowSim/coflowSim.cpp.o
-
-coflowSim/coflowSim.i: coflowSim/coflowSim.cpp.i
-
-.PHONY : coflowSim/coflowSim.i
-
-# target to preprocess a source file
-coflowSim/coflowSim.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.i
-.PHONY : coflowSim/coflowSim.cpp.i
-
-coflowSim/coflowSim.s: coflowSim/coflowSim.cpp.s
-
-.PHONY : coflowSim/coflowSim.s
-
-# target to generate assembly for a file
-coflowSim/coflowSim.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/coflowSim/coflowSim.cpp.s
-.PHONY : coflowSim/coflowSim.cpp.s
-
 datastructures/coflow.o: datastructures/coflow.cpp.o
 
 .PHONY : datastructures/coflow.o
@@ -258,59 +231,32 @@ datastructures/machine.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/machine.cpp.s
 .PHONY : datastructures/machine.cpp.s
 
-datastructures/mapper.o: datastructures/mapper.cpp.o
+lib/epollFunctions.o: lib/epollFunctions.cpp.o
 
-.PHONY : datastructures/mapper.o
-
-# target to build an object file
-datastructures/mapper.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/mapper.cpp.o
-.PHONY : datastructures/mapper.cpp.o
-
-datastructures/mapper.i: datastructures/mapper.cpp.i
-
-.PHONY : datastructures/mapper.i
-
-# target to preprocess a source file
-datastructures/mapper.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/mapper.cpp.i
-.PHONY : datastructures/mapper.cpp.i
-
-datastructures/mapper.s: datastructures/mapper.cpp.s
-
-.PHONY : datastructures/mapper.s
-
-# target to generate assembly for a file
-datastructures/mapper.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/mapper.cpp.s
-.PHONY : datastructures/mapper.cpp.s
-
-datastructures/reducer.o: datastructures/reducer.cpp.o
-
-.PHONY : datastructures/reducer.o
+.PHONY : lib/epollFunctions.o
 
 # target to build an object file
-datastructures/reducer.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/reducer.cpp.o
-.PHONY : datastructures/reducer.cpp.o
+lib/epollFunctions.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.o
+.PHONY : lib/epollFunctions.cpp.o
 
-datastructures/reducer.i: datastructures/reducer.cpp.i
+lib/epollFunctions.i: lib/epollFunctions.cpp.i
 
-.PHONY : datastructures/reducer.i
+.PHONY : lib/epollFunctions.i
 
 # target to preprocess a source file
-datastructures/reducer.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/reducer.cpp.i
-.PHONY : datastructures/reducer.cpp.i
+lib/epollFunctions.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.i
+.PHONY : lib/epollFunctions.cpp.i
 
-datastructures/reducer.s: datastructures/reducer.cpp.s
+lib/epollFunctions.s: lib/epollFunctions.cpp.s
 
-.PHONY : datastructures/reducer.s
+.PHONY : lib/epollFunctions.s
 
 # target to generate assembly for a file
-datastructures/reducer.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/reducer.cpp.s
-.PHONY : datastructures/reducer.cpp.s
+lib/epollFunctions.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.s
+.PHONY : lib/epollFunctions.cpp.s
 
 main.o: main.cpp.o
 
@@ -339,32 +285,86 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-socket/reciver.o: socket/reciver.cpp.o
+scheduler/coflowManager.o: scheduler/coflowManager.cpp.o
 
-.PHONY : socket/reciver.o
+.PHONY : scheduler/coflowManager.o
 
 # target to build an object file
-socket/reciver.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.o
-.PHONY : socket/reciver.cpp.o
+scheduler/coflowManager.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/coflowManager.cpp.o
+.PHONY : scheduler/coflowManager.cpp.o
 
-socket/reciver.i: socket/reciver.cpp.i
+scheduler/coflowManager.i: scheduler/coflowManager.cpp.i
 
-.PHONY : socket/reciver.i
+.PHONY : scheduler/coflowManager.i
 
 # target to preprocess a source file
-socket/reciver.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.i
-.PHONY : socket/reciver.cpp.i
+scheduler/coflowManager.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/coflowManager.cpp.i
+.PHONY : scheduler/coflowManager.cpp.i
 
-socket/reciver.s: socket/reciver.cpp.s
+scheduler/coflowManager.s: scheduler/coflowManager.cpp.s
 
-.PHONY : socket/reciver.s
+.PHONY : scheduler/coflowManager.s
 
 # target to generate assembly for a file
-socket/reciver.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/reciver.cpp.s
-.PHONY : socket/reciver.cpp.s
+scheduler/coflowManager.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/coflowManager.cpp.s
+.PHONY : scheduler/coflowManager.cpp.s
+
+scheduler/machineManager.o: scheduler/machineManager.cpp.o
+
+.PHONY : scheduler/machineManager.o
+
+# target to build an object file
+scheduler/machineManager.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/machineManager.cpp.o
+.PHONY : scheduler/machineManager.cpp.o
+
+scheduler/machineManager.i: scheduler/machineManager.cpp.i
+
+.PHONY : scheduler/machineManager.i
+
+# target to preprocess a source file
+scheduler/machineManager.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/machineManager.cpp.i
+.PHONY : scheduler/machineManager.cpp.i
+
+scheduler/machineManager.s: scheduler/machineManager.cpp.s
+
+.PHONY : scheduler/machineManager.s
+
+# target to generate assembly for a file
+scheduler/machineManager.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/machineManager.cpp.s
+.PHONY : scheduler/machineManager.cpp.s
+
+scheduler/scheduler.o: scheduler/scheduler.cpp.o
+
+.PHONY : scheduler/scheduler.o
+
+# target to build an object file
+scheduler/scheduler.cpp.o:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/scheduler.cpp.o
+.PHONY : scheduler/scheduler.cpp.o
+
+scheduler/scheduler.i: scheduler/scheduler.cpp.i
+
+.PHONY : scheduler/scheduler.i
+
+# target to preprocess a source file
+scheduler/scheduler.cpp.i:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/scheduler.cpp.i
+.PHONY : scheduler/scheduler.cpp.i
+
+scheduler/scheduler.s: scheduler/scheduler.cpp.s
+
+.PHONY : scheduler/scheduler.s
+
+# target to generate assembly for a file
+scheduler/scheduler.cpp.s:
+	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/scheduler.cpp.s
+.PHONY : scheduler/scheduler.cpp.s
 
 socket/sender.o: socket/sender.cpp.o
 
@@ -483,9 +483,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... master"
-	@echo "... coflowSim/coflowSim.o"
-	@echo "... coflowSim/coflowSim.i"
-	@echo "... coflowSim/coflowSim.s"
 	@echo "... datastructures/coflow.o"
 	@echo "... datastructures/coflow.i"
 	@echo "... datastructures/coflow.s"
@@ -498,18 +495,21 @@ help:
 	@echo "... datastructures/machine.o"
 	@echo "... datastructures/machine.i"
 	@echo "... datastructures/machine.s"
-	@echo "... datastructures/mapper.o"
-	@echo "... datastructures/mapper.i"
-	@echo "... datastructures/mapper.s"
-	@echo "... datastructures/reducer.o"
-	@echo "... datastructures/reducer.i"
-	@echo "... datastructures/reducer.s"
+	@echo "... lib/epollFunctions.o"
+	@echo "... lib/epollFunctions.i"
+	@echo "... lib/epollFunctions.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... socket/reciver.o"
-	@echo "... socket/reciver.i"
-	@echo "... socket/reciver.s"
+	@echo "... scheduler/coflowManager.o"
+	@echo "... scheduler/coflowManager.i"
+	@echo "... scheduler/coflowManager.s"
+	@echo "... scheduler/machineManager.o"
+	@echo "... scheduler/machineManager.i"
+	@echo "... scheduler/machineManager.s"
+	@echo "... scheduler/scheduler.o"
+	@echo "... scheduler/scheduler.i"
+	@echo "... scheduler/scheduler.s"
 	@echo "... socket/sender.o"
 	@echo "... socket/sender.i"
 	@echo "... socket/sender.s"

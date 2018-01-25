@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/he/git/coflowSim_online/client/main.cpp
+iostream
+-
+netinet/in.h
+-
+cstring
+-
+zconf.h
+-
+sstream
+-
+arpa/inet.h
+-
+

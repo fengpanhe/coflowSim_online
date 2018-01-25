@@ -82,12 +82,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/he/git/coflowSim_online/master/coflowSim/coflowSim.cpp">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/coflowSim/coflowSim.h">
-			<Option target="master"/>
-		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/coflow.cpp">
 			<Option target="master"/>
 		</Unit>
@@ -112,16 +106,10 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/machine.h">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/mapper.cpp">
+		<Unit filename="/home/he/git/coflowSim_online/master/lib/epollFunctions.cpp">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/mapper.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/reducer.cpp">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/reducer.h">
+		<Unit filename="/home/he/git/coflowSim_online/master/lib/epollFunctions.h">
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/lib/locker.h">
@@ -136,10 +124,22 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/main.cpp">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/reciver.cpp">
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/coflowManager.cpp">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/reciver.h">
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/coflowManager.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/machineManager.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/machineManager.h">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/scheduler.cpp">
+			<Option target="master"/>
+		</Unit>
+		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/scheduler.h">
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/socket/sender.cpp">

@@ -14,7 +14,7 @@ class CoflowBenchmarkTraceProducer: public Producer {
 public:
     CoflowBenchmarkTraceProducer(string coflowBenchFilePath, string machineDefineFilePath);
 
-    CoflowCollection* prepareCoflows() override;
+    bool prepareCoflows(vector<Coflow*>* & coflows) override;
 
     vector<Machine*>* prepareMachines() override;
 

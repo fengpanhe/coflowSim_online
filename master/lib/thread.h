@@ -7,6 +7,7 @@
 
 
 class thread {
+public:
     virtual void run() = 0;
 };
 

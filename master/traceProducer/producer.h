@@ -7,10 +7,11 @@
 
 
 #include "../datastructures/coflowCollection.h"
+#include "../datastructures/machine.h"
 
 class Producer {
 public:
-    virtual CoflowCollection* prepareCoflows() = 0;
+    virtual bool prepareCoflows(vector<Coflow*>* & coflows) = 0;
     virtual vector<Machine*>* prepareMachines() = 0;
     virtual int getCoflowNum() = 0;
 };

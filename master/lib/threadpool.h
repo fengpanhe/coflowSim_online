@@ -114,7 +114,7 @@ void threadpool< T >::run()
         {
             continue;
         }
-        request->process();
+        request->run();
     }
 }
 

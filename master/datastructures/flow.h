@@ -6,9 +6,6 @@
 #define MASTER_FLOW_H
 
 
-#include "mapper.h"
-#include "reducer.h"
-
 class Flow {
 public:
     Flow(int mapperID, int reducerID, double flowSizeMB):mapperID(mapperID),reducerID(reducerID),flowSizeMB(flowSizeMB){

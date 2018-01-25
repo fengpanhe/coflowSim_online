@@ -605,3 +605,35 @@ make[1]: Leaving directory '/home/he/git/coflowSim_online/master/cmake-build-deb
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_6a3d6/fast"
+make[1]: Entering directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_6a3d6.dir/build.make CMakeFiles/cmTC_6a3d6.dir/build
+make[2]: Entering directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6a3d6.dir/CheckIncludeFile.c.o
+/usr/lib/hardening-wrapper/bin/cc    -o CMakeFiles/cmTC_6a3d6.dir/CheckIncludeFile.c.o   -c /home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_6a3d6
+/opt/clion/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6a3d6.dir/link.txt --verbose=1
+/usr/lib/hardening-wrapper/bin/cc      CMakeFiles/cmTC_6a3d6.dir/CheckIncludeFile.c.o  -o cmTC_6a3d6 
+make[2]: Leaving directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_fb269/fast"
+make[1]: Entering directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_fb269.dir/build.make CMakeFiles/cmTC_fb269.dir/build
+make[2]: Entering directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fb269.dir/CheckFunctionExists.c.o
+/usr/lib/hardening-wrapper/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_fb269.dir/CheckFunctionExists.c.o   -c /opt/clion/bin/cmake/share/cmake-3.9/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fb269
+/opt/clion/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb269.dir/link.txt --verbose=1
+/usr/lib/hardening-wrapper/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_fb269.dir/CheckFunctionExists.c.o  -o cmTC_fb269 -lpthread 
+make[2]: Leaving directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/home/he/git/coflowSim_online/master/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+

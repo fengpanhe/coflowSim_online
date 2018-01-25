@@ -4,95 +4,62 @@
 
 #include <zconf.h>
 #include <sys/epoll.h>
-#include <bits/fcntl-linux.h>
-#include <fcntl.h>
 #include <cerrno>
-#include <sys/uio.h>
 #include <cstring>
 #include "socketManage.h"
+#include "../lib/epollFunctions.h"
 
+#include <iostream>
+using namespace std;
 
-int setnonblocking( int fd )
-{
-    int old_option = fcntl( fd, F_GETFL );
-    int new_option = old_option | O_NONBLOCK;
-    fcntl( fd, F_SETFL, new_option );
-    return old_option;
-}
-
-void addfd( int epollfd, int fd, bool one_shot )
-{
-    epoll_event event;
-    event.data.fd = fd;
-    event.events = EPOLLIN | EPOLLET | EPOLLRDHUP;
-    if( one_shot )
-    {
-        event.events |= EPOLLONESHOT;
-    }
-    epoll_ctl( epollfd, EPOLL_CTL_ADD, fd, &event );
-    setnonblocking( fd );
-}
-
-void removefd( int epollfd, int fd )
-{
-    epoll_ctl( epollfd, EPOLL_CTL_DEL, fd, 0 );
-    close( fd );
-}
-
-void modfd( int epollfd, int fd, int ev )
-{
-    epoll_event event;
-    event.data.fd = fd;
-    event.events = ev | EPOLLET | EPOLLONESHOT | EPOLLRDHUP;
-    epoll_ctl( epollfd, EPOLL_CTL_MOD, fd, &event );
-}
-
+int SocketManage::sEpollfd = -1;
 
 void SocketManage::initSocket(int sockfd, const sockaddr_in &addr) {
-    mSockfd = sockfd;
+    m_Sockfd = sockfd;
     m_address = addr;
     int error = 0;
     socklen_t len = sizeof(error);
-    getsockopt(mSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+    getsockopt(m_Sockfd, SOL_SOCKET, SO_ERROR, &error, &len);
     int reuse = 1;
-    setsockopt(mSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
-    addfd(this->sEpollfd, sockfd, true);
-    init();
-}
-
-void SocketManage::init() {
-    mRecvIdx = 0;
-    mSendBufSize = 0;
-    memset( mRecvBuf, '\0', MAX_RECV_BUFFER_SIZE );
-    memset( mSendBuf, '\0', MAX_SEND_BUFFER_SIZE );
+    setsockopt(m_Sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+    addfd(SocketManage::sEpollfd, sockfd, true);
+    initRecvBuf();
+    initSendBuf();
 }
 
 void SocketManage::closeConn(bool real_close) {
-    if(real_close && (mSockfd != -1)){
-        removefd(sEpollfd, mSockfd);
-        mSockfd = -1;
+    if(real_close && (m_Sockfd != -1)){
+        removefd(SocketManage::sEpollfd, m_Sockfd);
+        m_Sockfd = -1;
     }
 }
 
 void SocketManage::run() {
-    epoll_event event;
-    event.data.fd = mSockfd;
-    if (event.events & EPOLLIN){
-        this->receiveMessage();
-    }
-    else if(event.events & EPOLLOUT){
+    m_sendBufLocker.lock();
+    if(m_sendBufSize > 0){
+        printf("%d send msg 1 %s \n", m_Sockfd, m_sendBuf);
         this->sendMessage();
+        printf("%d send msg 2\n", m_Sockfd);
+        m_sendBufLocker.unlock();
+        return;
     }
+    m_sendBufLocker.unlock();
+
+    m_recvBufLocker.lock();
+    if(!this->receiveMessage()){
+        cout << "error:" << endl;
+    }
+    m_recvBufLocker.unlock();
 }
 
 bool SocketManage::receiveMessage() {
-    if(mRecvIdx >= MAX_RECV_BUFFER_SIZE){
+    if(m_recvIdx >= MAX_RECV_BUFFER_SIZE){
         return false;
     }
     int bytes_read = 0;
     while (true){
-        bytes_read = static_cast<int>(recv(mSockfd, mRecvBuf + mRecvIdx,
-                                           static_cast<size_t>(MAX_RECV_BUFFER_SIZE - mRecvIdx), 0));
+        bytes_read = static_cast<int>(recv(m_Sockfd, m_recvBuf + m_recvIdx,
+                                           static_cast<size_t>(MAX_RECV_BUFFER_SIZE - m_recvIdx), 0));
         if(bytes_read == -1){
             if (errno == EAGAIN || errno == EWOULDBLOCK){
                 break;
@@ -102,31 +69,31 @@ bool SocketManage::receiveMessage() {
         else if(bytes_read == 0){
             return false;
         }
-        mRecvIdx += bytes_read;
+        m_recvIdx += bytes_read;
     }
     return true;
 }
 
 bool SocketManage::sendMessage() {
 
-    if(mSendBufSize == 0){
-        modfd(sEpollfd, mSockfd, EPOLLIN);
-        init();
+    if(m_sendBufSize == 0){
+        modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLIN);
+        initSendBuf();
         return true;
     }
 
     int temp = 0;
-    temp = static_cast<int>(send(mSockfd, mSendBuf, static_cast<size_t>(mSendBufSize), 0));
+    temp = static_cast<int>(send(m_Sockfd, m_sendBuf, static_cast<size_t>(m_sendBufSize), 0));
 
-    if(temp == mSendBufSize){
-        modfd(sEpollfd, mSockfd, EPOLLIN);
-        init();
+    if(temp == m_sendBufSize){
+        modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLIN);
+        initSendBuf();
         return true;
     }
 
     if(temp <= -1){
         if( errno == EAGAIN ) {
-            modfd( sEpollfd, mSockfd, EPOLLOUT );
+            modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLOUT );
             return true;
         }
         return false;
@@ -136,17 +103,42 @@ bool SocketManage::sendMessage() {
 }
 
 bool SocketManage::setSendMsg(char * msg, int msgSize) {
-    if(mSendBufSize > 0){
+    m_sendBufLocker.lock();
+    if ((m_sendBufSize + msgSize) > MAX_SEND_BUFFER_SIZE){
+        m_sendBufLocker.unlock();
         return false;
     }
-
     for (int i = 0; i < msgSize; ++i) {
-        mSendBuf[i] = msg[i];
+        m_sendBuf[m_sendBufSize++] = msg[i];
     }
-    mSendBuf[msgSize] = '\0';
-    mSendBufSize = msgSize;
-    modfd( sEpollfd, mSockfd, EPOLLOUT );
+    m_sendBuf[m_sendBufSize] = '\0';
+    modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLOUT );
+    m_sendBufLocker.unlock();
     return true;
+}
+
+void SocketManage::initRecvBuf() {
+    m_recvIdx = 0;
+    memset( m_recvBuf, '\0', MAX_RECV_BUFFER_SIZE );
+}
+
+void SocketManage::initSendBuf() {
+    m_sendBufSize = 0;
+    memset( m_sendBuf, '\0', MAX_SEND_BUFFER_SIZE );
+}
+
+bool SocketManage::getRecvBuf(char *&buf, int &buflen) {
+    m_recvBufLocker.lock();
+    int i = 0;
+    while (i < m_recvIdx){
+        buf[i] = m_recvBuf[i];
+        i++;
+    }
+    buf[i] = '\0';
+    buflen = m_recvIdx;
+    initRecvBuf();
+    m_recvBufLocker.unlock();
+    return false;
 }
 
 

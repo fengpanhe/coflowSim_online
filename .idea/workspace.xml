@@ -10,19 +10,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85e0523a-aac8-486b-85de-61f11801adcc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/master/.idea/dictionaries/he.xml" afterPath="$PROJECT_DIR$/master/.idea/dictionaries/he.xml" />
       <change beforePath="$PROJECT_DIR$/master/.idea/workspace.xml" afterPath="$PROJECT_DIR$/master/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/master/CMakeLists.txt" afterPath="$PROJECT_DIR$/master/CMakeLists.txt" />
-      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/Makefile2" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeCache.txt" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeCache.txt" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/CMakeOutput.log" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/Makefile.cmake" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/CXX.includecache" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/CXX.includecache" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/DependInfo.cmake" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/build.make" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/build.make" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/cmake_clean.cmake" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflow.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflow.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/flow.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/flow.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/machine.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/machine.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/mapper.cpp.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/datastructures/reducer.cpp.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/depend.internal" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/depend.internal" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/depend.make" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/depend.make" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/link.txt" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/progress.make" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/progress.marks" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/main.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/main.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/producer.cpp.o" afterPath="$PROJECT_DIR$/master/cmake-build-debug/CMakeFiles/master.dir/traceProducer/producer.cpp.o" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/master/cmake-build-debug/Makefile" />
+      <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/master" afterPath="$PROJECT_DIR$/master/cmake-build-debug/master" />
       <change beforePath="$PROJECT_DIR$/master/cmake-build-debug/master.cbp" afterPath="$PROJECT_DIR$/master/cmake-build-debug/master.cbp" />
-      <change beforePath="$PROJECT_DIR$/master/traceProducer/TraceProducer.cpp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/master/traceProducer/TraceProducer.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/coflowSim/coflowSim.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/coflowSim/coflowSim.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/flow.h" afterPath="$PROJECT_DIR$/master/datastructures/flow.h" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/machine.h" afterPath="$PROJECT_DIR$/master/datastructures/machine.h" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/mapper.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/mapper.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/reducer.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/datastructures/reducer.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/lib/thread.h" afterPath="$PROJECT_DIR$/master/lib/thread.h" />
+      <change beforePath="$PROJECT_DIR$/master/lib/threadpool.h" afterPath="$PROJECT_DIR$/master/lib/threadpool.h" />
+      <change beforePath="$PROJECT_DIR$/master/main.cpp" afterPath="$PROJECT_DIR$/master/main.cpp" />
+      <change beforePath="$PROJECT_DIR$/master/socket/reciver.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/socket/reciver.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/master/socket/socketManage.cpp" afterPath="$PROJECT_DIR$/master/socket/socketManage.cpp" />
+      <change beforePath="$PROJECT_DIR$/master/socket/socketManage.h" afterPath="$PROJECT_DIR$/master/socket/socketManage.h" />
+      <change beforePath="$PROJECT_DIR$/master/traceProducer/CoflowBenchmarkTraceProducer.cpp" afterPath="$PROJECT_DIR$/master/traceProducer/CoflowBenchmarkTraceProducer.cpp" />
+      <change beforePath="$PROJECT_DIR$/master/traceProducer/CoflowBenchmarkTraceProducer.h" afterPath="$PROJECT_DIR$/master/traceProducer/CoflowBenchmarkTraceProducer.h" />
+      <change beforePath="$PROJECT_DIR$/master/traceProducer/producer.h" afterPath="$PROJECT_DIR$/master/traceProducer/producer.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +63,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,7 +87,17 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/master/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="176">
+              <caret line="8" column="44" lean-forward="true" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1650">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -76,8 +116,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-400" />
-    <option name="y" value="181" />
+    <option name="y" value="29" />
     <option name="width" value="1920" />
     <option name="height" value="1051" />
   </component>
@@ -118,11 +157,6 @@
             <path>
               <item name="coflowSim_online" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="coflowSim_online" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="coflowSim_online" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
-              <item name="coflowSim_online" type="462c0819:PsiDirectoryNode" />
-              <item name="master" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -165,31 +199,33 @@
       <option name="presentableId" value="Default" />
       <updated>1516517305626</updated>
       <workItem from="1516517307331" duration="136000" />
+      <workItem from="1516864843878" duration="745000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136000" />
+    <option name="totallyTimeSpent" value="881000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-400" y="181" width="1920" height="1051" extended-state="0" />
+    <frame x="0" y="29" width="1920" height="1051" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24986793" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18700476" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24390244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -224,6 +260,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1650">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="44" lean-forward="true" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
           <folding />
         </state>
       </provider>

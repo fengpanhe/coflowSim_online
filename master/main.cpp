@@ -18,7 +18,7 @@
 
 #define LISTENED_IP "127.0.0.1"
 #define LISTENED_PORT 4002
-#define BACKLOG 100
+#define BACKLOG 10
 
 #define MAX_EVENT_NUMBER 10000
 //const char* ip = "127.0.0.1";
@@ -71,10 +71,17 @@ int test(){
         return 1;
     }
 
+
+    CoflowBenchmarkTraceProducer producer("../../FB2010-1Hr-150-0.txt", "123");
+    vector<Coflow*>* coflows = new vector<Coflow*>;
+    producer.prepareCoflows(coflows);
+    coflows->at(1)->toString();
+
     scheduler * scheduler1 = new scheduler();
     machineManager* machineManager1 = new machineManager();
-    machineManager1->setLogicMachineNum(10);
+    machineManager1->setLogicMachineNum(150);
     scheduler1->setMachines(machineManager1);
+    scheduler1->setUnregisterCoflows(coflows);
     pool->append(scheduler1);
 
     epoll_event events[ MAX_EVENT_NUMBER ];
@@ -128,10 +135,7 @@ int test(){
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-//    CoflowBenchmarkTraceProducer producer("../../FB2010-1Hr-150-0.txt", "123");
-//    vector<Coflow*>* coflows = new vector<Coflow*>;
-//    producer.prepareCoflows(coflows);
-//    coflows->at(1)->toString();
+
     test();
     return 0;
 }

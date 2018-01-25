@@ -44,6 +44,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/he/git/coflowSim_online/master/../share"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/backward"/>
@@ -66,6 +67,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/he/git/coflowSim_online/master/../share"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/backward"/>
@@ -106,21 +108,6 @@
 		<Unit filename="/home/he/git/coflowSim_online/master/datastructures/machine.h">
 			<Option target="master"/>
 		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/lib/epollFunctions.cpp">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/lib/epollFunctions.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/lib/locker.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/lib/thread.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/lib/threadpool.h">
-			<Option target="master"/>
-		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/main.cpp">
 			<Option target="master"/>
 		</Unit>
@@ -140,18 +127,6 @@
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/scheduler/scheduler.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/sender.cpp">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/sender.h">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/socketManage.cpp">
-			<Option target="master"/>
-		</Unit>
-		<Unit filename="/home/he/git/coflowSim_online/master/socket/socketManage.h">
 			<Option target="master"/>
 		</Unit>
 		<Unit filename="/home/he/git/coflowSim_online/master/traceProducer/CoflowBenchmarkTraceProducer.cpp">

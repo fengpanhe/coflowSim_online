@@ -13,27 +13,24 @@ CMakeFiles/master.dir/datastructures/coflowCollection.cpp.o: ../datastructures/f
 CMakeFiles/master.dir/datastructures/flow.cpp.o: ../datastructures/flow.cpp
 CMakeFiles/master.dir/datastructures/flow.cpp.o: ../datastructures/flow.h
 
+CMakeFiles/master.dir/datastructures/machine.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/datastructures/machine.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/datastructures/machine.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/datastructures/machine.cpp.o: ../datastructures/machine.cpp
 CMakeFiles/master.dir/datastructures/machine.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/datastructures/machine.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/datastructures/machine.cpp.o: ../lib/thread.h
-CMakeFiles/master.dir/datastructures/machine.cpp.o: ../socket/socketManage.h
 
-CMakeFiles/master.dir/lib/epollFunctions.cpp.o: ../lib/epollFunctions.cpp
-CMakeFiles/master.dir/lib/epollFunctions.cpp.o: ../lib/epollFunctions.h
-
+CMakeFiles/master.dir/main.cpp.o: ../../share/lib/epollFunctions.h
+CMakeFiles/master.dir/main.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/main.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/main.cpp.o: ../../share/lib/threadpool.h
+CMakeFiles/master.dir/main.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/main.cpp.o: ../datastructures/coflow.h
 CMakeFiles/master.dir/main.cpp.o: ../datastructures/coflowCollection.h
 CMakeFiles/master.dir/main.cpp.o: ../datastructures/flow.h
 CMakeFiles/master.dir/main.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/main.cpp.o: ../lib/epollFunctions.h
-CMakeFiles/master.dir/main.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/main.cpp.o: ../lib/thread.h
-CMakeFiles/master.dir/main.cpp.o: ../lib/threadpool.h
 CMakeFiles/master.dir/main.cpp.o: ../main.cpp
 CMakeFiles/master.dir/main.cpp.o: ../scheduler/machineManager.h
 CMakeFiles/master.dir/main.cpp.o: ../scheduler/scheduler.h
-CMakeFiles/master.dir/main.cpp.o: ../socket/socketManage.h
 CMakeFiles/master.dir/main.cpp.o: ../traceProducer/CoflowBenchmarkTraceProducer.h
 CMakeFiles/master.dir/main.cpp.o: ../traceProducer/producer.h
 
@@ -42,50 +39,41 @@ CMakeFiles/master.dir/scheduler/coflowManager.cpp.o: ../datastructures/flow.h
 CMakeFiles/master.dir/scheduler/coflowManager.cpp.o: ../scheduler/coflowManager.cpp
 CMakeFiles/master.dir/scheduler/coflowManager.cpp.o: ../scheduler/coflowManager.h
 
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../lib/thread.h
 CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../scheduler/machineManager.cpp
 CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../scheduler/machineManager.h
-CMakeFiles/master.dir/scheduler/machineManager.cpp.o: ../socket/socketManage.h
 
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../datastructures/coflow.h
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../datastructures/flow.h
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../lib/thread.h
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../scheduler/machineManager.h
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../scheduler/scheduler.cpp
 CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../scheduler/scheduler.h
-CMakeFiles/master.dir/scheduler/scheduler.cpp.o: ../socket/socketManage.h
 
-CMakeFiles/master.dir/socket/sender.cpp.o: ../socket/sender.cpp
-CMakeFiles/master.dir/socket/sender.cpp.o: ../socket/sender.h
-
-CMakeFiles/master.dir/socket/socketManage.cpp.o: ../lib/epollFunctions.h
-CMakeFiles/master.dir/socket/socketManage.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/socket/socketManage.cpp.o: ../lib/thread.h
-CMakeFiles/master.dir/socket/socketManage.cpp.o: ../socket/socketManage.cpp
-CMakeFiles/master.dir/socket/socketManage.cpp.o: ../socket/socketManage.h
-
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../datastructures/coflow.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../datastructures/coflowCollection.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../datastructures/flow.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../lib/thread.h
-CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../socket/socketManage.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../traceProducer/CoflowBenchmarkTraceProducer.cpp
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../traceProducer/CoflowBenchmarkTraceProducer.h
 CMakeFiles/master.dir/traceProducer/CoflowBenchmarkTraceProducer.cpp.o: ../traceProducer/producer.h
 
+CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../../share/lib/locker.h
+CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../../share/lib/thread.h
+CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../../share/socket/socketManage.h
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../datastructures/coflow.h
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../datastructures/coflowCollection.h
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../datastructures/flow.h
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../datastructures/machine.h
-CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../lib/locker.h
-CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../lib/thread.h
-CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../socket/socketManage.h
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../traceProducer/producer.cpp
 CMakeFiles/master.dir/traceProducer/producer.cpp.o: ../traceProducer/producer.h
 

@@ -7,7 +7,7 @@
 
 
 #include "../datastructures/coflow.h"
-#include "../lib/thread.h"
+#include "lib/thread.h"
 #include "../datastructures/machine.h"
 #include "machineManager.h"
 
@@ -19,12 +19,15 @@ public:
 
     bool onCoflowUnregister(Coflow* c);
 
+    bool setUnregisterCoflows(vector<Coflow*>* coflows);
+
 private:
     vector<Coflow*>* mUnregisterCoflows;
     vector<Coflow*>* mRunningCoflows;
     vector<Coflow*>* mFinishedCoflows;
     vector<Coflow*>* mNotAdmittedCoflows;
 
+//    TODO
     machineManager* machines;
 public:
     void setMachines(machineManager *machines);

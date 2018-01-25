@@ -45,3 +45,7 @@ Machine *machineManager::getPhyMachineByMachineID(int machineID) {
     }
     return nullptr;
 }
+
+int machineManager::getPhysicsMachineNum() {
+    return m_physicsMachines.size();
+}

@@ -21,12 +21,14 @@ public:
     const double getStartTime() const;
 
     void toString();
+// TODO
+    vector<Flow*> flowCollection;
 private:
     const int coflowID;
     const double startTime;
     int mapper_num;
     int reducer_num;
-    vector<Flow*> flowCollection;
+
 };
 
 

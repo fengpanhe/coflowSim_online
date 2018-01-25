@@ -20,6 +20,8 @@ public:
 
     bool removeOnePhysicsMachine(int machinId);
 
+    int getPhysicsMachineNum();
+
     void setLogicMachineNum(int num);
 
     void updateLogicMap();
@@ -30,8 +32,6 @@ public:
     unordered_map<int, Machine*> m_logicMap;
 private:
     vector<Machine*> m_physicsMachines;
-
-
     int m_logicMachineNum;
 
 };

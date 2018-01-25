@@ -4,7 +4,10 @@
 #include <zconf.h>
 #include <sstream>
 #include <arpa/inet.h>
-
+#include <assert.h>
+#include "lib/epollFunctions.h"
+#include "socket/socketManage.h"
+#include <sys/epoll.h>
 using namespace std;
 #define BROADCAST_LISTEN_PORT 4001
 #define CONN_PORT 4002
@@ -56,31 +59,76 @@ int test() {
     if (connect(connSockfd, (struct sockaddr *) &connAddr, sizeof(connAddr)) < 0) {
         printf("Failed to connect with server");
     }
-    printf("%s\n", "connected");
-    while (true) {
-        printf("%s\n", "recv");
-        int bytes_read = 0;
-        char buf[1024];
-        printf("%s\n", "recv");
-        while (true) {
-            bytes_read = 0;
-            bytes_read = static_cast<int>(recv(connSockfd, buf + bytes_read,
-                                               static_cast<size_t>(100 - bytes_read), 0));
-            if (bytes_read == -1) {
-                if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                    break;
-                }
-                printf("Failed");
-                return false;
-            } else if (bytes_read == 0) {
-                printf("Failed");
-                return false;
-            }
-            printf("buf: %s\n", buf);
+    int error = 0;
+    socklen_t len = sizeof(error);
+    getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+    int reuse = 1;
+    setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+
+    SocketManage sockManger;
+
+    epoll_event events[5];
+    int epollfd = epoll_create( 5 );
+    assert( epollfd != -1 );
+//    addfd( epollfd, listenSockfd, false );
+    SocketManage::sEpollfd = epollfd;
+    sockManger.initSocket(connSockfd, connAddr);
+    while(true){
+        int number = epoll_wait( epollfd, events, 5, -1 );
+        printf("epoll_number: %d\n", number);
+        if ( ( number < 0 ) && ( errno != EINTR ) ) {
+            printf( "epoll failure\n" );
+            break;
         }
-        printf(buf);
-        printf("\n");
+        for ( int i = 0; i < number; i++ ) {
+            int sockfd = events[i].data.fd;
+            if( events[i].events & ( EPOLLRDHUP | EPOLLHUP | EPOLLERR ) ) {
+                sockManger.closeConn(sockfd);
+            }
+            else if( (events[i].events & EPOLLIN) || (events[i].events & EPOLLOUT)) {
+                sockManger.run();
+            }
+            else {}
+        }
     }
+//    int dayle = 100000000000;
+//    while(true){
+//        dayle = 1000000000;
+//        while(--dayle > 0);
+//        sockManger.run();
+//    }
+//    printf("%s\n", "connected");
+//    int dayle = 100000000000;
+//    int recvlen = 0;
+//    while (true) {
+//        int recvlen = 0;
+//        int bytes_read = 0;
+//        char buf[1024];
+//        while (true) {
+////            dayle = 1000000000;
+////            while(--dayle > 0);
+//            bytes_read = static_cast<int>(recv(connSockfd, buf + recvlen,
+//                                               10, 0));
+//            if (bytes_read == -1) {
+//                if (errno == EAGAIN  | errno == EWOULDBLOCK) {
+//                    printf("break");
+//                    break;
+//                }
+//                printf("Failed");
+//                return false;
+//            } else if (bytes_read == 0) {
+//                printf("Failed");
+//                return false;
+//            }
+//            recvlen += bytes_read;
+//            if(recvlen >= 5) break;
+//            printf("buf: %s  len: %d\n", buf, recvlen);
+//        }
+//        for (int i = 0; i < recvlen; ++i) {
+//            cout << buf[i];
+//        }
+//        printf("\n");
+//    }
 }
 int main() {
     std::cout << "Hello, World!" << std::endl;

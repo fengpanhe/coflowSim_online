@@ -22,7 +22,7 @@ void SocketManage::initSocket(int sockfd, const sockaddr_in &addr) {
     getsockopt(m_Sockfd, SOL_SOCKET, SO_ERROR, &error, &len);
     int reuse = 1;
     setsockopt(m_Sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
-    addfd(SocketManage::sEpollfd, sockfd, true);
+    addfd(SocketManage::sEpollfd, sockfd, false);
     initRecvBuf();
     initSendBuf();
 }
@@ -37,9 +37,9 @@ void SocketManage::closeConn(bool real_close) {
 void SocketManage::run() {
     m_sendBufLocker.lock();
     if(m_sendBufSize > 0){
-        printf("%d send msg 1 %s \n", m_Sockfd, m_sendBuf);
+//        printf("%d send msg 1 %s \n", m_Sockfd, m_sendBuf);
         this->sendMessage();
-        printf("%d send msg 2\n", m_Sockfd);
+//        printf("%d send msg 2\n", m_Sockfd);
         m_sendBufLocker.unlock();
         return;
     }
@@ -49,6 +49,8 @@ void SocketManage::run() {
     if(!this->receiveMessage()){
         cout << "error:" << endl;
     }
+    printf("recvmsg: %s \n", m_recvBuf);
+    initRecvBuf();
     m_recvBufLocker.unlock();
 }
 
@@ -70,6 +72,9 @@ bool SocketManage::receiveMessage() {
             return false;
         }
         m_recvIdx += bytes_read;
+        if (m_recvIdx >= MSG_LEN){
+            break;
+        }
     }
     return true;
 }
@@ -112,6 +117,9 @@ bool SocketManage::setSendMsg(char * msg, int msgSize) {
         m_sendBuf[m_sendBufSize++] = msg[i];
     }
     m_sendBuf[m_sendBufSize] = '\0';
+
+    m_sendBufSize = (msgSize / MSG_LEN + 1) * MSG_LEN;
+
     modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLOUT );
     m_sendBufLocker.unlock();
     return true;

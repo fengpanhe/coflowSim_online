@@ -6,7 +6,7 @@
 #define MASTER_MACHINE_H
 
 
-#include "../socket/socketManage.h"
+#include <socket/socketManage.h>
 
 class Machine : public SocketManage {
 public:

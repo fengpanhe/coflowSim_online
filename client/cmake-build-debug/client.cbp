@@ -44,6 +44,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/he/git/coflowSim_online/client/../share"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/backward"/>
@@ -66,6 +67,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/he/git/coflowSim_online/client/../share"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/x86_64-pc-linux-gnu"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.1/../../../../include/c++/7.2.1/backward"/>

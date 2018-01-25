@@ -6,6 +6,32 @@
 
 #IncludeRegexTransform: 
 
+../../share/lib/epollFunctions.h
+fcntl.h
+-
+sys/epoll.h
+-
+zconf.h
+-
+
+../../share/lib/locker.h
+exception
+-
+pthread.h
+-
+semaphore.h
+-
+
+../../share/lib/thread.h
+
+../../share/socket/socketManage.h
+netinet/in.h
+-
+../lib/thread.h
+../../share/lib/thread.h
+../lib/locker.h
+../../share/lib/locker.h
+
 /home/he/git/coflowSim_online/client/main.cpp
 iostream
 -
@@ -18,5 +44,13 @@ zconf.h
 sstream
 -
 arpa/inet.h
+-
+assert.h
+-
+lib/epollFunctions.h
+/home/he/git/coflowSim_online/client/lib/epollFunctions.h
+socket/socketManage.h
+/home/he/git/coflowSim_online/client/socket/socketManage.h
+sys/epoll.h
 -
 

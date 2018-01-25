@@ -231,33 +231,6 @@ datastructures/machine.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/datastructures/machine.cpp.s
 .PHONY : datastructures/machine.cpp.s
 
-lib/epollFunctions.o: lib/epollFunctions.cpp.o
-
-.PHONY : lib/epollFunctions.o
-
-# target to build an object file
-lib/epollFunctions.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.o
-.PHONY : lib/epollFunctions.cpp.o
-
-lib/epollFunctions.i: lib/epollFunctions.cpp.i
-
-.PHONY : lib/epollFunctions.i
-
-# target to preprocess a source file
-lib/epollFunctions.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.i
-.PHONY : lib/epollFunctions.cpp.i
-
-lib/epollFunctions.s: lib/epollFunctions.cpp.s
-
-.PHONY : lib/epollFunctions.s
-
-# target to generate assembly for a file
-lib/epollFunctions.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/lib/epollFunctions.cpp.s
-.PHONY : lib/epollFunctions.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -366,60 +339,6 @@ scheduler/scheduler.cpp.s:
 	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/scheduler/scheduler.cpp.s
 .PHONY : scheduler/scheduler.cpp.s
 
-socket/sender.o: socket/sender.cpp.o
-
-.PHONY : socket/sender.o
-
-# target to build an object file
-socket/sender.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.o
-.PHONY : socket/sender.cpp.o
-
-socket/sender.i: socket/sender.cpp.i
-
-.PHONY : socket/sender.i
-
-# target to preprocess a source file
-socket/sender.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.i
-.PHONY : socket/sender.cpp.i
-
-socket/sender.s: socket/sender.cpp.s
-
-.PHONY : socket/sender.s
-
-# target to generate assembly for a file
-socket/sender.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/sender.cpp.s
-.PHONY : socket/sender.cpp.s
-
-socket/socketManage.o: socket/socketManage.cpp.o
-
-.PHONY : socket/socketManage.o
-
-# target to build an object file
-socket/socketManage.cpp.o:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.o
-.PHONY : socket/socketManage.cpp.o
-
-socket/socketManage.i: socket/socketManage.cpp.i
-
-.PHONY : socket/socketManage.i
-
-# target to preprocess a source file
-socket/socketManage.cpp.i:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.i
-.PHONY : socket/socketManage.cpp.i
-
-socket/socketManage.s: socket/socketManage.cpp.s
-
-.PHONY : socket/socketManage.s
-
-# target to generate assembly for a file
-socket/socketManage.cpp.s:
-	$(MAKE) -f CMakeFiles/master.dir/build.make CMakeFiles/master.dir/socket/socketManage.cpp.s
-.PHONY : socket/socketManage.cpp.s
-
 traceProducer/CoflowBenchmarkTraceProducer.o: traceProducer/CoflowBenchmarkTraceProducer.cpp.o
 
 .PHONY : traceProducer/CoflowBenchmarkTraceProducer.o
@@ -495,9 +414,6 @@ help:
 	@echo "... datastructures/machine.o"
 	@echo "... datastructures/machine.i"
 	@echo "... datastructures/machine.s"
-	@echo "... lib/epollFunctions.o"
-	@echo "... lib/epollFunctions.i"
-	@echo "... lib/epollFunctions.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -510,12 +426,6 @@ help:
 	@echo "... scheduler/scheduler.o"
 	@echo "... scheduler/scheduler.i"
 	@echo "... scheduler/scheduler.s"
-	@echo "... socket/sender.o"
-	@echo "... socket/sender.i"
-	@echo "... socket/sender.s"
-	@echo "... socket/socketManage.o"
-	@echo "... socket/socketManage.i"
-	@echo "... socket/socketManage.s"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.o"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.i"
 	@echo "... traceProducer/CoflowBenchmarkTraceProducer.s"

@@ -9,6 +9,8 @@
 #include <netinet/in.h>
 #include "../lib/thread.h"
 #include "../lib/locker.h"
+#define MSG_LEN 100
+
 
 class SocketManage : public thread {
 public:

@@ -83,7 +83,7 @@ int test(){
     }
 
 
-    CoflowBenchmarkTraceProducer producer("../../FB2010-1Hr-150-0.txt", "123");
+    CoflowBenchmarkTraceProducer producer("./FB2010-1Hr-150-0.txt", "123");
     vector<Coflow*>* coflows = new vector<Coflow*>;
     producer.prepareCoflows(coflows);
     coflows->at(1)->toString();

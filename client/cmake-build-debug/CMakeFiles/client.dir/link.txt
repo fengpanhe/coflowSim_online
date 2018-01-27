@@ -1,1 +1,0 @@
-/usr/lib/hardening-wrapper/bin/c++  -g   CMakeFiles/client.dir/main.cpp.o  -o client -Wl,-rpath,/home/he/git/coflowSim_online/share/cmake-build-debug /home/he/git/coflowSim_online/share/cmake-build-debug/libshare.so -lpthread 

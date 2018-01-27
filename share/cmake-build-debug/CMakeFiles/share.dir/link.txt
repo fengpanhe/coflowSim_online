@@ -1,1 +1,0 @@
-/usr/lib/hardening-wrapper/bin/c++ -fPIC -g  -shared -Wl,-soname,libshare.so -o libshare.so CMakeFiles/share.dir/library.cpp.o CMakeFiles/share.dir/lib/epollFunctions.cpp.o CMakeFiles/share.dir/socket/sender.cpp.o CMakeFiles/share.dir/socket/socketManage.cpp.o 

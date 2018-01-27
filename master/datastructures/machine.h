@@ -5,20 +5,18 @@
 #ifndef MASTER_MACHINE_H
 #define MASTER_MACHINE_H
 
-
 #include <socket/socketManage.h>
 
 class Machine : public SocketManage {
 public:
-    Machine(int machineID):machineID(machineID){}
+  Machine(int machineID) : machineID(machineID) {}
 
-    int getMachineID() const;
+  int getMachineID() const;
 
-    void run() override;
+  void run() override;
 
 private:
-    const int machineID;
+  const int machineID;
 };
 
-
-#endif //MASTER_MACHINE_H
+#endif // MASTER_MACHINE_H

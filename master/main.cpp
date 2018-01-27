@@ -5,6 +5,8 @@
 #include <strings.h>
 #include <sys/epoll.h>
 #include <cstring>
+#include <fstream>
+#include <sstream>
 #include "traceProducer/producer.h"
 #include "traceProducer/CoflowBenchmarkTraceProducer.h"
 #include "lib/threadpool.h"
@@ -23,8 +25,17 @@
 #define MAX_EVENT_NUMBER 10000
 //const char* ip = "127.0.0.1";
 //int port = 12345;
+#define CONFIG_PATH "../config"
 
 int test(){
+//    char listenip[50];
+//    int listenport;
+//    fstream Configfin;
+//    Configfin.open(CONFIG_PATH);
+//    Configfin >> listenip;
+//    Configfin >> listenport;
+//    Configfin.close();
+//    printf("ip: %s port: %d \n", listenip, listenport);
     int bcSockfd, listenSockfd;
     struct sockaddr_in bcAddr, listenAddr;
     threadpool<thread>* pool = nullptr;
@@ -90,7 +101,12 @@ int test(){
     addfd( epollfd, listenSockfd, false );
     SocketManage::sEpollfd = epollfd;
 
-    char bcmsg[] = "127.0.0.1 4002";
+    char bcmsg[50] = "127.0.0.1 4002";
+//    fstream Cofigfin;
+//    Cofigfin.open(CONFIG_PATH);
+//    Cofigfin.getline(bcmsg, 50);
+//    Cofigfin.close();
+
     while(true){
 
         int sendBytes;

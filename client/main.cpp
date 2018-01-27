@@ -73,6 +73,7 @@ int test() {
 //    addfd( epollfd, listenSockfd, false );
     SocketManage::sEpollfd = epollfd;
     sockManger.initSocket(connSockfd, connAddr);
+    printf("connSockfd: %d\n", connSockfd);
     while(true){
         int number = epoll_wait( epollfd, events, 5, -1 );
         printf("epoll_number: %d\n", number);

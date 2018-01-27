@@ -95,6 +95,10 @@ sys/epoll.h
 -
 cstring
 -
+fstream
+-
+sstream
+-
 traceProducer/producer.h
 /home/he/git/coflowSim_online/master/traceProducer/producer.h
 traceProducer/CoflowBenchmarkTraceProducer.h

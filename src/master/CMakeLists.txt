@@ -4,6 +4,7 @@
 # set(CMAKE_CXX_STANDARD 11)
 
 include_directories(${PROJECT_SOURCE_DIR}/src/common)
+include_directories(${PROJECT_SOURCE_DIR}/thirdparty)
 
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 

@@ -1,32 +1,92 @@
 #include <iostream>
 #include <unordered_map>
-#include <assert.h>
 #include <arpa/inet.h>
 #include <strings.h>
 #include <sys/epoll.h>
 #include <cstring>
 #include <fstream>
 #include <sstream>
+
 #include "traceProducer/producer.h"
 #include "traceProducer/CoflowBenchmarkTraceProducer.h"
 #include "lib/threadpool.h"
-#include "lib/thread.h"
 #include "lib/epollFunctions.h"
-#include "socket/socketManage.h"
 #include "scheduler/scheduler.h"
 
-#define BROADCAST_IP "255.255.255.255"
-#define BROADCAST_PORT 4001
+#include "spdlog/spdlog.h"
 
-#define LISTENED_IP "127.0.0.1"
-#define LISTENED_PORT 4002
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/document.h"
+using namespace rapidjson;
+
 #define BACKLOG 10
 
 #define MAX_EVENT_NUMBER 10000
-//const char* ip = "127.0.0.1";
-//int port = 12345;
-#define CONFIG_PATH "../config"
 
+char serverIP[64] = "127.0.0.1";
+int serverPort = 4002;
+char broadcastIP[64] = "255.255.255.255";
+int broadcastPort = 4001;
+char FBfilePath[1024] = "../res/FB2010-1Hr-150-0.txt";
+int threadNum = 8;
+bool parseConfig(char const * configFilePath){
+//    ifstream configFin;
+//    configFin.open(configFilePath);
+    FILE* fp = fopen(configFilePath, "r"); // 非 Windows 平台使用 "r"
+    char readBuffer[65536];
+    FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+    Document document;
+    document.ParseStream(is);
+    fclose(fp);
+
+    stringstream ss;
+
+    assert(document.HasMember("server_ip"));
+    assert(document["server_ip"].IsString());
+    ss << document["server_ip"].GetString();
+    ss >> serverIP;
+    ss.clear();
+
+    assert(document.HasMember("server_port"));
+    assert(document["server_port"].IsInt());
+    ss << document["server_port"].GetInt();
+    ss >> serverPort;
+    ss.clear();
+
+    assert(document.HasMember("broadcast_ip"));
+    assert(document["broadcast_ip"].IsString());
+    ss << document["broadcast_ip"].GetString();
+    ss >> broadcastIP;
+    ss.clear();
+
+    assert(document.HasMember("broadcast_port"));
+    assert(document["broadcast_port"].IsInt());
+    ss << document["broadcast_port"].GetInt();
+    ss >> broadcastPort;
+    ss.clear();
+
+
+    assert(document.HasMember("FBfilePath"));
+    assert(document["FBfilePath"].IsString());
+    ss << configFilePath;
+    ss >> FBfilePath;
+    ss.clear();
+    int index = strlen(FBfilePath) - 1;
+    while(index >= 0 && FBfilePath[index] != '/') index--;
+    FBfilePath[++index] = '\0';
+    ss << FBfilePath;
+    ss << document["FBfilePath"].GetString();
+    ss >> FBfilePath;
+    ss.clear();
+
+    assert(document.HasMember("thread_num"));
+    assert(document["thread_num"].IsInt());
+    ss << document["thread_num"].GetInt();
+    ss >> threadNum;
+    ss.clear();
+
+    return true;
+}
 int test(){
 //    char listenip[50];
 //    int listenport;
@@ -50,8 +110,8 @@ int test(){
     memset(&bcAddr, 0, sizeof(struct sockaddr_in));
     bcAddr.sin_family = AF_INET;
     bcAddr.sin_family = AF_INET;
-    bcAddr.sin_addr.s_addr = inet_addr(BROADCAST_IP);
-    bcAddr.sin_port = htons(BROADCAST_PORT);
+    bcAddr.sin_addr.s_addr = inet_addr(broadcastIP);
+    bcAddr.sin_port = htons(broadcastPort);
 
 
     // 初始化监听socket
@@ -64,8 +124,8 @@ int test(){
 
     bzero( &listenAddr, sizeof( listenAddr ) );
     listenAddr.sin_family = AF_INET;
-    inet_pton(AF_INET, LISTENED_IP, &listenAddr.sin_addr);
-    listenAddr.sin_port = htons(LISTENED_PORT);
+    inet_pton(AF_INET, serverIP, &listenAddr.sin_addr);
+    listenAddr.sin_port = htons(serverPort);
     if (bind(listenSockfd, (struct sockaddr *)&listenAddr, sizeof(struct sockaddr)) == -1) {
         perror("Bind error\n");
         return -1;
@@ -83,7 +143,7 @@ int test(){
     }
 
 
-    CoflowBenchmarkTraceProducer producer("./FB2010-1Hr-150-0.txt", "123");
+    CoflowBenchmarkTraceProducer producer(FBfilePath, "123");
     vector<Coflow*>* coflows = new vector<Coflow*>;
     producer.prepareCoflows(coflows);
     coflows->at(1)->toString();
@@ -148,10 +208,12 @@ int test(){
     }
 }
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+int main(int argc, char const *argv[]) {
 
+    std::cout << "Hello, World!" << argv[1] << std::endl;
+    parseConfig(argv[1]);
 
-    test();
+    printf("FBfilePath = %s\n", FBfilePath);
+//    test();
     return 0;
 }

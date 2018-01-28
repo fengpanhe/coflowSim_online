@@ -3,9 +3,10 @@
 
 # set(CMAKE_CXX_STANDARD 11)
 
-include_directories(${PROJECT_SOURCE_DIR}/common)
+include_directories(${PROJECT_SOURCE_DIR}/src/common)
+include_directories(${PROJECT_SOURCE_DIR}/thirdparty)
 
-link_directories(${PROJECT_SOURCE_DIR}/common)
+link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 add_executable(client main.cpp)
 

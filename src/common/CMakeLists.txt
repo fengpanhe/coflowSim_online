@@ -3,4 +3,11 @@
 
 # set(CMAKE_CXX_STANDARD 11)
 
-add_library(common SHARED library.cpp library.h lib/epollFunctions.cpp lib/epollFunctions.h lib/locker.h lib/thread.h lib/threadpool.h socket/sender.cpp socket/sender.h socket/socketManage.cpp socket/socketManage.h)
+
+# 设置输出路径
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+
+aux_source_directory(. DIR_SRCS_)
+aux_source_directory(./socket DIR_SRCS_SOCKET)
+aux_source_directory(./lib DIR_SRCS_LIB)
+add_library(common SHARED ${DIR_SRCS_SOCKET} ${DIR_SRCS_LIB})

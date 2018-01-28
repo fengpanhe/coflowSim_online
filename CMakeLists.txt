@@ -4,6 +4,7 @@ project(CoflowSim)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_subdirectory(master)
-add_subdirectory(common)
-add_subdirectory(client)
+# add_subdirectory(thirdparty)
+add_subdirectory(src/master)
+add_subdirectory(src/common)
+add_subdirectory(src/client)

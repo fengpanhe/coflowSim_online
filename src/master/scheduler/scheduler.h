@@ -5,33 +5,32 @@
 #ifndef MASTER_SCHEDULER_H
 #define MASTER_SCHEDULER_H
 
-
 #include "../datastructures/coflow.h"
-#include "lib/thread.h"
 #include "../datastructures/machine.h"
+#include "lib/threadclass.h"
 #include "machineManager.h"
 
-class scheduler : public thread {
+class scheduler : public ThreadClass {
 public:
-    void run() override;
+  void run() override;
 
-    bool onCoflowRegister(Coflow* c);
+  bool onCoflowRegister(Coflow *c);
 
-    bool onCoflowUnregister(Coflow* c);
+  bool onCoflowUnregister(Coflow *c);
 
-    bool setUnregisterCoflows(vector<Coflow*>* coflows);
+  bool setUnregisterCoflows(vector<Coflow *> *coflows);
 
 private:
-    vector<Coflow*>* mUnregisterCoflows;
-    vector<Coflow*>* mRunningCoflows;
-    vector<Coflow*>* mFinishedCoflows;
-    vector<Coflow*>* mNotAdmittedCoflows;
+  vector<Coflow *> *mUnregisterCoflows;
+  vector<Coflow *> *mRunningCoflows;
+  vector<Coflow *> *mFinishedCoflows;
+  vector<Coflow *> *mNotAdmittedCoflows;
 
-//    TODO
-    machineManager* machines;
+  //    TODO
+  machineManager *machines;
+
 public:
-    void setMachines(machineManager *machines);
+  void setMachines(machineManager *machines);
 };
 
-
-#endif //MASTER_SCHEDULER_H
+#endif // MASTER_SCHEDULER_H

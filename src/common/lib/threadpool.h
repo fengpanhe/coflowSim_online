@@ -13,11 +13,11 @@
 #include "locker.h"
 
 template< typename T >
-class threadpool
+class ThreadPool
 {
 public:
-    threadpool( int thread_number = 8, int max_requests = 10000 );
-    ~threadpool();
+    ThreadPool( int thread_number = 8, int max_requests = 10000 );
+    ~ThreadPool();
     bool append( T* request );
 
 private:
@@ -34,8 +34,9 @@ private:
     bool m_stop;
 };
 
+
 template< typename T >
-threadpool< T >::threadpool( int thread_number, int max_requests ) :
+ThreadPool< T >::ThreadPool( int thread_number, int max_requests ) :
         m_thread_number( thread_number ), m_max_requests( max_requests ), m_stop( false ), m_threads( NULL )
 {
     if( ( thread_number <= 0 ) || ( max_requests <= 0 ) )
@@ -51,7 +52,7 @@ threadpool< T >::threadpool( int thread_number, int max_requests ) :
 
     for ( int i = 0; i < thread_number; ++i )
     {
-        printf( "create the %dth thread\n", i );
+        printf( "create the %dth ThreadClass\n", i );
         if( pthread_create( m_threads + i, NULL, worker, this ) != 0 )
         {
             delete [] m_threads;
@@ -66,14 +67,14 @@ threadpool< T >::threadpool( int thread_number, int max_requests ) :
 }
 
 template< typename T >
-threadpool< T >::~threadpool()
+ThreadPool< T >::~ThreadPool()
 {
     delete [] m_threads;
     m_stop = true;
 }
 
 template< typename T >
-bool threadpool< T >::append( T* request )
+bool ThreadPool< T >::append( T* request )
 {
     m_queuelocker.lock();
     if ( m_workqueue.size() > m_max_requests )
@@ -88,15 +89,15 @@ bool threadpool< T >::append( T* request )
 }
 
 template< typename T >
-void* threadpool< T >::worker( void* arg )
+void* ThreadPool< T >::worker( void* arg )
 {
-    threadpool* pool = ( threadpool* )arg;
+    ThreadPool* pool = ( ThreadPool* )arg;
     pool->run();
     return pool;
 }
 
 template< typename T >
-void threadpool< T >::run()
+void ThreadPool< T >::run()
 {
     while ( ! m_stop )
     {

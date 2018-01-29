@@ -6,7 +6,7 @@
 #define MASTER_THREAD_H
 
 
-class thread {
+class ThreadClass {
 public:
     virtual void run() = 0;
 };

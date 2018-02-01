@@ -10,9 +10,9 @@
 #include "../datastructures/machine.h"
 using namespace std;
 
-class machineManager {
+class MachineManager {
 public:
-    machineManager();
+    MachineManager();
 
     bool addOnePhysicsMachine(int machinId, int sockfd, struct sockaddr_in client_address);
 

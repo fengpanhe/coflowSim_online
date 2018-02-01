@@ -11,6 +11,7 @@
 #include <exception>
 #include <pthread.h>
 #include "locker.h"
+#include "spdlog/spdlog.h"
 
 template< typename T >
 class ThreadPool
@@ -39,6 +40,7 @@ template< typename T >
 ThreadPool< T >::ThreadPool( int thread_number, int max_requests ) :
         m_thread_number( thread_number ), m_max_requests( max_requests ), m_stop( false ), m_threads( NULL )
 {
+  auto console = spdlog::stdout_color_mt("ThreadPool");
     if( ( thread_number <= 0 ) || ( max_requests <= 0 ) )
     {
         throw std::exception();
@@ -52,7 +54,7 @@ ThreadPool< T >::ThreadPool( int thread_number, int max_requests ) :
 
     for ( int i = 0; i < thread_number; ++i )
     {
-        printf( "create the %dth ThreadClass\n", i );
+
         if( pthread_create( m_threads + i, NULL, worker, this ) != 0 )
         {
             delete [] m_threads;
@@ -64,6 +66,7 @@ ThreadPool< T >::ThreadPool( int thread_number, int max_requests ) :
             throw std::exception();
         }
     }
+  console->info( "Created {} Threads\n", thread_number) ;
 }
 
 template< typename T >

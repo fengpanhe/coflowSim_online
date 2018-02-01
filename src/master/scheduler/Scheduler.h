@@ -8,9 +8,9 @@
 #include "../datastructures/coflow.h"
 #include "../datastructures/machine.h"
 #include "lib/threadclass.h"
-#include "machineManager.h"
+#include "MachineManager.h"
 
-class scheduler : public ThreadClass {
+class Scheduler : public ThreadClass {
 public:
   void run() override;
 
@@ -27,10 +27,10 @@ private:
   vector<Coflow *> *mNotAdmittedCoflows;
 
   //    TODO
-  machineManager *machines;
+  MachineManager *machines;
 
 public:
-  void setMachines(machineManager *machines);
+  void setMachines(MachineManager *machines);
 };
 
 #endif // MASTER_SCHEDULER_H

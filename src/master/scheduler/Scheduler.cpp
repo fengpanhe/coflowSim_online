@@ -4,9 +4,9 @@
 
 #include <sstream>
 #include <cstring>
-#include "scheduler.h"
+#include "Scheduler.h"
 
-void scheduler::run() {
+void Scheduler::run() {
     bool flag = false;
     while(true){
         int delay = 10000000000;
@@ -46,11 +46,11 @@ void scheduler::run() {
     }
 }
 
-void scheduler::setMachines(machineManager *machines) {
-    scheduler::machines = machines;
+void Scheduler::setMachines(MachineManager *machines) {
+    Scheduler::machines = machines;
 }
 
-bool scheduler::setUnregisterCoflows(vector<Coflow *> *coflows) {
+bool Scheduler::setUnregisterCoflows(vector<Coflow *> *coflows) {
     mUnregisterCoflows = coflows;
     return true;
 }

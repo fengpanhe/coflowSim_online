@@ -30,6 +30,7 @@ char broadcastIP[64] = "255.255.255.255";
 int broadcastPort = 4001;
 char FBfilePath[1024] = "../res/FB2010-1Hr-150-0.txt";
 int threadNum = 8;
+
 bool parseConfig(char const* configFilePath)
 {
     auto console = spdlog::stdout_color_mt("parseConfig");
@@ -96,6 +97,7 @@ bool parseConfig(char const* configFilePath)
 
     return true;
 }
+
 int test()
 {
     auto console = spdlog::stdout_color_mt("console");
@@ -214,8 +216,10 @@ int test()
 int main(int argc, char const* argv[])
 {
 
-    std::cout << "Hello, World!" << argv[1] << std::endl;
-    parseConfig(argv[1]);
-    test();
+//    std::cout << "Hello, World!" << argv[1] << std::endl;
+//    parseConfig(argv[1]);
+//    test();
+    int now1 = time(0);
+    printf("时间： %d \n", now1);
     return 0;
 }

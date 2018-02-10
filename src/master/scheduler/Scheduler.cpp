@@ -7,6 +7,10 @@
 #include "Scheduler.h"
 
 void Scheduler::run() {
+    startTime = time(0);
+
+
+
     bool flag = false;
     while(true){
         int delay = 10000000000;
@@ -15,7 +19,6 @@ void Scheduler::run() {
             continue;
         }
         printf("de\n");
-//        m_logicMap[1]->setSendMsg(ch, 10);
         for (int i = 0; i < mUnregisterCoflows->size(); ++i) {
             Coflow* co = mUnregisterCoflows->at(i);
             for(auto &it:co->flowCollection){
@@ -35,13 +38,6 @@ void Scheduler::run() {
                 machines->sendTask(it->getMapperID(), ch, strlen(ch));
             }
         }
-//        for (auto &it:*mUnregisterCoflows){
-//            delay = 100000000;
-//            while(--delay > 0);
-//            stringstream ss;
-////            for(auto it->)
-//            flag = true;
-//        }
         if(flag) break;
     }
 }
@@ -53,4 +49,18 @@ void Scheduler::setMachines(MachineManager *machines) {
 bool Scheduler::setUnregisterCoflows(vector<Coflow *> *coflows) {
     mUnregisterCoflows = coflows;
     return true;
+}
+void Scheduler::registerCoflow()
+{
+    int nowTime = time(0);
+    int t = nowTime - startTime;
+    while (true){
+        if(mUnregisterCoflows->front()->getStartTime() <= t){
+            registedCoflows->push_back(mUnregisterCoflows->at(0));
+            mUnregisterCoflows->erase(mUnregisterCoflows->begin());
+        }
+        else{
+            break;
+        }
+    }
 }

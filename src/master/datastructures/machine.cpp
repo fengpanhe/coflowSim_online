@@ -14,6 +14,14 @@ int Machine::getMachineID() const {
 void Machine::run() {
     SocketManage::run();
 }
+int Machine::getRemainBandwidth() const
+{
+    return remainBandwidth;
+}
+void Machine::setRemainBandwidth(int remainBandwidth)
+{
+    Machine::remainBandwidth = remainBandwidth;
+}
 
 
 

@@ -6,8 +6,8 @@
 #include "coflow.h"
 
 
-void Coflow::addFlow(int mapperID, int reducerID, double flowSizeMB) {
-    this->flowCollection.push_back(new Flow(mapperID, reducerID, flowSizeMB));
+void Coflow::addFlow(int flowID, int mapperID, int reducerID, double flowSizeMB) {
+    this->flowCollection.push_back(new Flow(flowID, mapperID, reducerID, flowSizeMB));
 }
 
 const int Coflow::getCoflowID() const {
@@ -24,4 +24,28 @@ void Coflow::toString() {
     for(auto & it:this->flowCollection){
         it->toString();
     }
+}
+int Coflow::getCoflowState() const
+{
+    return coflowState;
+}
+void Coflow::setCoflowState(int coflowState)
+{
+    Coflow::coflowState = coflowState;
+}
+bool Coflow::flowEnd(int flowID, int endtime)
+{
+    for(auto & it:flowCollection){
+        if(it->getFlowID() == flowID){
+            it->setFlowState(FLOWEND);
+            it->setEndTime(endtime);
+            endflowNum++;
+            break;
+        }
+    }
+    if(endflowNum >= flowCollection.size()){
+        this->endtime = endtime;
+        return true;
+    }
+    return false;
 }

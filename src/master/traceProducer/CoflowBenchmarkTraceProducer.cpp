@@ -17,6 +17,7 @@ CoflowBenchmarkTraceProducer::CoflowBenchmarkTraceProducer(string coflowBenchFil
 }
 
 bool CoflowBenchmarkTraceProducer::prepareCoflows(vector<Coflow*>* & coflows) {
+    cout << this->coflowBenchFilePath << endl;
     fstream CBfin;
     CBfin.open(this->coflowBenchFilePath);
 
@@ -101,7 +102,7 @@ Coflow* CoflowBenchmarkTraceProducer::prepareOneCoflow(char* line) {
 
     for (auto &it : reducer_sizeMB) {
         for (int i = 0; i < mapperNum; ++i) {
-            coflow->addFlow(mapperIDs[i], it.first, it.second / mapperNum);
+            coflow->addFlow(i, mapperIDs[i], it.first, it.second / mapperNum);
         }
     }
     return coflow;

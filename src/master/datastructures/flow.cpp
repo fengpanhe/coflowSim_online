@@ -37,3 +37,23 @@ double Flow::getCurrentMbs() const {
 void Flow::setCurrentMbs(double currentMbs) {
     Flow::currentMbs = currentMbs;
 }
+const int Flow::getFlowID() const
+{
+    return flowID;
+}
+bool Flow::isFlowState() const
+{
+    return flowState;
+}
+void Flow::setFlowState(bool flowState)
+{
+    Flow::flowState = flowState;
+}
+int Flow::getEndTime() const
+{
+    return endTime;
+}
+void Flow::setEndTime(int endTime)
+{
+    Flow::endTime = endTime;
+}

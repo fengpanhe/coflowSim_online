@@ -49,8 +49,8 @@ void SocketManage::run() {
     if(!this->receiveMessage()){
         cout << "error:" << endl;
     }
-    printf("recvmsg: %s \n", m_recvBuf);
-    initRecvBuf();
+    printf("recvmsg: \"%s\" \n", m_recvBuf);
+//    initRecvBuf();
     m_recvBufLocker.unlock();
 }
 
@@ -145,8 +145,17 @@ bool SocketManage::getRecvBuf(char *&buf, int &buflen) {
     buf[i] = '\0';
     buflen = m_recvIdx;
     initRecvBuf();
+
     m_recvBufLocker.unlock();
     return false;
+}
+int SocketManage::getM_recvIdx() const
+{
+    return m_recvIdx;
+}
+void SocketManage::setM_recvIdx(int m_recvIdx)
+{
+    SocketManage::m_recvIdx = m_recvIdx;
 }
 
 

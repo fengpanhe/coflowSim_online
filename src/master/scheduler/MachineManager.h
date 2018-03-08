@@ -14,7 +14,7 @@ class MachineManager {
 public:
     MachineManager();
 
-    bool addOnePhysicsMachine(int machinId, int sockfd, struct sockaddr_in client_address);
+    bool addOnePhysicsMachine( int machinId, char* sockip, int sockport, struct sockaddr_in connAddr);
 
     Machine* getPhyMachineByMachineID(int machineID);
 
@@ -26,12 +26,13 @@ public:
 
     void updateLogicMap();
 
-    bool sendTask(int mapperID, char * ins, int inslen);
+    bool sendTask(int coflowID, int flowID, int mapperID, int reducerID, double flowSizeMB, double sendSpeedMbs);
 
     // 逻辑机到物理机的映射
     unordered_map<int, Machine*> m_logicMap;
-private:
     vector<Machine*> m_physicsMachines;
+private:
+
     int m_logicMachineNum;
 
 };

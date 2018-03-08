@@ -27,10 +27,10 @@ public:
   bool setSendMsg(char *msg, int msgSize);
 
   bool getRecvBuf(char *&buf, int &buflen);
-
+    int getM_recvIdx() const;
+    void setM_recvIdx(int m_recvIdx);
 private:
-  int m_Sockfd;
-  sockaddr_in m_address;
+    sockaddr_in m_address;
 
   char m_recvBuf[MAX_RECV_BUFFER_SIZE];
   int m_recvIdx;
@@ -44,6 +44,8 @@ private:
   void initSendBuf();
   bool receiveMessage();
   bool sendMessage();
+protected:
+    int m_Sockfd;
 };
 
 #endif // MASTER_SOCKETMANAGE_H

@@ -4,5 +4,6 @@
   "broadcast_ip": "255.255.255.255",
   "broadcast_port": 4001,
   "FBfilePath": "../res/FB2010-1Hr-150-0.txt",
+  "machine_define_path": "../res/machine_define.json",
   "thread_num": 8
 }

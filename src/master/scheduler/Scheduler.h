@@ -13,18 +13,24 @@
 
 class Scheduler : public ThreadClass {
 public:
+    Scheduler(){
+        registerIndex = 0;
+    }
+
     void run() override;
 
     bool onCoflowRegister(Coflow* c);
 
     bool onCoflowUnregister(Coflow* c);
 
-    bool setUnregisterCoflows(vector<Coflow*>* coflows);
+    bool setCoflows(vector<Coflow*>* coflows);
 
     // 模拟coflow的注册过程
     void registerCoflow();
 private:
-    vector<Coflow*>* mUnregisterCoflows;
+    vector<Coflow*>* sCoflows;
+    int registerIndex;
+
     vector<Coflow*>* registedCoflows;
     vector<Coflow*>* mRunningCoflows;
     vector<Coflow*>* mFinishedCoflows;

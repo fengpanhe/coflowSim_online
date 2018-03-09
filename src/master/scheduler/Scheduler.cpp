@@ -26,8 +26,8 @@ void Scheduler::run() {
         registerCoflow();
         for (int i = 0; i < registerIndex; ++i) {
             // TODO 选出可以发送的coflow，改状态为RUNNING
-            if(sCoflows->at(0)->getCoflowState() == REGISTED)
-                sCoflows->at(0)->setCoflowState(RUNNING);
+            if(sCoflows->at(i)->getCoflowState() == REGISTED)
+                sCoflows->at(i)->setCoflowState(RUNNING);
         }
 
         for (int i = 0; i < registerIndex; ++i) {

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/client.dir/main.cpp.o  -o ../../bin/client  -L/home/he/git/coflowSim_online/lib -Wl,-rpath,/home/he/git/coflowSim_online/lib ../../lib/libcommon.a -lpthread 

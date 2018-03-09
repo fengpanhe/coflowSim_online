@@ -144,7 +144,10 @@ bool parseMachineDenfine(char const* machineDefinePath, MachineManager*& machine
 
     assert(clients_ip.IsArray());
     assert(clients_port.IsArray());
+    struct sockaddr_in connAddr[3];
+    int connSockfd[3];
     for (SizeType i = 0; i<clients_ip.Size(); i++) {
+        cout << i << endl;
         char client_ip[64];
         int client_port;
 
@@ -156,26 +159,26 @@ bool parseMachineDenfine(char const* machineDefinePath, MachineManager*& machine
         ss >> client_port;
         ss.clear();
 
-        struct sockaddr_in connAddr;
-        int connSockfd;
-        memset(&connAddr, 0, sizeof(struct sockaddr_in));
-        connAddr.sin_family = AF_INET;
-        connAddr.sin_addr.s_addr = inet_addr(client_ip);
-        connAddr.sin_port = htons(client_port);
-        if ((connSockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))<0) {
+        struct sockaddr_in connAddr[i];
+        int connSockfd[i];
+        memset(&connAddr[i], 0, sizeof(struct sockaddr_in));
+        connAddr[i].sin_family = AF_INET;
+        connAddr[i].sin_addr.s_addr = inet_addr(client_ip);
+        connAddr[i].sin_port = htons(client_port);
+        if ((connSockfd[i] = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))<0) {
             printf("Failed to create socket");
         }
 
-        if (connect(connSockfd, (struct sockaddr*) &connAddr, sizeof(connAddr))<0) {
+        if (connect(connSockfd[i], (struct sockaddr*) &connAddr[i], sizeof(connAddr[i]))<0) {
             printf("Failed to connect with server");
         }
         int error = 0;
         socklen_t len = sizeof(error);
-        getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+        getsockopt(connSockfd[i], SOL_SOCKET, SO_ERROR, &error, &len);
         int reuse = 1;
-        setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+        setsockopt(connSockfd[i], SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
-        machineManager->addOnePhysicsMachine(connSockfd, client_ip, client_port, connAddr);
+        machineManager->addOnePhysicsMachine(connSockfd[i], client_ip, client_port, connAddr[i]);
     }
 
 }

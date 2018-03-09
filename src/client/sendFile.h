@@ -22,6 +22,7 @@ class SendFile : public SocketManage {
 public:
     SendFile(char* ins){
         reflag = false;
+        coflowID = -1;
         int i;
         for(i = 0; i < strlen(ins); i++){
             this->ins[i] = ins[i];

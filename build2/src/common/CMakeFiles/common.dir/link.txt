@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libcommon.a  CMakeFiles/common.dir/library.cpp.o CMakeFiles/common.dir/socket/sender.cpp.o CMakeFiles/common.dir/socket/socketManage.cpp.o CMakeFiles/common.dir/lib/epollFunctions.cpp.o
+/usr/bin/ranlib ../../lib/libcommon.a

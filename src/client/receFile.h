@@ -19,7 +19,7 @@ public:
 // recv函数接收数据到缓冲区buffer中
         char buffer[BUFFER_SIZE];
         bzero(buffer, BUFFER_SIZE);
-        if (recv(m_Sockfd, buffer, BUFFER_SIZE, 0)<0) {
+        if (recv(m_Sockfd, buffer, 20, 0)<0) {
             perror("Server Recieve Data Failed:");
         }
         // 然后从buffer(缓冲区)拷贝到file_name中
@@ -29,6 +29,11 @@ public:
         printf("%s\n", file_name);
 
         // 打开文件，准备写入
+        int nowTime = time(0);
+        stringstream ss;
+        ss << nowTime;
+        ss >> file_name;
+        ss.clear();
         FILE* fp = fopen(file_name, "w");
 //        ofstream fp;
 //        fp.open(file_name);

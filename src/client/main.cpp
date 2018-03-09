@@ -170,9 +170,10 @@ int test()
         }
 
         for(auto & it:sendFiles){
-            if(it->reflag){
+            if(it->reflag && it->coflowID > -1){
 
-                char * tmpstr = new char[100];
+                char tmpstr[100] = "a";
+//                memset(tmpstr,'0',sizeof(tmpstr));
                 stringstream ss;
                 ss << it->coflowID;
                 ss >> tmpstr;
@@ -189,7 +190,7 @@ int test()
                 ss << it->endTime;
                 ss >> tmpstr + strlen(tmpstr);
                 ss.clear();
-                cout << tmpstr;
+                cout << tmpstr << endl;
                 masterSockManger.setSendMsg(tmpstr, strlen(tmpstr));
                 masterSockManger.run();
                 it->reflag = false;

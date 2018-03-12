@@ -6,6 +6,7 @@
 
 # 设置输出路径
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+include_directories(${PROJECT_SOURCE_DIR}/thirdparty)
 
 aux_source_directory(. DIR_SRCS_)
 aux_source_directory(./socket DIR_SRCS_SOCKET)

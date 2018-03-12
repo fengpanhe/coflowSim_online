@@ -37,8 +37,9 @@ public:
     void setCoflowState(int coflowState);
 
 // TODO
-    vector<Flow*> flowCollection;
+  vector<Flow*> flowCollection;
 private:
+
     const int coflowID;
     const double startTime;
     int coflowState;

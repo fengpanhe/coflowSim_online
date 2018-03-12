@@ -8,10 +8,16 @@
 #include "../lib/locker.h"
 #include "../lib/threadclass.h"
 #include <netinet/in.h>
+#include <spdlog/spdlog.h>
+#include <iostream>
 #define MSG_LEN 100
+
+//auto socketManage_logger = spdlog::basic_logger_mt("socketManage_logger", "socketManage.log");
+
 
 class SocketManage : public ThreadClass {
 public:
+
   // 共用的epoll文件描述符
   static int sEpollfd;
 
@@ -25,12 +31,15 @@ public:
   void run() override;
 
   bool setSendMsg(char *msg, int msgSize);
-
   bool getRecvBuf(char *&buf, int &buflen);
-    int getM_recvIdx() const;
-    void setM_recvIdx(int m_recvIdx);
+
+  int getM_recvIdx() const;
+  void setM_recvIdx(int m_recvIdx);
+
+  bool recvMsg();
+  bool sendMsg();
 private:
-    sockaddr_in m_address;
+  sockaddr_in m_address;
 
   char m_recvBuf[MAX_RECV_BUFFER_SIZE];
   int m_recvIdx;
@@ -45,7 +54,7 @@ private:
   bool receiveMessage();
   bool sendMessage();
 protected:
-    int m_Sockfd;
+  int m_Sockfd;
 };
 
 #endif // MASTER_SOCKETMANAGE_H

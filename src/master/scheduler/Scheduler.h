@@ -13,36 +13,43 @@
 
 class Scheduler : public ThreadClass {
 public:
-    Scheduler(){
-        registerIndex = 0;
-    }
+  Scheduler() {
+    registerIndex = 0;
 
-    void run() override;
+    recvbuf = new char[1024];
+  }
 
-    bool onCoflowRegister(Coflow* c);
+  ~Scheduler(){
+    delete recvbuf;
+  }
 
-    bool onCoflowUnregister(Coflow* c);
+  void run() override;
 
-    bool setCoflows(vector<Coflow*>* coflows);
+  bool onCoflowRegister(Coflow *c);
 
-    // 模拟coflow的注册过程
-    void registerCoflow();
+  bool onCoflowUnregister(Coflow *c);
+
+  bool setCoflows(vector<Coflow *> *coflows);
+
+  // 模拟coflow的注册过程
+  void registerCoflow(long currentTime);
 private:
-    vector<Coflow*>* sCoflows;
-    int registerIndex;
+  vector<Coflow *> *sCoflows;
+  int registerIndex;
 
-    vector<Coflow*>* registedCoflows;
-    vector<Coflow*>* mRunningCoflows;
-    vector<Coflow*>* mFinishedCoflows;
-    vector<Coflow*>* mNotAdmittedCoflows;
+  vector<Coflow *> *registedCoflows;
+  vector<Coflow *> *mRunningCoflows;
+  vector<Coflow *> *mFinishedCoflows;
+  vector<Coflow *> *mNotAdmittedCoflows;
 
-    //    TODO
-    MachineManager* machines;
+  //    TODO
+  MachineManager *machines;
 
-    int startTime;
+  long startTime;
 
+  char * recvbuf;
 public:
-    void setMachines(MachineManager* machines);
+  void setMachines(MachineManager *machines);
 };
 
 #endif // MASTER_SCHEDULER_H

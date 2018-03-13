@@ -322,5 +322,9 @@ int main(int argc, char const *argv[]) {
   //    int now1 = time(0);
   //    printf("时间： %d \n", now1);
   //  cout << "clock" << clock() << endl;
+  // long st = clock();
+  // while (clock() - st < 1000000) {
+  //   cout << clock() - st << endl;
+  // }
   return 0;
 }

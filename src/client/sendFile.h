@@ -23,7 +23,7 @@ using namespace std;
 //     spdlog::basic_logger_mt("sendFile_logger", "sendFile_logger.log");
 static std::shared_ptr<spdlog::logger> sendFile_logger;
 
-// auto sendFile_logger = spdlog::stdout_color_mt("sendFile_logger");
+auto sendFile_logger_ = spdlog::stdout_color_mt("sendFile_logger");
 class SendFile : public SocketManage {
 public:
   SendFile(char *ins, int inslen, SocketManage masterSockManger) {
@@ -52,11 +52,7 @@ public:
     // 输入文件名 并放到缓冲区buffer中等待发送
     char file_name[FILE_NAME_MAX_SIZE];
     char file_save_name[FILE_NAME_MAX_SIZE];
-    //        bzero(file_name, FILE_NAME_MAX_SIZE+1);
-    //        printf("Please Input File Name On Server:\t");
-    //        gets( file_name);
-    //        printf("Please Input File Name to save On Client:\t");
-    //        gets(file_save_name);
+
     char socketip[64] = "";
     int socketport = 0;
     double flowSizeMB = 0;
@@ -73,7 +69,7 @@ public:
     ss >> sendSpeedMbs;
     ss.clear();
 
-    sendFile_logger->info("{}_{} 准备发送", coflowID, flowID);
+    // sendFile_logger->info("{}_{} 准备发送", coflowID, flowID);
 
     struct sockaddr_in connAddr;
     int connSockfd;
@@ -103,8 +99,11 @@ public:
     //      perror("Send File Name Failed:");
     //      exit(1);
     //    }
-    flowSizeMB = 1;
-    while (flowSizeMB-- > 0) {
+    long startTime = clock();
+    // flowSizeMB = 1;
+    int flowSizeKB = flowSizeMB * 1024;
+    int sendenMB = 0;
+    while (sendenMB++ >= flowSizeKB) {
       memset(buffer, 'a', sizeof(buffer));
       if (send(connSockfd, buffer, BUFFER_SIZE, 0) < 0) {
         perror("Send File Failed:");
@@ -115,12 +114,10 @@ public:
     removefd(SocketManage::sEpollfd, connSockfd);
 
     endTime = time(0);
-    sendFile_logger->info("{}_{} 发送完成, 当前时间： {}", coflowID, flowID,
-                          endTime);
-    //    cout << file_name << "发送完成，" << "时间：" << nowTime << endl;
-
-    // shutdown(connSockfd, SHUT_RDWR);
-
+    // sendFile_logger->info("{}_{} 发送完成, 当前时间： {}", coflowID, flowID,
+    //                       endTime);
+    sendFile_logger_->info("{}_{} Send Complete, S: {} MB, T: {}ms", coflowID,
+                           flowID, flowSizeMB, clock() - startTime);
     char tmpstr[100] = "a";
     memset(tmpstr, '\0', strlen(tmpstr));
     tmpstr[0] = '(';

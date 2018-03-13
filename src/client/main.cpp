@@ -182,7 +182,7 @@ int coflowSimClient() {
   vector<SendFile *> sendFiles;
   ReceFile *receFiles = new ReceFile[65536];
 
-//  addfd(epollfd, listenSockfd, false);
+  //  addfd(epollfd, listenSockfd, false);
   RecvListen *recvListen = new RecvListen(listenSockfd, pool);
   pool->append(recvListen);
   int f_int = 0;
@@ -196,17 +196,18 @@ int coflowSimClient() {
       int sockfd = events[i].data.fd;
       if (sockfd == listenSockfd) {
 
-//        struct sockaddr_in client_address {};
-//        socklen_t client_addrlength = sizeof(client_address);
-//        int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
-//                            &client_addrlength);
-//        if (connfd < 0) {
-//          continue;
-//        }
-//        receFiles[connfd].file_int = f_int;
-//        f_int++;
-//        receFiles[connfd].initSocket(connfd, client_address);
-//        pool->append(receFiles + connfd);
+        //        struct sockaddr_in client_address {};
+        //        socklen_t client_addrlength = sizeof(client_address);
+        //        int connfd = accept(listenSockfd, (struct sockaddr
+        //        *)&client_address,
+        //                            &client_addrlength);
+        //        if (connfd < 0) {
+        //          continue;
+        //        }
+        //        receFiles[connfd].file_int = f_int;
+        //        f_int++;
+        //        receFiles[connfd].initSocket(connfd, client_address);
+        //        pool->append(receFiles + connfd);
       } else if (sockfd == masterfd) {
 
         if (events[i].events & EPOLLIN) {
@@ -242,9 +243,9 @@ int coflowSimClient() {
             recvbuflen = 0;
           }
         } else if (events[i].events & EPOLLOUT) {
-          cout << "EPOLLOUT" << endl;
+          // cout << "EPOLLOUT" << endl;
 
-          cout << "EPOLLOUT_end" << endl;
+          // cout << "EPOLLOUT_end" << endl;
         }
 
       } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {

@@ -49,14 +49,8 @@ void Scheduler::run() {
       if (!it->recvMsg()) {
         continue;
       }
-      //      if (it->getM_recvIdx() <= 0) {
-      //        continue;
-      //      }
-      //
-      //      int buflen = 0;
-      //      it->getRecvBuf(recvbuf, buflen);
-      it->parseFlowsFinishedInfo();
 
+      it->parseFlowsFinishedInfo();
       int coflowID, flowID, endtime;
       while (it->getOneFlowEndInfo(coflowID, flowID, endtime)) {
         //        cout << coflowID << " " << flowID << " " << endtime << endl;
@@ -81,32 +75,7 @@ void Scheduler::run() {
           }
         }
       }
-      //      stringstream ss;
-      //      ss << recvbuf;
-      //      ss >> coflowID;
-      //      ss >> flowID;
-      //      ss >> endtime;
-      //      ss.clear();
     }
-    //        for (int i = 0; i < sCoflows->size(); ++i) {
-    //            Coflow* co = sCoflows->at(i);
-    //            for(auto &it:co->flowCollection){
-    //                delay = 1000000000;
-    //                while(--delay > 0);
-    //                stringstream ss;
-    //                ss << "coflowID:";
-    //                ss << co->getCoflowID();
-    //                ss << "||flow:";
-    //                ss << it->getMapperID();
-    //                ss << "->";
-    //                ss << it->getReducerID();
-    //                ss << "||";
-    //                ss << it->getFlowSizeMB();
-    //                char ch[100];
-    //                ss >> ch;
-    //                machines->sendTask(it->getMapperID(), ch, strlen(ch));
-    //            }
-    //        }
     if (flag)
       break;
   }

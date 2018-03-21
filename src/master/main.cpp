@@ -34,9 +34,8 @@ int threadNum = 8;
 
 bool parseConfig(char const *configFilePath) {
   auto console = spdlog::stdout_color_mt("parseConfig");
-  //    ifstream configFin;
-  //    configFin.open(configFilePath);
-  FILE *fp = fopen(configFilePath, "r"); // 非 Windows 平台使用 "r"
+
+  FILE *fp = fopen(configFilePath, "r");
   char readBuffer[65536];
   FileReadStream is(fp, readBuffer, sizeof(readBuffer));
   Document document;
@@ -188,12 +187,12 @@ bool parseMachineDenfine(char const *machineDefinePath,
                                          connAddr[i]);
   }
 }
+
 int coflowSimMaster() {
   auto console = spdlog::stdout_color_mt("coflowSimMaster");
 
-  int bcSockfd, listenSockfd;
-  struct sockaddr_in bcAddr {
-  }, listenAddr{};
+  int listenSockfd;
+  struct sockaddr_in listenAddr {};
   ThreadPool<ThreadClass> *pool = nullptr;
 
   epoll_event events[MAX_EVENT_NUMBER];
@@ -202,21 +201,6 @@ int coflowSimMaster() {
   addfd(epollfd, listenSockfd, false);
   SocketManage::sEpollfd = epollfd;
 
-  /*    // 初始化广播socket和地址
-      if ((bcSockfd = socket(PF_INET, SOCK_DGRAM, 0))==-1) {
-          perror("Creating bcsocket failed\n");
-          return -1;
-      }
-      int opval = 1;
-      setsockopt(bcSockfd, SOL_SOCKET, SO_BROADCAST | SO_REUSEADDR, &opval,
-              sizeof(int));
-      memset(&bcAddr, 0, sizeof(struct sockaddr_in));
-      bcAddr.sin_family = AF_INET;
-      bcAddr.sin_family = AF_INET;
-      bcAddr.sin_addr.s_addr = inet_addr(broadcastIP);
-      bcAddr.sin_port = htons(static_cast<uint16_t>(broadcastPort));
-      console->info("Successfully initialized bcSockfd and address!");
-  */
   // 初始化监听socket
   if ((listenSockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
     perror("Creating listenSocket failed");
@@ -269,17 +253,7 @@ int coflowSimMaster() {
   scheduler1->setCoflows(coflows);
   pool->append(scheduler1);
 
-  char bcmsg[50] = "127.0.0.1 4002";
   while (true) {
-
-    /*
-       if (sendto(bcSockfd, bcmsg, strlen(bcmsg), 0, (struct sockaddr *)&bcAddr,
-                  sizeof(struct sockaddr)) == -1) {
-         console->error("sendto fail, errno={}\n", errno);
-         return -1;
-       }
-       console->info("Broadcast a message: {}", bcmsg);
-    */
 
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
     if ((number < 0) && (errno != EINTR)) {
@@ -314,17 +288,7 @@ int coflowSimMaster() {
 }
 
 int main(int argc, char const *argv[]) {
-
-  //    std::cout << "Hello, World!" << argv[1] << std::endl;
-
   parseConfig(argv[1]);
   coflowSimMaster();
-  //    int now1 = time(0);
-  //    printf("时间： %d \n", now1);
-  //  cout << "clock" << clock() << endl;
-  // long st = clock();
-  // while (clock() - st < 1000000) {
-  //   cout << clock() - st << endl;
-  // }
   return 0;
 }

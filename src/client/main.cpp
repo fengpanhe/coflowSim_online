@@ -18,7 +18,6 @@
 #include "recvListen.h"
 using namespace rapidjson;
 using namespace std;
-#define BROADCAST_LISTEN_PORT 4001
 #define CONN_PORT 4002
 
 #define BACKLOG 65535
@@ -70,69 +69,16 @@ int coflowSimClient() {
   auto coflowSimClient_logger =
       spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
 
+  // 创建线程池
   ThreadPool<ThreadClass> *pool = nullptr;
   try {
     pool = new ThreadPool<ThreadClass>(threadNum);
   } catch (...) {
     return 1;
   }
-  //    int bcListenSockfd, connSockfd;
-  struct sockaddr_in bclAddr, connAddr;
-  int bcSockfd, listenSockfd;
-  struct sockaddr_in bcAddr {
-  }, listenAddr{};
 
-  /*/  if ((bcListenSockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-  //    printf("socket fail\n");
-  //    return -1;
-  //  }
-  //  int set = 1;
-  //  setsockopt(bcListenSockfd, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(int));
-  //  memset(&bclAddr, 0, sizeof(struct sockaddr_in));
-  //  bclAddr.sin_family = AF_INET;
-  //  bclAddr.sin_port = htons(BROADCAST_LISTEN_PORT);
-  //  bclAddr.sin_addr.s_addr = INADDR_ANY;
-  //  if (bind(bcListenSockfd, (struct sockaddr *)&bclAddr,
-  //           sizeof(struct sockaddr)) == -1) {
-  //    printf("bind fail\n");
-  //    return -1;
-  //  }
-  //  int recvbytes;
-  //  char recvbuf[128];
-  //  socklen_t addrLen = sizeof(struct sockaddr_in);
-  //  if ((recvbytes = recvfrom(bcListenSockfd, recvbuf, 128, 0,
-  //                            (struct sockaddr *)&bclAddr, &addrLen)) != -1) {
-  //    recvbuf[recvbytes] = '\0';
-  //    printf("receive a broadCast messgse:%s\n", recvbuf);
-  //  } else {
-  //    printf("recvfrom fail\n");
-  //  }
-  //  close(bcListenSockfd);
-  //
-  //  stringstream ss(recvbuf);
-  //  char ip[20];
-  //  int port;
-  //  ss >> ip;
-  //  ss >> port;
-  //  printf("ip: %s, port: %d\n", ip, port);
-  //  memset(&connAddr, 0, sizeof(struct sockaddr_in));
-  //  connAddr.sin_family = AF_INET;
-  //  connAddr.sin_addr.s_addr = inet_addr(ip);
-  //  connAddr.sin_port = htons(port);
-  //  if ((connSockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
-  //    printf("Failed to create socket");
-  //  }
-  //
-  //  if (connect(connSockfd, (struct sockaddr *)&connAddr, sizeof(connAddr)) <
-  0) {
-  //    printf("Failed to connect with server");
-  //  }
-  //  int error = 0;
-  //  socklen_t len = sizeof(error);
-  //  getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
-  //  int reuse = 1;
-  //  setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
-  */
+  int listenSockfd;
+  struct sockaddr_in listenAddr {};
 
   // 初始化监听socket
   if ((listenSockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
@@ -155,20 +101,17 @@ int coflowSimClient() {
     perror("listen() error\n");
     return -1;
   }
-
   console->info("Successfully initialized listenSockfd and address!");
-
-  //    SocketManage sockManger;
 
   // epoll创建
   epoll_event events[MAX_EVENT_NUMBER];
   int epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd != -1);
-  SocketManage::sEpollfd = epollfd;
 
+  SocketManage::sEpollfd = epollfd; // SocketManage类的静态变量赋值
   console->info("epoll_event is created!");
 
-  //    masterSockManger的创建，接收master的连接
+  // masterSockManger的创建，接收master的连接
   SocketManage masterSockManger;
   struct sockaddr_in master_address {};
   socklen_t master_addrlength = sizeof(master_address);
@@ -177,7 +120,7 @@ int coflowSimClient() {
                         &master_addrlength);
   masterSockManger.initSocket(masterfd, master_address);
 
-  console->info("masterSockManger is ok!");
+  console->info("masterSockManger is ready!");
 
   vector<SendFile *> sendFiles;
   ReceFile *receFiles = new ReceFile[65536];
@@ -253,74 +196,6 @@ int coflowSimClient() {
       } else {
       }
     }
-
-    /*        for (auto& it:sendFiles) {
-                if (it->reflag && it->coflowID>-1) {
-
-                    char tmpstr[100] = "a";
-    //                memset(tmpstr,'0',sizeof(tmpstr));
-                    stringstream ss;
-                    ss << it->coflowID;
-                    ss >> tmpstr;
-                    ss.clear();
-
-                    tmpstr[strlen(tmpstr)] = ' ';
-
-                    ss << it->flowID;
-                    ss >> tmpstr+strlen(tmpstr);
-                    ss.clear();
-
-                    tmpstr[strlen(tmpstr)] = ' ';
-
-                    ss << it->endTime;
-                    ss >> tmpstr+strlen(tmpstr);
-                    ss.clear();
-                    cout << tmpstr << endl;
-                    masterSockManger.setSendMsg(tmpstr, strlen(tmpstr));
-                    masterSockManger.run();
-                    it->reflag = false;
-                    break;
-                }
-            }
-    /*        //    int dayle = 100000000000;
-            //    while(true){
-            //        dayle = 1000000000;
-            //        while(--dayle > 0);
-            //        sockManger.run();
-            //    }
-            //    printf("%s\n", "connected");
-            //    int dayle = 100000000000;
-            //    int recvlen = 0;
-            //    while (true) {
-            //        int recvlen = 0;
-            //        int bytes_read = 0;
-            //        char buf[1024];
-            //        while (true) {
-            ////            dayle = 1000000000;
-            ////            while(--dayle > 0);
-            //            bytes_read = static_cast<int>(recv(connSockfd, buf +
-    recvlen,
-            //                                               10, 0));
-            //            if (bytes_read == -1) {
-            //                if (errno == EAGAIN  | errno == EWOULDBLOCK) {
-            //                    printf("break");
-            //                    break;
-            //                }
-            //                printf("Failed");
-            //                return false;
-            //            } else if (bytes_read == 0) {
-            //                printf("Failed");
-            //                return false;
-            //            }
-            //            recvlen += bytes_read;
-            //            if(recvlen >= 5) break;
-            //            printf("buf: %s  len: %d\n", buf, recvlen);
-            //        }
-            //        for (int i = 0; i < recvlen; ++i) {
-            //            cout << buf[i];
-            //        }
-            //        printf("\n");
-            //    } */
   }
 }
 

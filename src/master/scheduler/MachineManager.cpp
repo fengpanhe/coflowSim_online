@@ -7,16 +7,25 @@
 #include <iostream>
 #include <sstream>
 
-MachineManager::MachineManager() { m_logicMachineNum = -1; }
+MachineManager::MachineManager() {
+  m_logicMachineNum = -1;
+  m_physicsMachinesNum = 0;
+}
 
-bool MachineManager::addOnePhysicsMachine(int machinId, char *sockip,
-                                          int sockport,
-                                          struct sockaddr_in connAddr) {
-  Machine *machine = new Machine(machinId, sockip, sockport);
-  machine->initSocket(machinId, connAddr);
+int MachineManager::addOnePhysicsMachine(char *sockip, int sockport) {
+  Machine *machine = new Machine(m_physicsMachinesNum++, sockip, sockport);
   m_physicsMachines.push_back(machine);
   updateLogicMap();
-  return true;
+  return m_physicsMachinesNum - 1;
+}
+
+bool MachineManager::startConn() {
+  Machine *machine;
+  for (auto it = m_physicsMachines.begin(); it != m_physicsMachines.end();
+       it++) {
+    machine = *it;
+    machine->createConnect();
+  }
 }
 
 bool MachineManager::removeOnePhysicsMachine(int machinId) {

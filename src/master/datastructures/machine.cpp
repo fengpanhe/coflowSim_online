@@ -3,18 +3,26 @@
 //
 
 #include "machine.h"
+#include <arpa/inet.h>
 #include <cstring>
 #include <sstream>
 
 int Machine::getMachineID() const { return machineID; }
 
 void Machine::run() { SocketManage::run(); }
+
+bool Machine::createConnect() {
+  SocketManage::createConnect(this->socketip, this->socketport);
+}
+
 int Machine::getRemainBandwidth() const { return remainBandwidth; }
+
 void Machine::setRemainBandwidth(int remainBandwidth) {
   Machine::remainBandwidth = remainBandwidth;
 }
 
 char *Machine::getSocketip() { return socketip; }
+
 void Machine::setSocketip(char *socketip) {
   memset(this->socketip, '\0', 64);
   int silen = strlen(socketip);
@@ -22,15 +30,18 @@ void Machine::setSocketip(char *socketip) {
     this->socketip[i] = socketip[i];
   }
 }
+
 int Machine::getSocketport() const { return socketport; }
+
 void Machine::setSocketport(int socketport) {
   Machine::socketport = socketport;
 }
+
 bool Machine::getOneFlowEndInfo(int &coflowID, int &flowID, int &endtime) {
-  if(this->flowsFinishedInfo.size() <= 0){
+  if (this->flowsFinishedInfo.size() <= 0) {
     return false;
   }
-  FlowEndInfo * flowEndInfo = this->flowsFinishedInfo.front();
+  FlowEndInfo *flowEndInfo = this->flowsFinishedInfo.front();
   coflowID = flowEndInfo->coflowID;
   flowID = flowEndInfo->flowID;
   endtime = flowEndInfo->endTime;
@@ -38,6 +49,7 @@ bool Machine::getOneFlowEndInfo(int &coflowID, int &flowID, int &endtime) {
   this->flowsFinishedInfo.pop();
   return true;
 }
+
 bool Machine::parseFlowsFinishedInfo() {
   if (this->getM_recvIdx() <= 0) {
     return false;
@@ -55,7 +67,7 @@ bool Machine::parseFlowsFinishedInfo() {
       tmprecv[flowEndIndex] = '\0';
       stringstream ss;
       ss << tmprecv + flowStartIndex;
-      FlowEndInfo * flowEndInfo = new FlowEndInfo();
+      FlowEndInfo *flowEndInfo = new FlowEndInfo();
       ss >> flowEndInfo->coflowID;
       ss >> flowEndInfo->flowID;
       ss >> flowEndInfo->endTime;
@@ -71,7 +83,7 @@ bool Machine::parseFlowsFinishedInfo() {
     }
     tmprecv[i] = '\0';
     tmprecvIndex = i;
-  } else{
+  } else {
     tmprecv[0] = '\0';
     tmprecvIndex = 0;
   }

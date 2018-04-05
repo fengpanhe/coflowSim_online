@@ -5,37 +5,38 @@
 #ifndef MASTER_MACHINEMANAGER_H
 #define MASTER_MACHINEMANAGER_H
 
-#include <vector>
-#include <unordered_map>
 #include "../datastructures/machine.h"
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 class MachineManager {
 public:
-    MachineManager();
+  MachineManager();
 
-    bool addOnePhysicsMachine( int machinId, char* sockip, int sockport, struct sockaddr_in connAddr);
+  // 返回machineID
+  int addOnePhysicsMachine(char *sockip, int sockport);
+  bool startConn();
+  Machine *getPhyMachineByMachineID(int machineID);
 
-    Machine* getPhyMachineByMachineID(int machineID);
+  bool removeOnePhysicsMachine(int machinId);
 
-    bool removeOnePhysicsMachine(int machinId);
+  int getPhysicsMachineNum();
 
-    int getPhysicsMachineNum();
+  void setLogicMachineNum(int num);
 
-    void setLogicMachineNum(int num);
+  void updateLogicMap();
 
-    void updateLogicMap();
+  bool sendTask(int coflowID, int flowID, int mapperID, int reducerID,
+                double flowSizeMB, double sendSpeedMbs);
 
-    bool sendTask(int coflowID, int flowID, int mapperID, int reducerID, double flowSizeMB, double sendSpeedMbs);
+  // 逻辑机到物理机的映射
+  unordered_map<int, Machine *> m_logicMap;
+  vector<Machine *> m_physicsMachines;
 
-    // 逻辑机到物理机的映射
-    unordered_map<int, Machine*> m_logicMap;
-    vector<Machine*> m_physicsMachines;
 private:
-
-    int m_logicMachineNum;
-
+  int m_logicMachineNum;
+  int m_physicsMachinesNum;
 };
 
-
-#endif //MASTER_MACHINEMANAGER_H
+#endif // MASTER_MACHINEMANAGER_H

@@ -145,8 +145,8 @@ bool parseMachineDenfine(char const *machineDefinePath,
 
   assert(clients_ip.IsArray());
   assert(clients_port.IsArray());
-  struct sockaddr_in connAddr[3];
-  int connSockfd[3];
+  // struct sockaddr_in connAddr;
+  // int connSockfd;
   for (SizeType i = 0; i < clients_ip.Size(); i++) {
 
     char client_ip[64];
@@ -160,69 +160,78 @@ bool parseMachineDenfine(char const *machineDefinePath,
     ss >> client_port;
     ss.clear();
 
-    console->info("Connecting {}:{} ", client_ip, client_port);
+    machineManager->addOnePhysicsMachine(client_ip, client_port);
 
-    struct sockaddr_in connAddr[i];
-    int connSockfd[i];
-    memset(&connAddr[i], 0, sizeof(struct sockaddr_in));
-    connAddr[i].sin_family = AF_INET;
-    connAddr[i].sin_addr.s_addr = inet_addr(client_ip);
-    connAddr[i].sin_port = htons(client_port);
-    if ((connSockfd[i] = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
-      printf("Failed to create socket \n");
-    }
+    // console->info("Connecting {}:{} ", client_ip, client_port);
 
-    if (connect(connSockfd[i], (struct sockaddr *)&connAddr[i],
-                sizeof(connAddr[i])) < 0) {
-      console->error("Failed to connect with server");
-    }
-    int error = 0;
-    socklen_t len = sizeof(error);
-    getsockopt(connSockfd[i], SOL_SOCKET, SO_ERROR, &error, &len);
-    int reuse = 1;
-    setsockopt(connSockfd[i], SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+    // struct sockaddr_in connAddr[i];
+    // int connSockfd[i];
+    // memset(&connAddr[i], 0, sizeof(struct sockaddr_in));
+    // connAddr[i].sin_family = AF_INET;
+    // connAddr[i].sin_addr.s_addr = inet_addr(client_ip);
+    // connAddr[i].sin_port = htons(client_port);
+    // if ((connSockfd[i] = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
+    //   printf("Failed to create socket \n");
+    // }
 
-    console->info("Connected, sockfd is {}", connSockfd[i]);
-    machineManager->addOnePhysicsMachine(connSockfd[i], client_ip, client_port,
-                                         connAddr[i]);
+    // if (connect(connSockfd[i], (struct sockaddr *)&connAddr[i],
+    //             sizeof(connAddr[i])) < 0) {
+    //   console->error("Failed to connect with server");
+    // }
+    // int error = 0;
+    // socklen_t len = sizeof(error);
+    // getsockopt(connSockfd[i], SOL_SOCKET, SO_ERROR, &error, &len);
+    // int reuse = 1;
+    // setsockopt(connSockfd[i], SOL_SOCKET, SO_REUSEADDR, &reuse,
+    // sizeof(reuse));
+
+    // console->info("Connected, sockfd is {}", connSockfd[i]);
+    // machineManager->addOnePhysicsMachine(connSockfd[i], client_ip,
+    // client_port);
   }
 }
 
 int coflowSimMaster() {
   auto console = spdlog::stdout_color_mt("coflowSimMaster");
 
-  int listenSockfd;
-  struct sockaddr_in listenAddr {};
+  // int listenSockfd;
+  // struct sockaddr_in listenAddr {};
   ThreadPool<ThreadClass> *pool = nullptr;
+  CoflowBenchmarkTraceProducer producer(FBfilePath, "123");
+  auto *scheduler1 = new Scheduler();
+  auto *coflows = new vector<Coflow *>;
+  auto *machineManager1 = new MachineManager();
+  int coflow_num = 0;
+  int flow_num = 0;
 
   epoll_event events[MAX_EVENT_NUMBER];
   int epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd != -1);
-  addfd(epollfd, listenSockfd, false);
+  // addfd(epollfd, listenSockfd, false);
   SocketManage::sEpollfd = epollfd;
 
   // 初始化监听socket
-  if ((listenSockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-    perror("Creating listenSocket failed");
-    return -1;
-  }
-  struct linger tmp = {1, 0};
-  setsockopt(listenSockfd, SOL_SOCKET, SO_LINGER, &tmp, sizeof(tmp));
+  // if ((listenSockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+  //   perror("Creating listenSocket failed");
+  //   return -1;
+  // }
+  // struct linger tmp = {1, 0};
+  // setsockopt(listenSockfd, SOL_SOCKET, SO_LINGER, &tmp, sizeof(tmp));
 
-  bzero(&listenAddr, sizeof(listenAddr));
-  listenAddr.sin_family = AF_INET;
-  inet_pton(AF_INET, serverIP, &listenAddr.sin_addr);
-  listenAddr.sin_port = htons(static_cast<uint16_t>(serverPort));
-  if (bind(listenSockfd, (struct sockaddr *)&listenAddr,
-           sizeof(struct sockaddr)) == -1) {
-    perror("Bind error\n");
-    return -1;
-  }
-  if (listen(listenSockfd, BACKLOG) == -1) {
-    perror("listen() error\n");
-    return -1;
-  }
-  console->info("Successfully initialized listenSockfd and address!");
+  // bzero(&listenAddr, sizeof(listenAddr));
+  // listenAddr.sin_family = AF_INET;
+  // inet_pton(AF_INET, serverIP, &listenAddr.sin_addr);
+  // listenAddr.sin_port = htons(static_cast<uint16_t>(serverPort));
+  // if (bind(listenSockfd, (struct sockaddr *)&listenAddr,
+  //          sizeof(struct sockaddr)) == -1) {
+  //   perror("Bind error\n");
+  //   return -1;
+  // }
+  // if (listen(listenSockfd, BACKLOG) == -1) {
+  //   perror("listen() error\n");
+  //   return -1;
+  // }
+  // console->info("Successfully initialized listenSockfd and address!");
 
   // 线程池
   try {
@@ -231,60 +240,59 @@ int coflowSimMaster() {
     return 1;
   }
 
-  CoflowBenchmarkTraceProducer producer(FBfilePath, "123");
-  auto *coflows = new vector<Coflow *>;
+  //解析coflow
   producer.prepareCoflows(coflows);
-  int coflow_num = 0;
-  int flow_num = 0;
+
+  // 统计coflow的数量和flow的数量
   coflow_num = coflows->size();
-  console->info("coflow_num: {}", coflow_num);
   for (int i = 0; i < coflow_num; i++) {
     flow_num += coflows->at(i)->flowCollection.size();
   }
+  console->info("coflow_num: {}", coflow_num);
   console->info("flow_num: {}", flow_num);
-  //    coflows->at(1)->toString();
 
-  auto *scheduler1 = new Scheduler();
-  auto *machineManager1 = new MachineManager();
+  // machineManager处理
   machineManager1->setLogicMachineNum(150);
   parseMachineDenfine(machine_define_path, machineManager1);
+  machineManager1->startConn();
 
   scheduler1->setMachines(machineManager1);
   scheduler1->setCoflows(coflows);
+
   pool->append(scheduler1);
 
-  while (true) {
+  // while (true) {
 
-    int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
-    if ((number < 0) && (errno != EINTR)) {
-      console->error("epoll failure\n");
-      break;
-    }
-    for (int i = 0; i < number; i++) {
-      int sockfd = events[i].data.fd;
-      if (sockfd == listenSockfd) {
-        struct sockaddr_in client_address {};
-        socklen_t client_addrlength = sizeof(client_address);
-        int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
-                            &client_addrlength);
-        if (connfd < 0) {
-          console->error("errno is: {}\n", errno);
-          continue;
-        }
-        console->info("accept connfd: {}", connfd);
-        //        machineManager1->addOnePhysicsMachine(connfd, connfd,
-        //        client_address);
-      } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
-        //        machineManager1->removeOnePhysicsMachine(sockfd);
-      } else if (events[i].events & EPOLLIN) {
-        //        machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
-        //        pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
-      } else if (events[i].events & EPOLLOUT) {
-        // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
-      } else {
-      }
-    }
-  }
+  //   int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
+  //   if ((number < 0) && (errno != EINTR)) {
+  //     console->error("epoll failure\n");
+  //     break;
+  //   }
+  // for (int i = 0; i < number; i++) {
+  //   int sockfd = events[i].data.fd;
+  //   if (sockfd == listenSockfd) {
+  //     struct sockaddr_in client_address {};
+  //     socklen_t client_addrlength = sizeof(client_address);
+  //     int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
+  //                         &client_addrlength);
+  //     if (connfd < 0) {
+  //       console->error("errno is: {}\n", errno);
+  //       continue;
+  //     }
+  //     console->info("accept connfd: {}", connfd);
+  //     //        machineManager1->addOnePhysicsMachine(connfd, connfd,
+  //     //        client_address);
+  //   } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+  //     //        machineManager1->removeOnePhysicsMachine(sockfd);
+  //   } else if (events[i].events & EPOLLIN) {
+  //     // machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
+  //     // pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
+  //   } else if (events[i].events & EPOLLOUT) {
+  //     // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
+  //   } else {
+  //   }
+  // }
+  // }
 }
 
 int main(int argc, char const *argv[]) {

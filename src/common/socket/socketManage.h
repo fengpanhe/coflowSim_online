@@ -7,25 +7,27 @@
 
 #include "../lib/locker.h"
 #include "../lib/threadclass.h"
+#include <iostream>
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>
-#include <iostream>
 #define MSG_LEN 100
 
-//auto socketManage_logger = spdlog::basic_logger_mt("socketManage_logger", "socketManage.log");
-
+// auto socketManage_logger = spdlog::basic_logger_mt("socketManage_logger",
+// "socketManage.log");
 
 class SocketManage : public ThreadClass {
 public:
+  SocketManage() { m_Sockfd = -1; }
 
+  ~SocketManage() { this->closeConn(); }
   // 共用的epoll文件描述符
   static int sEpollfd;
-
   static const size_t MAX_RECV_BUFFER_SIZE = 2048;
   static const size_t MAX_SEND_BUFFER_SIZE = 1024;
 
   void initSocket(int sockfd, const sockaddr_in &addr);
 
+  bool createConnect(char *sockip, int sockport);
   void closeConn(bool real_close = true);
 
   void run() override;
@@ -38,6 +40,7 @@ public:
 
   bool recvMsg();
   bool sendMsg();
+
 private:
   sockaddr_in m_address;
 
@@ -53,6 +56,10 @@ private:
   void initSendBuf();
   bool receiveMessage();
   bool sendMessage();
+
+  static spdlog::async_logger logger_file;
+  static std::shared_ptr<spdlog::logger> logger_console;
+
 protected:
   int m_Sockfd;
 };

@@ -16,7 +16,7 @@ using namespace std;
 
 int SocketManage::sEpollfd = -1;
 
-const auto socketManage_logger_console =
+static auto socketManage_logger_console =
     spdlog::stdout_color_mt("socketManage_logger");
 
 static std::shared_ptr<spdlog::logger> socketManage_logger_file;
@@ -26,7 +26,8 @@ SocketManage::SocketManage() {
   try {
     spdlog::set_async_mode(8192);
     socketManage_logger_file = spdlog::rotating_logger_mt(
-        "socketManage_logger", "socketManage_logger.log", 1024 * 1024 * 5, 3);
+        "socketManage_file_logger", "socketManage_logger.log", 1024 * 1024 * 5,
+        3);
     spdlog::drop_all();
   } catch (const spdlog::spdlog_ex &ex) {
     std::cout << "Log initialization failed: " << ex.what() << std::endl;
@@ -63,12 +64,13 @@ bool SocketManage::createConnect(char *sockip, int sockport) {
   if (connect(connSockfd, (struct sockaddr *)&connAddr, sizeof(connAddr)) < 0) {
     socketManage_logger_console->error("Failed to connect with server!\n");
   }
-  int error = 0;
-  socklen_t len = sizeof(error);
-  getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
-  int reuse = 1;
-  setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
-  socketManage_logger_console->info("Connected! sockfd is {}", connSockfd);
+  // int error = 0;
+  // socklen_t len = sizeof(error);
+  // getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+  // int reuse = 1;
+  // setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+  socketManage_logger_console->info("Connected to {}:{}! sockfd is {}", sockip,
+                                    sockport, connSockfd);
   this->initSocket(connSockfd, connAddr);
 }
 
@@ -125,8 +127,11 @@ bool SocketManage::receiveMessage() {
       break;
     }
   }
-  //  printf("recvmsg: \"%s\" \n", m_recvBuf);
-  socketManage_logger_file->info("recvmsg: \"{}\" ", m_recvBuf);
+
+  if (m_recvIdx > 0) {
+    socketManage_logger_file->info("recvmsg: \"{}\" ", m_recvBuf);
+  }
+
   return true;
 }
 

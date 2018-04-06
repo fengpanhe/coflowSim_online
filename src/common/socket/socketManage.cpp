@@ -16,13 +16,13 @@ using namespace std;
 
 int SocketManage::sEpollfd = -1;
 
-static auto socketManage_logger_console =
-    spdlog::stdout_color_mt("socketManage_logger");
+static std::shared_ptr<spdlog::logger> socketManage_logger_console;
 
 static std::shared_ptr<spdlog::logger> socketManage_logger_file;
 
 SocketManage::SocketManage() {
   m_Sockfd = -1;
+  socketManage_logger_console = spdlog::stdout_color_mt("socketManage_logger");
   try {
     spdlog::set_async_mode(8192);
     socketManage_logger_file = spdlog::rotating_logger_mt(
@@ -64,11 +64,11 @@ bool SocketManage::createConnect(char *sockip, int sockport) {
   if (connect(connSockfd, (struct sockaddr *)&connAddr, sizeof(connAddr)) < 0) {
     socketManage_logger_console->error("Failed to connect with server!\n");
   }
-  // int error = 0;
-  // socklen_t len = sizeof(error);
-  // getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
-  // int reuse = 1;
-  // setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+  int error = 0;
+  socklen_t len = sizeof(error);
+  getsockopt(connSockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+  int reuse = 1;
+  setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
   socketManage_logger_console->info("Connected to {}:{}! sockfd is {}", sockip,
                                     sockport, connSockfd);
   this->initSocket(connSockfd, connAddr);

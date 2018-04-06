@@ -7,6 +7,30 @@
 #include <cstring>
 #include <sstream>
 
+const auto machine_logger_console = spdlog::stdout_color_mt("machine_logger");
+
+static std::shared_ptr<spdlog::logger> machine_logger_file;
+
+Machine::Machine(int machineID, char *sockip, int sockport)
+    : machineID(machineID) {
+  remainBandwidth = 0;
+  this->setSocketip(sockip);
+  this->setSocketport(sockport);
+  tmprecv = new char[TMORECV_MAX_SIZE];
+  memset(tmprecv, '\0', TMORECV_MAX_SIZE);
+  tmprecvIndex = 0;
+
+  try {
+    spdlog::set_async_mode(8192);
+    machine_logger_file = spdlog::rotating_logger_mt(
+        "machine_logger", "machine_logger.log", 1024 * 1024 * 5, 3);
+    spdlog::drop_all();
+  } catch (const spdlog::spdlog_ex &ex) {
+    std::cout << "Log initialization failed: " << ex.what() << std::endl;
+  }
+  SocketManage();
+}
+
 int Machine::getMachineID() const { return machineID; }
 
 void Machine::run() { SocketManage::run(); }

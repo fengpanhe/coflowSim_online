@@ -18,20 +18,7 @@ struct FlowEndInfo {
 };
 class Machine : public SocketManage {
 public:
-  Machine(int machineID, char *sockip, int sockport) : machineID(machineID) {
-    remainBandwidth = 0;
-    this->setSocketip(sockip);
-    this->setSocketport(sockport);
-    tmprecv = new char[TMORECV_MAX_SIZE];
-    memset(tmprecv, '\0', TMORECV_MAX_SIZE);
-    tmprecvIndex = 0;
-
-    machine_logger_file = spdlog::rotating_logger_mt(
-        "machine_logger", "machine_logger.log", 1024 * 1024 * 5, 3);
-    machine_logger_console = spdlog::stdout_color_mt("machine_logger");
-
-    SocketManage();
-  }
+  Machine(int machineID, char *sockip, int sockport);
 
   ~Machine() {}
 
@@ -67,9 +54,6 @@ private:
 
   char *tmprecv;
   int tmprecvIndex;
-
-  std::shared_ptr<spdlog::logger> machine_logger_file;
-  std::shared_ptr<spdlog::logger> machine_logger_console;
 };
 
 #endif // MASTER_MACHINE_H

@@ -17,7 +17,7 @@
 
 class SocketManage : public ThreadClass {
 public:
-  SocketManage() { m_Sockfd = -1; }
+  SocketManage();
 
   ~SocketManage() { this->closeConn(); }
   // 共用的epoll文件描述符
@@ -57,8 +57,8 @@ private:
   bool receiveMessage();
   bool sendMessage();
 
-  static spdlog::async_logger logger_file;
-  static std::shared_ptr<spdlog::logger> logger_console;
+  // static spdlog::async_logger logger_file;
+  // static std::shared_ptr<spdlog::logger> logger_console;
 
 protected:
   int m_Sockfd;

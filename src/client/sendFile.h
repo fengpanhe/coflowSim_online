@@ -24,7 +24,7 @@ using namespace std;
 static std::shared_ptr<spdlog::logger> sendFile_logger;
 
 auto sendFile_logger_ = spdlog::stdout_color_mt("sendFile_logger");
-class SendFile : public SocketManage {
+class SendFile : public ThreadClass {
 public:
   SendFile(char *ins, int inslen, SocketManage masterSockManger) {
     reflag = false;

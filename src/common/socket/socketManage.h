@@ -19,7 +19,9 @@ class SocketManage : public ThreadClass {
 public:
   SocketManage();
 
-  ~SocketManage() { this->closeConn(); }
+  ~SocketManage() {
+    // this->closeConn(); //加上这个会出错，未知
+  }
   // 共用的epoll文件描述符
   static int sEpollfd;
   static const size_t MAX_RECV_BUFFER_SIZE = 2048;

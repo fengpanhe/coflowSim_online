@@ -9,7 +9,7 @@
 
 static auto machine_logger_console = spdlog::stdout_color_mt("machine_logger");
 
-static std::shared_ptr<spdlog::logger> machine_logger_file;
+static std::shared_ptr<spdlog::logger> machine_logger_file = NULL;
 
 Machine::Machine(int machineID, char *sockip, int sockport)
     : machineID(machineID) {
@@ -20,13 +20,15 @@ Machine::Machine(int machineID, char *sockip, int sockport)
   memset(tmprecv, '\0', TMORECV_MAX_SIZE);
   tmprecvIndex = 0;
 
-  try {
-    spdlog::set_async_mode(8192);
-    machine_logger_file = spdlog::rotating_logger_mt(
-        "machine_file_logger", "machine_logger.log", 1024 * 1024 * 5, 3);
-    spdlog::drop_all();
-  } catch (const spdlog::spdlog_ex &ex) {
-    std::cout << "Log initialization failed: " << ex.what() << std::endl;
+  if (machine_logger_file == NULL) {
+    try {
+      spdlog::set_async_mode(8192);
+      machine_logger_file = spdlog::rotating_logger_mt(
+          "machine_file_logger", "machine_logger.log", 1024 * 1024 * 5, 3);
+      spdlog::drop_all();
+    } catch (const spdlog::spdlog_ex &ex) {
+      std::cout << "Log initialization failed: " << ex.what() << std::endl;
+    }
   }
 }
 

@@ -16,21 +16,27 @@ using namespace std;
 
 int SocketManage::sEpollfd = -1;
 
-static std::shared_ptr<spdlog::logger> socketManage_logger_console;
+static std::shared_ptr<spdlog::logger> socketManage_logger_console = NULL;
 
-static std::shared_ptr<spdlog::logger> socketManage_logger_file;
+static std::shared_ptr<spdlog::logger> socketManage_logger_file = NULL;
 
 SocketManage::SocketManage() {
   m_Sockfd = -1;
-  socketManage_logger_console = spdlog::stdout_color_mt("socketManage_logger");
-  try {
-    spdlog::set_async_mode(8192);
-    socketManage_logger_file = spdlog::rotating_logger_mt(
-        "socketManage_file_logger", "socketManage_logger.log", 1024 * 1024 * 5,
-        3);
-    spdlog::drop_all();
-  } catch (const spdlog::spdlog_ex &ex) {
-    std::cout << "Log initialization failed: " << ex.what() << std::endl;
+
+  if (socketManage_logger_console == NULL) {
+    socketManage_logger_console =
+        spdlog::stdout_color_mt("socketManage_logger");
+  }
+  if (socketManage_logger_file == NULL) {
+    try {
+      spdlog::set_async_mode(8192);
+      socketManage_logger_file = spdlog::rotating_logger_mt(
+          "socketManage_file_logger", "socketManage_logger.log",
+          1024 * 1024 * 5, 3);
+      spdlog::drop_all();
+    } catch (const spdlog::spdlog_ex &ex) {
+      std::cout << "Log initialization failed: " << ex.what() << std::endl;
+    }
   }
 }
 

@@ -5,28 +5,25 @@
 #ifndef MASTER_COFLOWCOLLECTION_H
 #define MASTER_COFLOWCOLLECTION_H
 
-
 #include "coflow.h"
 
 class CoflowCollection {
 public:
-    CoflowCollection();
+  CoflowCollection();
 
-    const vector<Coflow *> &getCoflows() const;
+  const vector<Coflow *> &getCoflows() const;
 
-    bool addCoflow(Coflow* coflow);
+  bool addCoflow(Coflow *coflow);
 
-    Coflow* getCoflowByindex(int index);
+  Coflow *getCoflowByindex(int index);
 
-    int getCoflowNum() const;
+  int getCoflowNum() const;
 
-    void setCoflowNum(int coflowNum);
+  void setCoflowNum(int coflowNum);
 
 private:
-    vector<Coflow*> coflows;
-    int coflowNum;
-
+  vector<Coflow *> coflows;
+  int coflowNum;
 };
 
-
-#endif //MASTER_COFLOWCOLLECTION_H
+#endif // MASTER_COFLOWCOLLECTION_H

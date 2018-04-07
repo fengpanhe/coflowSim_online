@@ -5,11 +5,11 @@
 #ifndef MASTER_SCHEDULER_H
 #define MASTER_SCHEDULER_H
 
-#include <queue>
 #include "../datastructures/coflow.h"
 #include "../datastructures/machine.h"
-#include "lib/threadclass.h"
 #include "MachineManager.h"
+#include "lib/threadclass.h"
+#include <queue>
 
 class Scheduler : public ThreadClass {
 public:
@@ -19,9 +19,7 @@ public:
     recvbuf = new char[1024];
   }
 
-  ~Scheduler(){
-    delete recvbuf;
-  }
+  ~Scheduler() { delete recvbuf; }
 
   void run() override;
 
@@ -33,6 +31,7 @@ public:
 
   // 模拟coflow的注册过程
   void registerCoflow(long currentTime);
+
 private:
   vector<Coflow *> *sCoflows;
   int registerIndex;
@@ -47,7 +46,8 @@ private:
 
   long startTime;
 
-  char * recvbuf;
+  char *recvbuf;
+
 public:
   void setMachines(MachineManager *machines);
 };

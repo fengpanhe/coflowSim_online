@@ -9,8 +9,8 @@
 #include <sys/epoll.h>
 #include <zconf.h>
 
-int setnonblocking(int fd );
-void addfd( int epollfd, int fd, bool one_shot );
-void removefd( int epollfd, int fd );
-void modfd( int epollfd, int fd, int ev );
-#endif //MASTER_EPOLLFUNCTIONS_H
+int setnonblocking(int fd);
+void addfd(int epollfd, int fd, bool one_shot);
+void removefd(int epollfd, int fd);
+void modfd(int epollfd, int fd, int ev);
+#endif // MASTER_EPOLLFUNCTIONS_H

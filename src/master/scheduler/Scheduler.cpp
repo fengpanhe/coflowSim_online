@@ -35,12 +35,22 @@ void Scheduler::run() {
     for (int i = 0; i < registerIndex; ++i) {
       Coflow *co = sCoflows->at(i);
       if (co->getCoflowState() == RUNNING) {
-        for (auto &it : co->flowCollection) {
-          while (!machines->sendTask(co->getCoflowID(), it->getFlowID(),
-                                     it->getMapperID(), it->getReducerID(),
-                                     it->getFlowSizeMB(), it->getCurrentMbs()))
+        for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
+             it++) {
+          Flow *f = it->second;
+          while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
+                                     f->getMapperID(), f->getReducerID(),
+                                     f->getFlowSizeMB(), f->getCurrentMbs()))
             ;
         }
+        // TODO
+        // for (auto &it : co->flowCollection) {
+        //   while (!machines->sendTask(co->getCoflowID(), it->getFlowID(),
+        //                              it->getMapperID(), it->getReducerID(),
+        //                              it->getFlowSizeMB(),
+        //                              it->getCurrentMbs()))
+        //     ;
+        // }
         co->setCoflowState(RUNNINGED);
       }
     }

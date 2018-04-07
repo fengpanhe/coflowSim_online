@@ -5,16 +5,19 @@
 #ifndef MASTER_COFLOW_H
 #define MASTER_COFLOW_H
 
+#include "flow.h"
+#include <map>
+#include <vector>
+using namespace std;
+
 #define UNREGISTER 0
 #define REGISTED 1
 #define RUNNING 2
 #define RUNNINGED 3
 #define FINISHED 4
 
-#include "flow.h"
-#include <vector>
-
-using namespace std;
+typedef map<int, Flow *> FLOWS_MAP_TYPE;
+typedef FLOWS_MAP_TYPE::iterator FLOWS_MAP_TYPE_IT;
 
 class Coflow {
 public:
@@ -28,6 +31,8 @@ public:
 
   bool flowEnd(int flowID, int endtime);
 
+  int getFlowsNum() const;
+
   const int getCoflowID() const;
 
   const double getStartTime() const;
@@ -35,16 +40,19 @@ public:
   void toString();
 
   int getCoflowState() const;
+
   void setCoflowState(int coflowState);
 
-  // TODO
-  vector<Flow *> flowCollection;
+  FLOWS_MAP_TYPE_IT flowsBegin();
+  FLOWS_MAP_TYPE_IT flowsEnd();
 
 private:
   const int coflowID;
   const double startTime;
   int coflowState;
 
+  // vector<Flow *> flowCollection;
+  FLOWS_MAP_TYPE flowCollection;
   int endflowNum;
   int endtime;
   int mapper_num;

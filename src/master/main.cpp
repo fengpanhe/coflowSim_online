@@ -188,7 +188,7 @@ int coflowSimMaster() {
   // 统计coflow的数量和flow的数量
   coflow_num = coflows->size();
   for (int i = 0; i < coflow_num; i++) {
-    flow_num += coflows->at(i)->flowCollection.size();
+    flow_num += coflows->at(i)->getFlowsNum();
   }
   console->info("coflow_num: {}", coflow_num);
   console->info("flow_num: {}", flow_num);

@@ -36,10 +36,10 @@ private:
   vector<Coflow *> *sCoflows;
   int registerIndex;
 
-  vector<Coflow *> *registedCoflows;
-  vector<Coflow *> *mRunningCoflows;
-  vector<Coflow *> *mFinishedCoflows;
-  vector<Coflow *> *mNotAdmittedCoflows;
+  // vector<Coflow *> *registedCoflows;
+  // vector<Coflow *> *mRunningCoflows;
+  // vector<Coflow *> *mFinishedCoflows;
+  // vector<Coflow *> *mNotAdmittedCoflows;
 
   //    TODO
   MachineManager *machines;

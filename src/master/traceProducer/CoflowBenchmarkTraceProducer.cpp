@@ -105,8 +105,6 @@ Coflow *CoflowBenchmarkTraceProducer::prepareOneCoflow(char *line) {
   for (auto &it : reducer_sizeMB) {
     for (int i = 0; i < mapperNum; ++i) {
       coflow->addFlow(flowID++, mapperIDs[i], it.first, it.second / mapperNum);
-      // if (flowID >= 1)
-      //   return coflow;
     }
   }
   return coflow;

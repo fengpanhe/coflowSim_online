@@ -26,49 +26,24 @@ using namespace std;
 char serverIP[64] = "127.0.0.1";
 int serverPort = 4003;
 int threadNum = 8;
-
 char *recvbuf = new char[4096];
 int recvbuflen = 0;
 
-bool parseConfig(char const *configFilePath) {
-  auto console = spdlog::stdout_color_mt("parseConfig");
-  FILE *fp = fopen(configFilePath, "r");
-  char readBuffer[65536];
-  FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-  Document document;
-  document.ParseStream(is);
-  fclose(fp);
+bool parseConfig(char const *configFilePath);
+int coflowSimClient();
 
-  stringstream ss;
-
-  assert(document.HasMember("server_ip"));
-  assert(document["server_ip"].IsString());
-  ss << document["server_ip"].GetString();
-  ss >> serverIP;
-  ss.clear();
-  console->info("server_ip is {}", serverIP);
-
-  assert(document.HasMember("server_port"));
-  assert(document["server_port"].IsInt());
-  ss << document["server_port"].GetInt();
-  ss >> serverPort;
-  ss.clear();
-  console->info("server_port is {}", serverPort);
-
-  assert(document.HasMember("thread_num"));
-  assert(document["thread_num"].IsInt());
-  ss << document["thread_num"].GetInt();
-  ss >> threadNum;
-  ss.clear();
-  console->info("thread_num is {}", threadNum);
-  return true;
+namespace spd = spdlog;
+int main(int argc, char const *argv[]) {
+  auto console = spd::stdout_color_mt("console");
+  parseConfig(argv[1]);
+  coflowSimClient();
+  return 0;
 }
 
+auto console = spdlog::stdout_color_mt("coflowSimClient");
+auto coflowSimClient_logger =
+    spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
 int coflowSimClient() {
-  auto console = spdlog::stdout_color_mt("coflowSimClient");
-  auto coflowSimClient_logger =
-      spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
-
   // 创建线程池
   ThreadPool<ThreadClass> *pool = nullptr;
   try {
@@ -115,6 +90,7 @@ int coflowSimClient() {
   SocketManage masterSockManger;
   struct sockaddr_in master_address {};
   socklen_t master_addrlength = sizeof(master_address);
+
   console->info("Waiting for master...");
   int masterfd = accept(listenSockfd, (struct sockaddr *)&master_address,
                         &master_addrlength);
@@ -128,7 +104,7 @@ int coflowSimClient() {
   //  addfd(epollfd, listenSockfd, false);
   RecvListen *recvListen = new RecvListen(listenSockfd, pool);
   pool->append(recvListen);
-  int f_int = 0;
+
   while (true) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
     if ((number < 0) && (errno != EINTR)) {
@@ -137,26 +113,10 @@ int coflowSimClient() {
     }
     for (int i = 0; i < number; i++) {
       int sockfd = events[i].data.fd;
-      if (sockfd == listenSockfd) {
-
-        //        struct sockaddr_in client_address {};
-        //        socklen_t client_addrlength = sizeof(client_address);
-        //        int connfd = accept(listenSockfd, (struct sockaddr
-        //        *)&client_address,
-        //                            &client_addrlength);
-        //        if (connfd < 0) {
-        //          continue;
-        //        }
-        //        receFiles[connfd].file_int = f_int;
-        //        f_int++;
-        //        receFiles[connfd].initSocket(connfd, client_address);
-        //        pool->append(receFiles + connfd);
-      } else if (sockfd == masterfd) {
-
+      if (sockfd == masterfd) {
         if (events[i].events & EPOLLIN) {
           masterSockManger.recvMsg();
           masterSockManger.getRecvBuf(recvbuf, recvbuflen);
-          // cout << "recvbuf" << recvbuf << endl;
           coflowSimClient_logger->info("recbuf: {}", recvbuf);
           int insstart = 0, insend = 0;
           for (int i = 0; i < recvbuflen; i++) {
@@ -187,7 +147,6 @@ int coflowSimClient() {
           }
         } else if (events[i].events & EPOLLOUT) {
           // cout << "EPOLLOUT" << endl;
-
           // cout << "EPOLLOUT_end" << endl;
         }
 
@@ -199,10 +158,36 @@ int coflowSimClient() {
   }
 }
 
-namespace spd = spdlog;
-int main(int argc, char const *argv[]) {
-  auto console = spd::stdout_color_mt("console");
-  parseConfig(argv[1]);
-  coflowSimClient();
-  return 0;
+bool parseConfig(char const *configFilePath) {
+  auto console = spdlog::stdout_color_mt("parseConfig");
+  FILE *fp = fopen(configFilePath, "r");
+  char readBuffer[65536];
+  FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+  Document document;
+  document.ParseStream(is);
+  fclose(fp);
+
+  stringstream ss;
+
+  assert(document.HasMember("server_ip"));
+  assert(document["server_ip"].IsString());
+  ss << document["server_ip"].GetString();
+  ss >> serverIP;
+  ss.clear();
+  console->info("server_ip is {}", serverIP);
+
+  assert(document.HasMember("server_port"));
+  assert(document["server_port"].IsInt());
+  ss << document["server_port"].GetInt();
+  ss >> serverPort;
+  ss.clear();
+  console->info("server_port is {}", serverPort);
+
+  assert(document.HasMember("thread_num"));
+  assert(document["thread_num"].IsInt());
+  ss << document["thread_num"].GetInt();
+  ss >> threadNum;
+  ss.clear();
+  console->info("thread_num is {}", threadNum);
+  return true;
 }

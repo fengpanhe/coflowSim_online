@@ -5,51 +5,58 @@
 #ifndef MASTER_COFLOW_H
 #define MASTER_COFLOW_H
 
+#include "flow.h"
+#include <map>
+#include <vector>
+using namespace std;
+
 #define UNREGISTER 0
-#define REGISTED   1
+#define REGISTED 1
 #define RUNNING 2
 #define RUNNINGED 3
 #define FINISHED 4
 
-#include <vector>
-#include "flow.h"
-
-using namespace std;
+typedef map<int, Flow *> FLOWS_MAP_TYPE;
+typedef FLOWS_MAP_TYPE::iterator FLOWS_MAP_TYPE_IT;
 
 class Coflow {
 public:
-    Coflow(int coflowID, double startTime):coflowID(coflowID),startTime(startTime){
-        coflowState = UNREGISTER;
-        endflowNum = 0;
-    }
+  Coflow(int coflowID, double startTime)
+      : coflowID(coflowID), startTime(startTime) {
+    coflowState = UNREGISTER;
+    endflowNum = 0;
+  }
 
-    void addFlow(int flowID, int mapperID, int reducerID, double flowSizeMB);
+  void addFlow(int flowID, int mapperID, int reducerID, double flowSizeMB);
 
-    bool flowEnd(int flowID, int endtime);
+  bool flowEnd(int flowID, int endtime);
 
-    const int getCoflowID() const;
+  int getFlowsNum() const;
 
-    const double getStartTime() const;
+  const int getCoflowID() const;
 
-    void toString();
+  const double getStartTime() const;
 
-    int getCoflowState() const;
-    void setCoflowState(int coflowState);
+  void toString();
 
-// TODO
-  vector<Flow*> flowCollection;
+  int getCoflowState() const;
+
+  void setCoflowState(int coflowState);
+
+  FLOWS_MAP_TYPE_IT flowsBegin();
+  FLOWS_MAP_TYPE_IT flowsEnd();
+
 private:
+  const int coflowID;
+  const double startTime;
+  int coflowState;
 
-    const int coflowID;
-    const double startTime;
-    int coflowState;
-
-    int endflowNum;
-    int endtime;
-    int mapper_num;
-    int reducer_num;
-
+  // vector<Flow *> flowCollection;
+  FLOWS_MAP_TYPE flowCollection;
+  int endflowNum;
+  int endtime;
+  int mapper_num;
+  int reducer_num;
 };
 
-
-#endif //MASTER_COFLOW_H
+#endif // MASTER_COFLOW_H

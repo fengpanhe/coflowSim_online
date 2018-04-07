@@ -9,6 +9,7 @@
 #include <spdlog/spdlog.h>
 #include <sstream>
 #define TIME_CLOCK 1000
+
 void Scheduler::run() {
   //  time_t now = time(0);
   startTime = clock() / TIME_CLOCK;
@@ -17,15 +18,10 @@ void Scheduler::run() {
   outfile.open("coflow.log", ios::out | ios::trunc);
   bool flag = false;
   int coflowFinishedNum = 0;
+
   while (true) {
-    // int delay = 100000000;
-    // while (--delay > 0)
-    //   ;
-    if (machines->getPhysicsMachineNum() < 1) {
-      continue;
-    }
-    //        printf("de\n");
     registerCoflow(clock() / TIME_CLOCK);
+
     for (int i = 0; i < registerIndex; ++i) {
       // TODO 选出可以发送的coflow，改状态为RUNNING
       if (sCoflows->at(i)->getCoflowState() == REGISTED)
@@ -35,10 +31,12 @@ void Scheduler::run() {
     for (int i = 0; i < registerIndex; ++i) {
       Coflow *co = sCoflows->at(i);
       if (co->getCoflowState() == RUNNING) {
-        for (auto &it : co->flowCollection) {
-          while (!machines->sendTask(co->getCoflowID(), it->getFlowID(),
-                                     it->getMapperID(), it->getReducerID(),
-                                     it->getFlowSizeMB(), it->getCurrentMbs()))
+        for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
+             it++) {
+          Flow *f = it->second;
+          while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
+                                     f->getMapperID(), f->getReducerID(),
+                                     f->getFlowSizeMB(), f->getCurrentMbs()))
             ;
         }
         co->setCoflowState(RUNNINGED);
@@ -49,11 +47,9 @@ void Scheduler::run() {
       if (!it->recvMsg()) {
         continue;
       }
-
       it->parseFlowsFinishedInfo();
       int coflowID, flowID, endtime;
       while (it->getOneFlowEndInfo(coflowID, flowID, endtime)) {
-        //        cout << coflowID << " " << flowID << " " << endtime << endl;
         for (int i = 0; i < sCoflows->size(); i++) {
           if (sCoflows->at(i)->getCoflowID() == coflowID) {
             if (sCoflows->at(i)->flowEnd(flowID, endtime)) {
@@ -94,7 +90,6 @@ void Scheduler::registerCoflow(long currentTime) {
   static auto registerCoflow_console =
       spdlog::stdout_color_mt("registerCoflow");
 
-  //  int nowTime = time(0);
   long t = currentTime - startTime;
   int CoflowNum = sCoflows->size();
 
@@ -105,7 +100,6 @@ void Scheduler::registerCoflow(long currentTime) {
       sCoflows->at(registerIndex)->setCoflowState(REGISTED);
       cout << t << ", coflow " << sCoflows->at(registerIndex)->getCoflowID()
            << " is registered!" << endl;
-
       registerIndex++;
     } else {
       break;

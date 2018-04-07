@@ -23,14 +23,7 @@ public:
     // recv函数接收数据到缓冲区buffer中
     char buffer[BUFFER_SIZE];
     bzero(buffer, BUFFER_SIZE);
-    //        if (recv(m_Sockfd, buffer, 20, 0)<0) {
-    //            perror("Server Recieve Data Failed:");
-    //        }
-    //        // 然后从buffer(缓冲区)拷贝到file_name中
     char file_name[FILE_NAME_MAX_SIZE + 1];
-    //        bzero(file_name, FILE_NAME_MAX_SIZE+1);
-    //        strncpy(file_name, buffer, strlen(buffer)>FILE_NAME_MAX_SIZE ?
-    //        FILE_NAME_MAX_SIZE : strlen(buffer)); printf("%s\n", file_name);
     memset(file_name, '\0', FILE_NAME_MAX_SIZE);
     // 打开文件，准备写入
     int nowTime = clock();

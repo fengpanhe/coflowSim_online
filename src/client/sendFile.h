@@ -19,11 +19,9 @@ using namespace std;
 #define BUFFER_SIZE 1024
 #define FILE_NAME_MAX_SIZE 512
 
-// auto sendFile_logger =
-//     spdlog::basic_logger_mt("sendFile_logger", "sendFile_logger.log");
-static std::shared_ptr<spdlog::logger> sendFile_logger;
+static std::shared_ptr<spdlog::logger> sendFile_logger = NULL;
+static auto sendFile_logger_ = spdlog::stdout_color_mt("sendFile_logger");
 
-auto sendFile_logger_ = spdlog::stdout_color_mt("sendFile_logger");
 class SendFile : public ThreadClass {
 public:
   SendFile(char *ins, int inslen, SocketManage masterSockManger) {
@@ -35,13 +33,15 @@ public:
     }
     this->ins[i++] = '\0';
     this->masterSockManger = masterSockManger;
-    try {
-      spdlog::set_async_mode(8192);
-      sendFile_logger = spdlog::rotating_logger_mt(
-          "sendFile_logger", "sendFile_logger.log", 1024 * 1024 * 5, 3);
-      spdlog::drop_all();
-    } catch (const spdlog::spdlog_ex &ex) {
-      std::cout << "Log initialization failed: " << ex.what() << std::endl;
+    if (sendFile_logger == NULL) {
+      try {
+        spdlog::set_async_mode(8192);
+        sendFile_logger = spdlog::rotating_logger_mt(
+            "sendFile_logger", "sendFile_logger.log", 1024 * 1024 * 5, 3);
+        spdlog::drop_all();
+      } catch (const spdlog::spdlog_ex &ex) {
+        std::cout << "Log initialization failed: " << ex.what() << std::endl;
+      }
     }
   }
   void run() {
@@ -69,8 +69,6 @@ public:
     ss >> sendSpeedMbs;
     ss.clear();
 
-    // sendFile_logger->info("{}_{} 准备发送", coflowID, flowID);
-
     struct sockaddr_in connAddr;
     int connSockfd;
     memset(&connAddr, 0, sizeof(struct sockaddr_in));
@@ -78,12 +76,12 @@ public:
     connAddr.sin_addr.s_addr = inet_addr(socketip);
     connAddr.sin_port = htons(socketport);
     if ((connSockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
-      printf("Failed to create socket");
+      printf("Failed to create socket\n");
     }
 
     if (connect(connSockfd, (struct sockaddr *)&connAddr, sizeof(connAddr)) <
         0) {
-      printf("Failed to connect with server");
+      printf("Failed to connect with server\n");
     }
     int error = 0;
     socklen_t len = sizeof(error);
@@ -93,12 +91,7 @@ public:
 
     char buffer[BUFFER_SIZE];
     bzero(buffer, BUFFER_SIZE);
-    //    strncpy(buffer, file_name, strlen(file_name) > BUFFER_SIZE ?
-    //    BUFFER_SIZE : strlen(file_name)); if (send(connSockfd, buffer,
-    //    BUFFER_SIZE, 0) < 0) {
-    //      perror("Send File Name Failed:");
-    //      exit(1);
-    //    }
+
     long startTime = clock();
     // flowSizeMB = 1;
     int flowSizeKB = flowSizeMB * 1024;
@@ -106,7 +99,7 @@ public:
     while (sendenMB++ >= flowSizeKB) {
       memset(buffer, 'a', sizeof(buffer));
       if (send(connSockfd, buffer, BUFFER_SIZE, 0) < 0) {
-        perror("Send File Failed:");
+        perror("Send File Failed:\n");
         exit(1);
       }
     }
@@ -114,11 +107,14 @@ public:
     removefd(SocketManage::sEpollfd, connSockfd);
 
     endTime = time(0);
-    // sendFile_logger->info("{}_{} 发送完成, 当前时间： {}", coflowID, flowID,
-    //                       endTime);
     sendFile_logger_->info("{}_{} Send Complete, S: {} MB, T: {}ms", coflowID,
                            flowID, flowSizeMB, clock() - startTime);
+    replyMaster();
+  }
+
+  void replyMaster() {
     char tmpstr[100] = "a";
+    stringstream ss;
     memset(tmpstr, '\0', strlen(tmpstr));
     tmpstr[0] = '(';
     ss << coflowID;

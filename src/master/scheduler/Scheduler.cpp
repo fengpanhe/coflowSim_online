@@ -20,10 +20,6 @@ void Scheduler::run() {
   int coflowFinishedNum = 0;
 
   while (true) {
-    // if (machines->getPhysicsMachineNum() < 1) {
-    //   continue;
-    // }
-
     registerCoflow(clock() / TIME_CLOCK);
 
     for (int i = 0; i < registerIndex; ++i) {
@@ -43,14 +39,6 @@ void Scheduler::run() {
                                      f->getFlowSizeMB(), f->getCurrentMbs()))
             ;
         }
-        // TODO
-        // for (auto &it : co->flowCollection) {
-        //   while (!machines->sendTask(co->getCoflowID(), it->getFlowID(),
-        //                              it->getMapperID(), it->getReducerID(),
-        //                              it->getFlowSizeMB(),
-        //                              it->getCurrentMbs()))
-        //     ;
-        // }
         co->setCoflowState(RUNNINGED);
       }
     }

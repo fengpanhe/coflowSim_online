@@ -14,7 +14,6 @@ MachineManager::MachineManager() {
 
 int MachineManager::addOnePhysicsMachine(char *sockip, int sockport) {
   Machine *machine = new Machine(m_physicsMachinesNum++, sockip, sockport);
-  machine->createConnect();
   m_physicsMachines.push_back(machine);
   updateLogicMap();
   return m_physicsMachinesNum - 1;

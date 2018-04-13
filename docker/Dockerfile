@@ -6,6 +6,6 @@ RUN cd root \
 RUN sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 RUN apt-get update \  
-    && apt-get install -y cmake g++ zlib1g-dev \
+    && apt-get install -y cmake g++ zlib1g-dev iproute2 \
     # added lines
     && rm -rf /var/lib/apt/lists/*

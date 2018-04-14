@@ -1,0 +1,12 @@
+//
+// Created by he on 4/13/18.
+//
+
+#ifndef COFLOWSIM_TRAFFICCONTROLMANAGER_H
+#define COFLOWSIM_TRAFFICCONTROLMANAGER_H
+
+class TrafficControlManager {
+
+};
+
+#endif //COFLOWSIM_TRAFFICCONTROLMANAGER_H

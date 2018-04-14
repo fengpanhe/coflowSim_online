@@ -1,5 +1,6 @@
 {
   "server_ip": "0.0.0.0",
   "server_port": 4003,
-  "thread_num": 8
+  "thread_num": 8,
+  "net_card_name": "eth0"
 }

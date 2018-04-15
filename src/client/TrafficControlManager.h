@@ -9,9 +9,11 @@
 #include <map>
 #include <list>
 #include <string.h>
+#include <lib/locker.h>
 using namespace std;
 
 #define NET_CARD_NAME_MAX_LEN 1024
+#define PORT_MAX_NUM 65535
 
 // tc的控制设计qdisc，class，filter
 // 此类对流量的控制是仅用于限制 tcp 端口流量
@@ -50,9 +52,9 @@ private:
 
   char net_card_name[NET_CARD_NAME_MAX_LEN];
   double remain_bandwidth_MBs;
-  double port_bandwitdth[65536];   // 端口的带宽，其中端口与classid同
+  double port_bandwitdth[PORT_MAX_NUM];   // 端口的带宽，其中端口与classid同
   int class_max_num;
-
+  locker get_port_locker;
 //  map<>
 };
 

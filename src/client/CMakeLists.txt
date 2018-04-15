@@ -8,7 +8,7 @@ include_directories(${PROJECT_SOURCE_DIR}/thirdparty)
 
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
-add_executable(client main.cpp sendFile.h receFile.h recvListen.h Listener.h Listener.cpp SendManager.cpp SendManager.h TrafficControlManager.cpp TrafficControlManager.h)
+add_executable(client main.cpp sendFile.h receFile.h recvListen.h Listener.h Listener.cpp SendManager.cpp SendManager.h TrafficControlManager.cpp TrafficControlManager.h Sender.h)
 
 # 设置输出路径
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)

@@ -20,7 +20,6 @@ TrafficControlManager::TrafficControlManager(char *net_card_name, double bandwid
   }
   this->remain_bandwidth_MBs = bandwidth_MBs;
   this->initTC();
-  class_max_num = (int) bandwidth_MBs;
 }
 
 void TrafficControlManager::initTC() {
@@ -35,56 +34,10 @@ void TrafficControlManager::initTC() {
   this->execShellCommmand(cmd);
 }
 
-int TrafficControlManager::getPortByBandwidth(int bandwidth_MBs) {
-  get_port_locker.lock();
-  // 在start_port 至 start_port+class_max_num之间随机获取一个可用的port
-  default_random_engine e;
-  uniform_int_distribution<int> rand_num(start_port, start_port + class_max_num);
-  int port = rand_num(e);
-  int rand_count = class_max_num/10;  // 表示随机的次数，超过次数则扩大class_max_num
-  while (!this->isUnusedPort(port) && rand_count > 0) {
-    port = rand_num(e);
-    rand_count--;
-  }
-
-  // 随机次数超过class_max_num / 10，扩大class_max_num为原来的2倍
-  if (rand_count==0) {
-    class_max_num = 2*class_max_num;
-    if (class_max_num + start_port >= PORT_MAX_NUM) {
-      class_max_num = PORT_MAX_NUM - start_port - 1;
-    }
-    uniform_int_distribution<int> rand_num1(start_port, start_port + class_max_num);
-    while (!this->isUnusedPort(port)) {
-      port = rand_num1(e);
-    }
-  }
-  this->setTcpPortBandwidth(port, bandwidth_MBs);
-  get_port_locker.unlock();
-  return port;
-}
-
 bool TrafficControlManager::setTcpPortBandwidth(int tcp_port, double bandwidth) {
   this->addTcClass(tcp_port, bandwidth);
   this->deleteTcFilter(tcp_port);
   this->addTcFilter(tcp_port, tcp_port);
-  port_bandwitdth[tcp_port] = bandwidth;
-  return true;
-}
-
-bool TrafficControlManager::isUnusedPort(int port) {
-  int sock;
-  struct sockaddr_in client{};
-
-  if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
-    printf("Failed to create socket");
-  }
-  client.sin_family = AF_INET;
-  client.sin_port = htons(static_cast<uint16_t>(port));
-  client.sin_addr.s_addr = htonl(INADDR_ANY);
-  if (bind(sock, (struct sockaddr *) &client, sizeof(struct sockaddr)) == -1) {
-    return false;
-  }
-  close(sock);
   return true;
 }
 
@@ -93,12 +46,12 @@ bool TrafficControlManager::execShellCommmand(char *command) {
   char buff[1024];
   memset(buff, 0, sizeof(buff));
 
-  if (nullptr == (fstream = popen(command, "r"))) {
+  if (nullptr==(fstream = popen(command, "r"))) {
     fprintf(stderr, "execute command failed: %s", strerror(errno));
     return false;
   }
 
-  while (nullptr != fgets(buff, sizeof(buff), fstream)) {
+  while (nullptr!=fgets(buff, sizeof(buff), fstream)) {
     printf("%s", buff);
   }
   pclose(fstream);

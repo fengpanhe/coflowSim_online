@@ -137,4 +137,3 @@ bool SendManager::appendTask(char *ins) {
   wait_queue_sem.post();
   return true;
 }
-

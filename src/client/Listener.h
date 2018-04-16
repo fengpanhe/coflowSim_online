@@ -1,5 +1,5 @@
-#ifndef LISTENER_H
-#define LISTENER_H
+#ifndef COFLOWSIM_LISTENER_H
+#define COFLOWSIM_LISTENER_H
 
 #include <arpa/inet.h>
 #include <lib/epollFunctions.h>
@@ -13,7 +13,7 @@
 #define MAX_EVENT_NUMBER 10000
 #define BACKLOG 65535
 #define RECV_FILE_NUM 65536
-char serverIP[64] = "127.0.0.1";
+
 class Listener : public ThreadClass {
 public:
   Listener(ThreadPool<ThreadClass> *pool);
@@ -29,5 +29,6 @@ private:
 
   ReceFile receFiles[RECV_FILE_NUM];
   ThreadPool<ThreadClass> *pool;
+  char serverIP[64] = "127.0.0.1";
 };
 #endif // !LISTENER_H

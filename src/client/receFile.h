@@ -4,6 +4,7 @@
 
 #ifndef COFLOWSIM_RECEFILE_H
 #define COFLOWSIM_RECEFILE_H
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

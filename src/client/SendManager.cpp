@@ -11,12 +11,12 @@
 #include "SendManager.h"
 #include "Sender.h"
 
-SendManager::SendManager(int task_number = 65535,
-                         int min_port = 1001,
-                         int max_port = 65535,
-                         TrafficControlManager *tc_manager,
+SendManager::SendManager(TrafficControlManager *tc_manager,
                          ThreadPool<ThreadClass> *pool,
-                         SocketManage *masterSockManger) {
+                         SocketManage *masterSockManger,
+                         int task_number,
+                         int min_port,
+                         int max_port) {
   this->max_task_number = task_number;
   this->min_port = min_port;
   this->max_port = max_port;
@@ -97,13 +97,13 @@ void SendManager::run() {
     }
 
     // 循环扫描 send_task_running_queue，删除标记为 TASK_END 的 task。
-    for (auto it = send_task_running_queue.begin(); it != send_task_running_queue.end();) {
+    for (auto it = send_task_running_queue.begin(); it!=send_task_running_queue.end();) {
       send_task = *it;
-      if(send_task->send_state == TASK_END){
+      if (send_task->send_state==TASK_END) {
         send_task_running_queue.erase(it++);
         delete send_task->sender;
         delete send_task;
-      } else{
+      } else {
         it++;
       }
     }

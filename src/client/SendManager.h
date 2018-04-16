@@ -19,6 +19,7 @@ using namespace std;
 #define SEND_RUNNING 1
 #define SEND_END 2
 #define TASK_END 3
+
 struct SendTask {
   char destination_ip[64] = "";
   int destination_port = 0;
@@ -35,12 +36,12 @@ struct SendTask {
 
 class SendManager : public ThreadClass {
 public:
-  SendManager(int task_number = 65536,
-              int min_port = 1001,
-              int max_port = 65535,
-              TrafficControlManager *tc_manager,
+  SendManager(TrafficControlManager *tc_manager,
               ThreadPool<ThreadClass> *pool,
-              SocketManage *masterSockManger);
+              SocketManage *masterSockManger,
+              int task_number = 65536,
+              int min_port = 1001,
+              int max_port = 65535);
   bool appendTask(char *ins);
   void run() override;
 

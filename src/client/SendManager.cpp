@@ -54,7 +54,7 @@ void SendManager::run() {
     send_task_wait_queue.pop_front();
     wait_queue_locker.unlock();
 
-    // 申请socketfd
+    // 申请 socketfd
     if ((connSockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
       printf("Failed to create socket\n");
     }
@@ -101,6 +101,7 @@ void SendManager::run() {
       send_task = *it;
       if(send_task->send_state == TASK_END){
         send_task_running_queue.erase(it++);
+        delete send_task->sender;
         delete send_task;
       } else{
         it++;

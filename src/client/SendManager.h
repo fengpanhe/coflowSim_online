@@ -42,7 +42,7 @@ public:
               ThreadPool<ThreadClass> *pool,
               SocketManage *masterSockManger);
   bool appendTask(char *ins);
-  void run();
+  void run() override;
 
 private:
 

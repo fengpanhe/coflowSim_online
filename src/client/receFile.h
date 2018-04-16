@@ -16,8 +16,8 @@
 #include <netinet/in.h>
 using namespace std;
 
-#define BUFFER_SIZE 1024
-#define FILE_NAME_MAX_SIZE 512
+#define RECEFILE_BUFFER_SIZE 1024
+#define RECEFILE_FILE_NAME_MAX_SIZE 512
 class ReceFile : public ThreadClass {
 public:
   int file_int = 0;
@@ -49,10 +49,10 @@ void ReceFile::closeConn(bool real_close) {
 
 void ReceFile::run() {
   // recv函数接收数据到缓冲区buffer中
-  char buffer[BUFFER_SIZE];
-  bzero(buffer, BUFFER_SIZE);
-  char file_name[FILE_NAME_MAX_SIZE + 1];
-  memset(file_name, '\0', FILE_NAME_MAX_SIZE);
+  char buffer[RECEFILE_BUFFER_SIZE];
+  bzero(buffer, RECEFILE_BUFFER_SIZE);
+  char file_name[RECEFILE_FILE_NAME_MAX_SIZE + 1];
+  memset(file_name, '\0', RECEFILE_FILE_NAME_MAX_SIZE);
   // 打开文件，准备写入
   int nowTime = clock();
   stringstream ss;
@@ -76,17 +76,17 @@ void ReceFile::run() {
   // }
 
   // 每接收一段数据，便将其写入文件中，循环直到文件接收完并写完为止
-  bzero(buffer, BUFFER_SIZE);
+  bzero(buffer, RECEFILE_BUFFER_SIZE);
   int length = 0;
   int allCount = 0;
-  while ((length = (int) recv(m_Sockfd, buffer, BUFFER_SIZE, 0)) > 0) {
+  while ((length = (int) recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0)) > 0) {
     //   if (fwrite(buffer, sizeof(char), length, fp) < length) {
     //     printf("File:\t%s Write Failed\n", file_name);
     //     break;
     //   }
     //            fp << buffer;
     allCount += length;
-    bzero(buffer, BUFFER_SIZE);
+    bzero(buffer, RECEFILE_BUFFER_SIZE);
   }
   //        fp.close();
   // fclose(fp);

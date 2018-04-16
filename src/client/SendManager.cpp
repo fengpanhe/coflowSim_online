@@ -15,10 +15,14 @@ SendManager::SendManager(int task_number = 65535,
                          int min_port = 1001,
                          int max_port = 65535,
                          TrafficControlManager *tc_manager,
-                         ThreadPool<ThreadClass> *pool) {
+                         ThreadPool<ThreadClass> *pool,
+                         SocketManage *masterSockManger) {
   this->max_task_number = task_number;
   this->min_port = min_port;
   this->max_port = max_port;
+  this->tc_manager = tc_manager;
+  this->pool = pool;
+  this->masterSockManger = masterSockManger;
   run_stop = false;
 }
 
@@ -35,6 +39,9 @@ void SendManager::run() {
   destination_addr.sin_family = AF_INET;
   int error = 0;
   int reuse = 1;
+
+  char reply_master_str_tmp[100] = "";
+  memset(reply_master_str_tmp, '\0', strlen(reply_master_str_tmp));
 
   while (!run_stop) {
     wait_queue_sem.wait();
@@ -79,10 +86,24 @@ void SendManager::run() {
     send_task->send_state = SEND_RUNNING;
     send_task_running_queue.push_back(send_task);
 
-    // 循环扫描 send_task_running_queue，处理标记完成的task
-    for (auto &it : this->send_task_running_queue){
-      if (it->send_state == SEND_END){
-        // TODO 将it指向的task剔除，回传数据给master。
+    // 循环扫描 send_task_running_queue，处理标记SEND_END的task，回传完成信息给master
+    for (auto &it : this->send_task_running_queue) {
+      if (it->send_state==SEND_END) {
+        sprintf(reply_master_str_tmp, "(%d %d %ld)", it->coflow_id, it->flow_id, it->end_time);
+        while (!masterSockManger->setSendMsg(reply_master_str_tmp, static_cast<int>(strlen(reply_master_str_tmp))));
+        masterSockManger->sendMsg();
+        it->send_state = TASK_END;
+      }
+    }
+
+    // 循环扫描 send_task_running_queue，删除标记为 TASK_END 的 task。
+    for (auto it = send_task_running_queue.begin(); it != send_task_running_queue.end();) {
+      send_task = *it;
+      if(send_task->send_state == TASK_END){
+        send_task_running_queue.erase(it++);
+        delete send_task;
+      } else{
+        it++;
       }
     }
 
@@ -114,10 +135,5 @@ bool SendManager::appendTask(char *ins) {
   wait_queue_locker.unlock();
   wait_queue_sem.post();
   return true;
-}
-
-bool SendManager::createSendTask(struct SendTask *send_task) {
-
-  return false;
 }
 

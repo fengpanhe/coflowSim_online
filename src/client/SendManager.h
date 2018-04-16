@@ -9,6 +9,7 @@
 #include <lib/locker.h>
 #include <lib/threadclass.h>
 #include <lib/threadpool.h>
+#include <socket/socketManage.h>
 #include "TrafficControlManager.h"
 #include "Sender.h"
 using namespace std;
@@ -17,6 +18,7 @@ using namespace std;
 #define SEND_WAIT 0
 #define SEND_RUNNING 1
 #define SEND_END 2
+#define TASK_END 3
 struct SendTask {
   char destination_ip[64] = "";
   int destination_port = 0;
@@ -25,7 +27,9 @@ struct SendTask {
   char file_name[FILE_NAME_MAX_SIZE] = "";
   int coflow_id = -1;
   int flow_id = -1;
+
   int send_state;
+  long end_time;
   Sender *sender;
 };
 
@@ -35,12 +39,12 @@ public:
               int min_port = 1001,
               int max_port = 65535,
               TrafficControlManager *tc_manager,
-              ThreadPool<ThreadClass> *pool);
+              ThreadPool<ThreadClass> *pool,
+              SocketManage *masterSockManger);
   bool appendTask(char *ins);
   void run();
 
 private:
-  bool createSendTask(struct SendTask *send_task);
 
   int max_task_number;  // 最大任务数量
 
@@ -58,6 +62,7 @@ private:
 
   TrafficControlManager *tc_manager;
   ThreadPool<ThreadClass> *pool;
+  SocketManage *masterSockManger;
 
 };
 

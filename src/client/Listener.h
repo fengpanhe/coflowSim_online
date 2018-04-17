@@ -16,19 +16,24 @@
 
 class Listener : public ThreadClass {
 public:
-  Listener(ThreadPool<ThreadClass> *pool);
+  Listener(ThreadPool<ThreadClass> *pool, int listen_port);
 //  ~Listener(){}
-  void run();
+  void run() override;
 
-  bool createListen(int port);
-  bool closeListen(int sockfd);
+
+
 
 private:
+  bool closeListen(int sockfd);
+  int createListen(int port);
+
   int epollfd;
   epoll_event events[MAX_EVENT_NUMBER];
 
   ReceFile receFiles[RECV_FILE_NUM];
   ThreadPool<ThreadClass> *pool;
   char serverIP[64] = "127.0.0.1";
+  int listen_port;
+//  bool run_stop;
 };
 #endif // !LISTENER_H

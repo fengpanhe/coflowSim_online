@@ -7,7 +7,15 @@
 
 class ThreadClass {
 public:
+  ThreadClass(){
+    run_stop = false;
+  }
+  void stop(){
+    run_stop = true;
+  }
   virtual void run() = 0;
+protected:
+  bool run_stop;
 };
 
 #endif // MASTER_THREAD_H

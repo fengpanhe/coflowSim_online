@@ -9,10 +9,12 @@ static std::shared_ptr<spdlog::logger> Listener_logger_console = NULL;
 
 static std::shared_ptr<spdlog::logger> Listener_file_logger = NULL;
 
-Listener::Listener(ThreadPool<ThreadClass> *pool) {
+Listener::Listener(ThreadPool<ThreadClass> *pool, int listen_port) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd != -1);
   this->pool = pool;
+  this->listen_port = listen_port;
+//  this->run_stop = false;
 
   if (Listener_logger_console == NULL) {
     Listener_logger_console =
@@ -32,7 +34,10 @@ Listener::Listener(ThreadPool<ThreadClass> *pool) {
 }
 
 void Listener::run() {
-  while (true) {
+  int listenSockfd;
+  listenSockfd = this->createListen(this->listen_port);
+  addfd(this->epollfd, listenSockfd, false);
+  while (!this->run_stop) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
     if ((number < 0) && (errno != EINTR)) {
       Listener_logger_console->error("epoll failure\n");
@@ -56,7 +61,7 @@ void Listener::run() {
   }
 }
 
-bool Listener::createListen(int port) {
+int Listener::createListen(int port) {
   int listenSockfd;
   struct sockaddr_in listenAddr {};
   // 初始化监听socket
@@ -80,7 +85,7 @@ bool Listener::createListen(int port) {
     perror("listen() error\n");
     return -1;
   }
-  addfd(this->epollfd, listenSockfd, false);
+  return listenSockfd;
 }
 bool Listener::closeListen(int sockfd) {
   if (sockfd != -1) {

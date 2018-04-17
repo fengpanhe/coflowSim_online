@@ -62,7 +62,7 @@ bool TrafficControlManager::execShellCommmand(char *command) {
 bool TrafficControlManager::addTcClass(int class_id, double bandwidth) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
-          "tc class replace dev %s parent %s classid 1:%d htb rate %gMbit",
+          "tc class replace dev %s parent %s classid 1:%x htb rate %gMbit",
           net_card_name,
           root_class_id,
           class_id,
@@ -72,7 +72,7 @@ bool TrafficControlManager::addTcClass(int class_id, double bandwidth) {
 bool TrafficControlManager::changeTcClass(int class_id, double bandwidth) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
-          "tc change replace dev %s parent %s classid 1:%d htb rate %gMbit",
+          "tc class replace dev %s parent %s classid 1:%x htb rate %gMbit",
           net_card_name,
           root_class_id,
           class_id,
@@ -82,7 +82,7 @@ bool TrafficControlManager::changeTcClass(int class_id, double bandwidth) {
 bool TrafficControlManager::addTcFilter(int tcp_port, int flow_classid) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
-          "tc filter add dev %s parent %s prio %d protocol ip u32  match tcp src %d FFFF classid 1:%d",
+          "tc filter add dev %s parent %s prio %d protocol ip u32  match tcp src %d FFFF classid 1:%x",
           net_card_name,
           root_id,
           tcp_port,

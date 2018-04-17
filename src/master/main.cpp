@@ -24,13 +24,13 @@ using namespace rapidjson;
 
 #define MAX_EVENT_NUMBER 10000
 
-char serverIP[64] = "127.0.0.1";
-int serverPort = 4002;
+char master_server_ip[64] = "127.0.0.1";
+int master_server_port = 4002;
 char broadcastIP[64] = "255.255.255.255";
 int broadcastPort = 4001;
 char FBfilePath[1024] = "../res/FB2010-1Hr-150-0.txt";
 char machine_define_path[1024] = "../res/machine_define.json";
-int threadNum = 8;
+int thread_num = 8;
 
 bool parseConfig(char const *configFilePath) {
   auto console = spdlog::stdout_color_mt("parseConfig");
@@ -47,16 +47,16 @@ bool parseConfig(char const *configFilePath) {
   assert(document.HasMember("server_ip"));
   assert(document["server_ip"].IsString());
   ss << document["server_ip"].GetString();
-  ss >> serverIP;
+  ss >> master_server_ip;
   ss.clear();
-  console->info("server_ip is {}", serverIP);
+  console->info("server_ip is {}", master_server_ip);
 
   assert(document.HasMember("server_port"));
   assert(document["server_port"].IsInt());
   ss << document["server_port"].GetInt();
-  ss >> serverPort;
+  ss >> master_server_port;
   ss.clear();
-  console->info("server_port is {}", serverPort);
+  console->info("server_port is {}", master_server_port);
 
   assert(document.HasMember("broadcast_ip"));
   assert(document["broadcast_ip"].IsString());
@@ -105,9 +105,9 @@ bool parseConfig(char const *configFilePath) {
   assert(document.HasMember("thread_num"));
   assert(document["thread_num"].IsInt());
   ss << document["thread_num"].GetInt();
-  ss >> threadNum;
+  ss >> thread_num;
   ss.clear();
-  console->info("thread_num is {}", threadNum);
+  console->info("thread_num is {}", thread_num);
 
   return true;
 }
@@ -203,7 +203,7 @@ int coflowSimMaster() {
 
   // 线程池
   try {
-    pool = new ThreadPool<ThreadClass>(threadNum);
+    pool = new ThreadPool<ThreadClass>(thread_num);
   } catch (...) {
     return 1;
   }

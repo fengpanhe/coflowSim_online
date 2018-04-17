@@ -14,15 +14,11 @@
 #define BACKLOG 65535
 #define RECV_FILE_NUM 65536
 
-class Listener : public ThreadClass {
+class RecvManager : public ThreadClass {
 public:
-  Listener(ThreadPool<ThreadClass> *pool, int listen_port);
-//  ~Listener(){}
+  RecvManager(ThreadPool<ThreadClass> *pool, char *listen_ip,int listen_port);
+//  ~RecvManager(){}
   void run() override;
-
-
-
-
 private:
   bool closeListen(int sockfd);
   int createListen(int port);
@@ -32,7 +28,7 @@ private:
 
   ReceFile receFiles[RECV_FILE_NUM];
   ThreadPool<ThreadClass> *pool;
-  char serverIP[64] = "127.0.0.1";
+  char listen_ip[64] = "127.0.0.1";
   int listen_port;
 };
 #endif // !LISTENER_H

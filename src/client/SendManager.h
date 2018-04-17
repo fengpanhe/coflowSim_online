@@ -43,7 +43,7 @@ public:
               int task_number = 65536,
               int min_port = 1001,
               int max_port = 65535);
-  bool appendTask(char *ins);
+  bool appendTask(char *ins, int ins_len);
   void run() override;
 
 private:

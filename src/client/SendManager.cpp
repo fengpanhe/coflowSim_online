@@ -111,10 +111,16 @@ void SendManager::run() {
 
 }
 
-bool SendManager::appendTask(char *ins) {
+bool SendManager::appendTask(char *ins, int ins_len) {
+  char ins_tmp[100];
+  int i;
+  for (i = 0; i < ins_len; i++) {
+    ins_tmp[i] = ins[i];
+  }
+  ins_tmp[i++] = '\0';
   auto *send_task = (struct SendTask *) malloc(sizeof(struct SendTask));
   stringstream ss;
-  ss << ins;
+  ss << ins_tmp;
   ss >> send_task->coflow_id;
   ss >> send_task->flow_id;
   ss >> send_task->destination_ip;

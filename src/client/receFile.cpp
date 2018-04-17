@@ -4,7 +4,7 @@
 
 #include <lib/epollFunctions.h>
 #include "receFile.h"
-int rf_epollfd = -1;
+int ReceFile::rf_epollfd = -1;
 void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
   m_Sockfd = sockfd;
   int error = 0;

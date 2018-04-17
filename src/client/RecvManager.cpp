@@ -3,17 +3,18 @@
 #include <spdlog/logger.h>
 #include <spdlog/spdlog.h>
 #include <iostream>
-#include "Listener.h"
+#include "RecvManager.h"
 
 static std::shared_ptr<spdlog::logger> Listener_logger_console = NULL;
 
 static std::shared_ptr<spdlog::logger> Listener_file_logger = NULL;
 
-Listener::Listener(ThreadPool<ThreadClass> *pool, int listen_port) {
+RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, char *listen_ip,int listen_port) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd!=-1);
   this->pool = pool;
   this->listen_port = listen_port;
+  sprintf(this->listen_ip, "%s", listen_ip);
 
   if (Listener_logger_console==NULL) {
     Listener_logger_console =
@@ -32,7 +33,7 @@ Listener::Listener(ThreadPool<ThreadClass> *pool, int listen_port) {
   }
 }
 
-void Listener::run() {
+void RecvManager::run() {
   int listenSockfd;
   listenSockfd = this->createListen(this->listen_port);
   addfd(this->epollfd, listenSockfd, false);
@@ -68,7 +69,7 @@ void Listener::run() {
   this->closeListen(listenSockfd);
 }
 
-int Listener::createListen(int port) {
+int RecvManager::createListen(int port) {
   int listenSockfd;
   struct sockaddr_in listenAddr{};
   // 初始化监听socket
@@ -81,7 +82,7 @@ int Listener::createListen(int port) {
 
   bzero(&listenAddr, sizeof(listenAddr));
   listenAddr.sin_family = AF_INET;
-  inet_pton(AF_INET, serverIP, &listenAddr.sin_addr);
+  inet_pton(AF_INET, this->listen_ip, &listenAddr.sin_addr);
   listenAddr.sin_port = htons(static_cast<uint16_t>(port));
   if (bind(listenSockfd, (struct sockaddr *) &listenAddr,
            sizeof(struct sockaddr))==-1) {
@@ -94,7 +95,7 @@ int Listener::createListen(int port) {
   }
   return listenSockfd;
 }
-bool Listener::closeListen(int sockfd) {
+bool RecvManager::closeListen(int sockfd) {
   if (sockfd!=-1) {
     removefd(this->epollfd, sockfd);
   }

@@ -12,8 +12,6 @@
 #include <list>
 #include <pthread.h>
 
-auto threadPool_logger = spdlog::stdout_color_mt("ThreadPool");
-
 template <typename T> class ThreadPool {
 public:
   ThreadPool(int thread_number = 8, int max_requests = 10000);
@@ -59,7 +57,6 @@ ThreadPool<T>::ThreadPool(int thread_number, int max_requests)
       throw std::exception();
     }
   }
-  threadPool_logger->info("Created {} Threads\n", thread_number);
 }
 
 template <typename T> ThreadPool<T>::~ThreadPool() {
@@ -70,8 +67,7 @@ template <typename T> ThreadPool<T>::~ThreadPool() {
 template <typename T> bool ThreadPool<T>::append(T *request) {
   m_queuelocker.lock();
   if (m_workqueue.size() > m_max_requests) {
-    threadPool_logger->warn("m_workqueue.size({}) > m_max_requests({})",
-                            m_workqueue.size(), m_max_requests);
+    printf("warning: m_workqueue.size(%d) > m_max_requests(%d)", m_workqueue.size(), m_max_requests);
     m_queuelocker.unlock();
     return false;
   }

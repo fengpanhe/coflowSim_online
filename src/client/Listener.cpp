@@ -7,7 +7,7 @@
 
 static std::shared_ptr<spdlog::logger> Listener_logger_console = NULL;
 
-static std::shared_ptr<spdlog::logger> Listener_logger_file = NULL;
+static std::shared_ptr<spdlog::logger> Listener_file_logger = NULL;
 
 Listener::Listener(ThreadPool<ThreadClass> *pool) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
@@ -16,13 +16,13 @@ Listener::Listener(ThreadPool<ThreadClass> *pool) {
 
   if (Listener_logger_console == NULL) {
     Listener_logger_console =
-        spdlog::stdout_color_mt("socketManage_logger");
+        spdlog::stdout_color_mt("Listener_logger");
   }
-  if (Listener_logger_file == NULL) {
+  if (Listener_file_logger == NULL) {
     try {
       spdlog::set_async_mode(8192);
-      Listener_logger_file = spdlog::rotating_logger_mt(
-          "socketManage_file_logger", "socketManage_logger.log",
+      Listener_file_logger = spdlog::rotating_logger_mt(
+          "socketManage_file_logger", "Listener_file_logger.log",
           1024 * 1024 * 5, 3);
       spdlog::drop_all();
     } catch (const spdlog::spdlog_ex &ex) {

@@ -11,7 +11,6 @@
 #include <lib/threadpool.h>
 #include <socket/socketManage.h>
 #include "TrafficControlManager.h"
-#include "Sender.h"
 using namespace std;
 
 #define FILE_NAME_MAX_SIZE 32
@@ -31,9 +30,9 @@ struct SendTask {
   int coflow_id = -1;
   int flow_id = -1;
 
-  int send_state;
-  long end_time;
-  Sender *sender;
+  int send_state{};
+  long end_time{};
+  Sender *sender{};
 };
 
 class SendManager : public ThreadClass {
@@ -90,6 +89,7 @@ public:
     }
     send_task->end_time = time(0);
     send_task->send_state = SEND_END;
+    close(sockfd);
   }
 private:
   struct SendTask * send_task;

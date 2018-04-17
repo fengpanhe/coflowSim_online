@@ -9,7 +9,6 @@
 #include <arpa/inet.h>
 #include <random>
 #include "SendManager.h"
-#include "Sender.h"
 
 SendManager::SendManager(TrafficControlManager *tc_manager,
                          ThreadPool<ThreadClass> *pool,

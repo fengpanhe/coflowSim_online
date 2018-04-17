@@ -21,8 +21,9 @@ using namespace std;
 class ReceFile : public ThreadClass {
 public:
   int file_int = 0;
+  static int rf_epollfd;
   void initSocket(int sockfd, const sockaddr_in &addr);
-  void run();
+  void run() override;
   void closeConn(bool real_close = true);
 private:
   int m_Sockfd;

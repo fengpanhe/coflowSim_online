@@ -2,10 +2,11 @@
 // Created by he on 4/17/18.
 //
 
+#include <lib/epollFunctions.h>
 #include "receFile.h"
+int rf_epollfd = -1;
 void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
   m_Sockfd = sockfd;
-//  m_address = addr;
   int error = 0;
   socklen_t len = sizeof(error);
   getsockopt(m_Sockfd, SOL_SOCKET, SO_ERROR, &error, &len);
@@ -15,8 +16,7 @@ void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
 
 void ReceFile::closeConn(bool real_close) {
   if (real_close && (m_Sockfd != -1)) {
-//    removefd(SocketManage::sEpollfd, m_Sockfd);
-    close(m_Sockfd);
+    removefd(rf_epollfd, m_Sockfd);
     m_Sockfd = -1;
   }
 }

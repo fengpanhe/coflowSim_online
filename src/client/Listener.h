@@ -34,6 +34,5 @@ private:
   ThreadPool<ThreadClass> *pool;
   char serverIP[64] = "127.0.0.1";
   int listen_port;
-//  bool run_stop;
 };
 #endif // !LISTENER_H

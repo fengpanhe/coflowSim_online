@@ -10,7 +10,7 @@
 #include <zconf.h>
 
 int setnonblocking(int fd);
-void addfd(int epollfd, int fd, bool one_shot);
+void addfd(int epollfd, int fd, bool one_shot, bool non_block = true);
 void removefd(int epollfd, int fd);
 void modfd(int epollfd, int fd, int ev);
 #endif // MASTER_EPOLLFUNCTIONS_H

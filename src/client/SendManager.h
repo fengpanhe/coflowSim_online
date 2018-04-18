@@ -80,7 +80,7 @@ public:
     bzero(buffer, SENDER_BUFFER_SIZE);
     auto flowSizeKB = static_cast<int>(send_task->flow_size_MB * 1024);
     int sended_MB = 0;
-    while (sended_MB++ >= flowSizeKB) {
+    while (sended_MB++ < flowSizeKB) {
       memset(buffer, 'a', sizeof(buffer));
       if (send(sockfd, buffer, SENDER_BUFFER_SIZE, 0) < 0) {
         perror("Send File Failed:\n");

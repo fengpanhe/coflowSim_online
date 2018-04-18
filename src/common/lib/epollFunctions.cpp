@@ -11,7 +11,7 @@ int setnonblocking(int fd) {
   return old_option;
 }
 
-void addfd(int epollfd, int fd, bool one_shot) {
+void addfd(int epollfd, int fd, bool one_shot, bool non_block) {
   epoll_event event;
   event.data.fd = fd;
   event.events = EPOLLIN | EPOLLET | EPOLLRDHUP;
@@ -19,7 +19,9 @@ void addfd(int epollfd, int fd, bool one_shot) {
     event.events |= EPOLLONESHOT;
   }
   epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
-  setnonblocking(fd);
+  if (non_block){
+    setnonblocking(fd);
+  }
 }
 
 void removefd(int epollfd, int fd) {

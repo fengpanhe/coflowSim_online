@@ -53,7 +53,7 @@ void RecvManager::run() {
           continue;
         }
         receFiles[connfd].initSocket(connfd, client_address);
-        addfd(this->epollfd, connfd, false);
+        addfd(this->epollfd, connfd, false, false);
       } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
 
       } else if (events[i].events & EPOLLIN) {

@@ -17,6 +17,7 @@ void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
 void ReceFile::closeConn(bool real_close) {
   if (real_close && (m_Sockfd != -1)) {
     removefd(rf_epollfd, m_Sockfd);
+    shutdown(m_Sockfd, SHUT_RDWR);
     m_Sockfd = -1;
   }
 }
@@ -42,28 +43,21 @@ void ReceFile::run() {
   ss << ".txt";
   ss >> file_name + strlen(file_name);
   ss.clear();
-  // FILE *fp = fopen(file_name, "w");
-
-  //    printf("打开文件，准备写入 %s\n", file_name);
-  // if (NULL == fp) {
-  //   printf("File:\t%s Can Not Open To Write\n", file_name);
-  // }
 
   // 每接收一段数据，便将其写入文件中，循环直到文件接收完并写完为止
   bzero(buffer, RECEFILE_BUFFER_SIZE);
-  int length = 0;
-  int allCount = 0;
-  while ((length = (int) recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0)) > 0) {
-    //   if (fwrite(buffer, sizeof(char), length, fp) < length) {
-    //     printf("File:\t%s Write Failed\n", file_name);
-    //     break;
-    //   }
-    //            fp << buffer;
-    allCount += length;
+  int bytes_read = 0;
+  while (true) {
+    bytes_read = static_cast<int>(recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0));
+//    if (bytes_read < 0) {
+//      perror("ReceFile error: bytes_read < 0 \n");
+//      break;
+//    }
+    if(bytes_read == 0){
+      printf("bytes_read == 0");
+      this->closeConn();
+      break;
+    }
     bzero(buffer, RECEFILE_BUFFER_SIZE);
   }
-  //        fp.close();
-  // fclose(fp);
-  //    printf("关闭文件，写入完毕 %s\n", file_name);
-  this->closeConn();
 }

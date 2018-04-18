@@ -16,19 +16,18 @@
 
 class RecvManager : public ThreadClass {
 public:
-  RecvManager(ThreadPool<ThreadClass> *pool, char *listen_ip,int listen_port);
+  RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd);
 //  ~RecvManager(){}
   void run() override;
 private:
   bool closeListen(int sockfd);
-  int createListen(int port);
+  int createListen(char * listen_ip, int port);
 
   int epollfd;
   epoll_event events[MAX_EVENT_NUMBER];
 
   ReceFile receFiles[RECV_FILE_NUM];
   ThreadPool<ThreadClass> *pool;
-  char listen_ip[64] = "127.0.0.1";
-  int listen_port;
+  int listen_sockfd;
 };
 #endif // !LISTENER_H

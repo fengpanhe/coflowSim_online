@@ -9,12 +9,11 @@ static std::shared_ptr<spdlog::logger> Listener_logger_console = NULL;
 
 static std::shared_ptr<spdlog::logger> Listener_file_logger = NULL;
 
-RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, char *listen_ip,int listen_port) {
+RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd!=-1);
   this->pool = pool;
-  this->listen_port = listen_port;
-  sprintf(this->listen_ip, "%s", listen_ip);
+  this->listen_sockfd = listen_sockfd;
 
   if (Listener_logger_console==NULL) {
     Listener_logger_console =
@@ -34,9 +33,7 @@ RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, char *listen_ip,int list
 }
 
 void RecvManager::run() {
-  int listenSockfd;
-  listenSockfd = this->createListen(this->listen_port);
-  addfd(this->epollfd, listenSockfd, false);
+  addfd(this->epollfd, this->listen_sockfd, false);
   ReceFile::rf_epollfd = epollfd;
   while (!this->run_stop) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
@@ -46,10 +43,10 @@ void RecvManager::run() {
     }
     for (int i = 0; i < number; i++) {
       int sockfd = events[i].data.fd;
-      if (sockfd==listenSockfd) {
+      if (sockfd==this->listen_sockfd) {
         struct sockaddr_in client_address{};
         socklen_t client_addrlength = sizeof(client_address);
-        int connfd = accept(listenSockfd, (struct sockaddr *) &client_address,
+        int connfd = accept(this->listen_sockfd, (struct sockaddr *) &client_address,
                             &client_addrlength);
         if (connfd < 0) {
           Listener_logger_console->error("errno is: {}\n", errno);
@@ -66,10 +63,10 @@ void RecvManager::run() {
       }
     }
   }
-  this->closeListen(listenSockfd);
+  this->closeListen(this->listen_sockfd);
 }
 
-int RecvManager::createListen(int port) {
+int RecvManager::createListen(char * listen_ip, int port) {
   int listenSockfd;
   struct sockaddr_in listenAddr{};
   // 初始化监听socket
@@ -82,7 +79,7 @@ int RecvManager::createListen(int port) {
 
   bzero(&listenAddr, sizeof(listenAddr));
   listenAddr.sin_family = AF_INET;
-  inet_pton(AF_INET, this->listen_ip, &listenAddr.sin_addr);
+  inet_pton(AF_INET, listen_ip, &listenAddr.sin_addr);
   listenAddr.sin_port = htons(static_cast<uint16_t>(port));
   if (bind(listenSockfd, (struct sockaddr *) &listenAddr,
            sizeof(struct sockaddr))==-1) {

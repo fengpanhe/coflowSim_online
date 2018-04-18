@@ -104,7 +104,7 @@ int coflowSimClient() {
   }
 
   auto tc_manager = new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
-  auto *recv_manager = new RecvManager(receiver_pool, client_server_ip, client_server_port);
+  auto *recv_manager = new RecvManager(receiver_pool, listenSockfd);
   auto *send_manager = new SendManager(tc_manager, sender_pool, &masterSockManger);
 
   receiver_pool->append(recv_manager);

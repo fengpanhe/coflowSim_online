@@ -52,7 +52,7 @@ bool TrafficControlManager::execShellCommmand(char *command) {
   FILE *fstream = nullptr;
   char buff[1024];
   memset(buff, 0, sizeof(buff));
-
+//  printf("%s\n", command);
   if (nullptr==(fstream = popen(command, "r"))) {
     fprintf(stderr, "execute command failed: %s", strerror(errno));
     return false;
@@ -63,9 +63,7 @@ bool TrafficControlManager::execShellCommmand(char *command) {
     printf("%s", buff);
   }
   pclose(fstream);
-  if (flag){
-    printf("%s\n", command);
-  }
+
   return true;
 }
 

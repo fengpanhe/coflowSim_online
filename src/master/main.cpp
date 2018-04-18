@@ -112,10 +112,10 @@ bool parseConfig(char const *configFilePath) {
   return true;
 }
 
-bool parseMachineDenfine(char const *machineDefinePath,
-                         MachineManager *&machineManager) {
+bool parseMachineDefine(char const *machineDefinePath,
+                        MachineManager *&machineManager) {
 
-  auto console = spdlog::stdout_color_mt("parseMachineDenfine");
+  auto console = spdlog::stdout_color_mt("parseMachineDefine");
 
   FILE *fp = fopen(machineDefinePath, "r"); // 非 Windows 平台使用 "r"
   char readBuffer[65536];
@@ -140,27 +140,51 @@ bool parseMachineDenfine(char const *machineDefinePath,
   ss >> master_port;
   ss.clear();
 
-  const Value &clients_ip = document["clients_ip"];
-  const Value &clients_port = document["clients_port"];
-
-  assert(clients_ip.IsArray());
-  assert(clients_port.IsArray());
-
-  for (SizeType i = 0; i < clients_ip.Size(); i++) {
-
+  assert(document.HasMember("clients"));
+  Value clients;
+  clients = document["clients"];
+  assert(clients.IsArray());
+  Value client;
+  for (SizeType i = 0; i < clients.Size(); i++) {
+    client = clients[i];
+    assert(client.IsObject());
     char client_ip[64];
     int client_port;
-
-    ss << clients_ip[i].GetString();
+    assert(client.HasMember("ip"));
+    assert(client["ip"].IsString());
+    ss << client["ip"].GetString();
     ss >> client_ip;
     ss.clear();
 
-    ss << clients_port[i].GetInt();
+    assert(client.HasMember("port"));
+    assert(client["port"].IsInt());
+    ss << client["port"].GetInt();
     ss >> client_port;
     ss.clear();
-
     machineManager->addOnePhysicsMachine(client_ip, client_port);
   }
+
+//  const Value &clients_ip = document["clients_ip"];
+//  const Value &clients_port = document["clients_port"];
+//
+//  assert(clients_ip.IsArray());
+//  assert(clients_port.IsArray());
+//
+//  for (SizeType i = 0; i < clients_ip.Size(); i++) {
+//
+//    char client_ip[64];
+//    int client_port;
+//
+//    ss << clients_ip[i].GetString();
+//    ss >> client_ip;
+//    ss.clear();
+//
+//    ss << clients_port[i].GetInt();
+//    ss >> client_port;
+//    ss.clear();
+//
+//    machineManager->addOnePhysicsMachine(client_ip, client_port);
+//  }
 }
 
 int coflowSimMaster() {
@@ -195,7 +219,7 @@ int coflowSimMaster() {
 
   // machineManager处理
   machineManager1->setLogicMachineNum(150);
-  parseMachineDenfine(machine_define_path, machineManager1);
+  parseMachineDefine(machine_define_path, machineManager1);
   machineManager1->startConn();
 
   scheduler1->setMachines(machineManager1);

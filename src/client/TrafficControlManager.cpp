@@ -28,14 +28,20 @@ void TrafficControlManager::initTC() {
   sprintf(cmd, "tc qdisc add dev %s root handle %s htb default 1", this->net_card_name, root_class_id);
   this->execShellCommmand(cmd);
   sprintf(cmd,
-          "tc class add dev %s parent 1: classid %s htb rate %gMbit",
+          "tc class replace dev %s parent 1: classid %s htb rate %gMbit",
           net_card_name,
           root_class_id,
           remain_bandwidth_MBs);
   this->execShellCommmand(cmd);
+  // 默认的分类,设置为1Mbit带宽
+  this->addTcClass(1, 1);
 }
 
 bool TrafficControlManager::setTcpPortBandwidth(int tcp_port, double bandwidth) {
+  if (bandwidth <= 0) {
+    printf("WARNING: The bandwidth of tcp port %d <= 0Mbit, set as default class.\n", tcp_port);
+    return false;
+  }
   this->addTcClass(tcp_port, bandwidth);
   this->deleteTcFilter(tcp_port);
   this->addTcFilter(tcp_port, tcp_port);
@@ -51,11 +57,15 @@ bool TrafficControlManager::execShellCommmand(char *command) {
     fprintf(stderr, "execute command failed: %s", strerror(errno));
     return false;
   }
-
+  bool flag = false;
   while (nullptr!=fgets(buff, sizeof(buff), fstream)) {
+    flag = true;
     printf("%s", buff);
   }
   pclose(fstream);
+  if (flag){
+    printf("%s\n", command);
+  }
   return true;
 }
 
@@ -82,7 +92,7 @@ bool TrafficControlManager::changeTcClass(int class_id, double bandwidth) {
 bool TrafficControlManager::addTcFilter(int tcp_port, int flow_classid) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
-          "tc filter add dev %s parent %s prio %d protocol ip u32  match tcp src %d FFFF classid 1:%x",
+          "tc filter replace dev %s parent %s prio %d protocol ip u32  match tcp src %d FFFF classid 1:%x",
           net_card_name,
           root_id,
           tcp_port,

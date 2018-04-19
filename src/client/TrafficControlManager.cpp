@@ -37,14 +37,14 @@ void TrafficControlManager::initTC() {
   this->addTcClass(1, 1);
 }
 
-bool TrafficControlManager::setTcpPortBandwidth(int tcp_port, double bandwidth) {
+bool TrafficControlManager::setipPortBandwidth(int ip_port, double bandwidth) {
   if (bandwidth <= 0) {
-    printf("WARNING: The bandwidth of tcp port %d <= 0Mbit, set as default class.\n", tcp_port);
+    printf("WARNING: The bandwidth of ip port %d <= 0Mbit, set as default class.\n", ip_port);
     return false;
   }
-  this->addTcClass(tcp_port, bandwidth);
-  this->deleteTcFilter(tcp_port);
-  this->addTcFilter(tcp_port, tcp_port);
+  this->addTcClass(ip_port, bandwidth);
+  this->deleteTcFilter(ip_port);
+  this->addTcFilter(ip_port, ip_port);
   return true;
 }
 
@@ -87,30 +87,30 @@ bool TrafficControlManager::changeTcClass(int class_id, double bandwidth) {
           bandwidth);
   return this->execShellCommmand(cmd);
 }
-bool TrafficControlManager::addTcFilter(int tcp_port, int flow_classid) {
+bool TrafficControlManager::addTcFilter(int ip_port, int flow_classid) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
-          "tc filter replace dev %s parent %s prio %d protocol ip u32  match tcp src %d FFFF classid 1:%x",
+          "tc filter replace dev %s parent %s prio %d protocol ip u32  match ip sport %d FFFF classid 1:%x",
           net_card_name,
           root_id,
-          tcp_port,
-          tcp_port,
+          ip_port,
+          ip_port,
           flow_classid);
   return this->execShellCommmand(cmd);
 }
-bool TrafficControlManager::changeTcFilter(int tcp_port, int flow_classid) {
-  if (!deleteTcFilter(tcp_port)) {
+bool TrafficControlManager::changeTcFilter(int ip_port, int flow_classid) {
+  if (!deleteTcFilter(ip_port)) {
     return false;
   }
-  return addTcFilter(tcp_port, flow_classid);
+  return addTcFilter(ip_port, flow_classid);
 }
-bool TrafficControlManager::deleteTcFilter(int tcp_port) {
+bool TrafficControlManager::deleteTcFilter(int ip_port) {
   char cmd[COMMAND_MAX_LEN];
   sprintf(cmd,
           "tc filter delete dev %s parent %s prio %d u32",
           net_card_name,
           root_id,
-          tcp_port);
+          ip_port);
   return this->execShellCommmand(cmd);
 }
 

@@ -24,8 +24,11 @@ void Scheduler::run() {
 
     for (int i = 0; i < registerIndex; ++i) {
       // TODO 选出可以发送的coflow，改状态为RUNNING
-      if (sCoflows->at(i)->getCoflowState() == REGISTED)
-        sCoflows->at(i)->setCoflowState(RUNNING);
+      Coflow * co = sCoflows->at(i);
+      if (co->getCoflowState() == REGISTED){
+        co->setCoflowState(RUNNING);
+      }
+
     }
 
     for (int i = 0; i < registerIndex; ++i) {
@@ -34,6 +37,7 @@ void Scheduler::run() {
         for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
              it++) {
           Flow *f = it->second;
+          f->setCurrentMbs(1);
           while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
                                      f->getMapperID(), f->getReducerID(),
                                      f->getFlowSizeMB(), f->getCurrentMbs()))

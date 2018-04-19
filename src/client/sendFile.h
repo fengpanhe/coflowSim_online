@@ -50,8 +50,8 @@ public:
       return;
     }
     // 输入文件名 并放到缓冲区buffer中等待发送
-    char file_name[FILE_NAME_MAX_SIZE];
-    char file_save_name[FILE_NAME_MAX_SIZE];
+    char file_name[RECEFILE_FILE_NAME_MAX_SIZE];
+    char file_save_name[RECEFILE_FILE_NAME_MAX_SIZE];
 
     char socketip[64] = "";
     int socketport = 0;
@@ -89,8 +89,8 @@ public:
     int reuse = 1;
     setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
-    char buffer[BUFFER_SIZE];
-    bzero(buffer, BUFFER_SIZE);
+    char buffer[RECEFILE_BUFFER_SIZE];
+    bzero(buffer, RECEFILE_BUFFER_SIZE);
 
     long startTime = clock();
     // flowSizeMB = 1;
@@ -98,7 +98,7 @@ public:
     int sendenMB = 0;
     while (sendenMB++ >= flowSizeKB) {
       memset(buffer, 'a', sizeof(buffer));
-      if (send(connSockfd, buffer, BUFFER_SIZE, 0) < 0) {
+      if (send(connSockfd, buffer, RECEFILE_BUFFER_SIZE, 0) < 0) {
         perror("Send File Failed:\n");
         exit(1);
       }
@@ -146,6 +146,6 @@ public:
 
 private:
   SocketManage masterSockManger;
-  char ins[FILE_NAME_MAX_SIZE];
+  char ins[RECEFILE_FILE_NAME_MAX_SIZE];
 };
 #endif // COFLOWSIM_SENDFILE_H

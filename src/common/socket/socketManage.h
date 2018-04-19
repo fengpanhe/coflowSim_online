@@ -63,4 +63,5 @@ protected:
   int m_Sockfd;
 };
 
+
 #endif // MASTER_SOCKETMANAGE_H

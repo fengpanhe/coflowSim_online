@@ -5,9 +5,9 @@
 #include <iostream>
 #include "RecvManager.h"
 
-static std::shared_ptr<spdlog::logger> Listener_logger_console = NULL;
+static std::shared_ptr<spdlog::logger> Listener_logger_console = nullptr;
 
-static std::shared_ptr<spdlog::logger> Listener_file_logger = NULL;
+static std::shared_ptr<spdlog::logger> Listener_file_logger = nullptr;
 
 RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
@@ -15,11 +15,11 @@ RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd) {
   this->pool = pool;
   this->listen_sockfd = listen_sockfd;
 
-  if (Listener_logger_console==NULL) {
+  if (Listener_logger_console==nullptr) {
     Listener_logger_console =
         spdlog::stdout_color_mt("Listener_logger");
   }
-  if (Listener_file_logger==NULL) {
+  if (Listener_file_logger==nullptr) {
     try {
       spdlog::set_async_mode(8192);
       Listener_file_logger = spdlog::rotating_logger_mt(
@@ -53,7 +53,7 @@ void RecvManager::run() {
           continue;
         }
         receFiles[connfd].initSocket(connfd, client_address);
-        addfd(this->epollfd, connfd, false, false);
+        addfd(this->epollfd, connfd, true, false);
       } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
 
       } else if (events[i].events & EPOLLIN) {

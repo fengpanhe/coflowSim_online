@@ -17,7 +17,6 @@ void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
 void ReceFile::closeConn(bool real_close) {
   if (real_close && (m_Sockfd != -1)) {
     removefd(rf_epollfd, m_Sockfd);
-    shutdown(m_Sockfd, SHUT_RDWR);
     m_Sockfd = -1;
   }
 }
@@ -49,12 +48,11 @@ void ReceFile::run() {
   int bytes_read = 0;
   while (true) {
     bytes_read = static_cast<int>(recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0));
-//    if (bytes_read < 0) {
-//      perror("ReceFile error: bytes_read < 0 \n");
-//      break;
-//    }
+    if (bytes_read < 0) {
+      perror("ReceFile error: bytes_read < 0 \n");
+      break;
+    }
     if(bytes_read == 0){
-      printf("bytes_read == 0");
       this->closeConn();
       break;
     }

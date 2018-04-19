@@ -76,7 +76,7 @@ void SendManager::run() {
     setsockopt(connSockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
     // 设定端口的速度
-    this->tc_manager->setTcpPortBandwidth(local_port, send_task->speed_Mbs);
+    this->tc_manager->setIpPortBandwidth(local_port, send_task->speed_Mbs);
     // 建立一个发送任务
     send_task->sender = new Sender(send_task, connSockfd);
     pool->append(send_task->sender);

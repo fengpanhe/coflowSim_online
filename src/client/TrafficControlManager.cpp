@@ -37,7 +37,7 @@ void TrafficControlManager::initTC() {
   this->addTcClass(1, 1);
 }
 
-bool TrafficControlManager::setipPortBandwidth(int ip_port, double bandwidth) {
+bool TrafficControlManager::setIpPortBandwidth(int ip_port, double bandwidth) {
   if (bandwidth <= 0) {
     printf("WARNING: The bandwidth of ip port %d <= 0Mbit, set as default class.\n", ip_port);
     return false;

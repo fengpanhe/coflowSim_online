@@ -24,7 +24,7 @@ public:
   TrafficControlManager(char *net_card_name, double bandwidth_MBs);
 
   // 设置ip端口的带宽
-  bool setipPortBandwidth(int ip_port, double bandwidth);
+  bool setIpPortBandwidth(int ip_port, double bandwidth);
 private:
 
   // 执行Linux shell命令

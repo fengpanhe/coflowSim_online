@@ -9,8 +9,8 @@
 #include <unordered_map>
 
 #include "lib/epollFunctions.h"
-#include "lib/threadclass.h"
-#include "lib/threadpool.h"
+//#include "lib/threadclass.h"
+#include "lib/ThreadPool.h"
 #include "scheduler/Scheduler.h"
 #include "socket/socketManage.h"
 #include "traceProducer/CoflowBenchmarkTraceProducer.h"
@@ -164,27 +164,27 @@ bool parseMachineDefine(char const *machineDefinePath,
     machineManager->addOnePhysicsMachine(client_ip, client_port);
   }
 
-//  const Value &clients_ip = document["clients_ip"];
-//  const Value &clients_port = document["clients_port"];
-//
-//  assert(clients_ip.IsArray());
-//  assert(clients_port.IsArray());
-//
-//  for (SizeType i = 0; i < clients_ip.Size(); i++) {
-//
-//    char client_ip[64];
-//    int client_port;
-//
-//    ss << clients_ip[i].GetString();
-//    ss >> client_ip;
-//    ss.clear();
-//
-//    ss << clients_port[i].GetInt();
-//    ss >> client_port;
-//    ss.clear();
-//
-//    machineManager->addOnePhysicsMachine(client_ip, client_port);
-//  }
+  //  const Value &clients_ip = document["clients_ip"];
+  //  const Value &clients_port = document["clients_port"];
+  //
+  //  assert(clients_ip.IsArray());
+  //  assert(clients_port.IsArray());
+  //
+  //  for (SizeType i = 0; i < clients_ip.Size(); i++) {
+  //
+  //    char client_ip[64];
+  //    int client_port;
+  //
+  //    ss << clients_ip[i].GetString();
+  //    ss >> client_ip;
+  //    ss.clear();
+  //
+  //    ss << clients_port[i].GetInt();
+  //    ss >> client_port;
+  //    ss.clear();
+  //
+  //    machineManager->addOnePhysicsMachine(client_ip, client_port);
+  //  }
 }
 
 int coflowSimMaster() {
@@ -192,7 +192,7 @@ int coflowSimMaster() {
 
   int listenSockfd;
   // struct sockaddr_in listenAddr {};
-  ThreadPool<ThreadClass> *pool = nullptr;
+  ThreadPool *pool = nullptr;
   CoflowBenchmarkTraceProducer producer(FBfilePath, "123");
   auto *scheduler1 = new Scheduler();
   auto *coflows = new vector<Coflow *>;
@@ -227,7 +227,7 @@ int coflowSimMaster() {
 
   // 线程池
   try {
-    pool = new ThreadPool<ThreadClass>(thread_num);
+    pool = new ThreadPool(thread_num);
   } catch (...) {
     return 1;
   }

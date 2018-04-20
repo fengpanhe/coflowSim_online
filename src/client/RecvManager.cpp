@@ -9,7 +9,7 @@ static std::shared_ptr<spdlog::logger> Listener_logger_console = nullptr;
 
 static std::shared_ptr<spdlog::logger> Listener_file_logger = nullptr;
 
-RecvManager::RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd) {
+RecvManager::RecvManager(ThreadPool *pool, int listen_sockfd) {
   epollfd = epoll_create(MAX_EVENT_NUMBER);
   assert(epollfd!=-1);
   this->pool = pool;

@@ -19,6 +19,7 @@ TrafficControlManager::TrafficControlManager(char *net_card_name, double bandwid
     this->net_card_name[i] = net_card_name[i];
     i++;
   }
+  this->net_card_name[i++] = '\0';
   this->remain_bandwidth_MBs = bandwidth_MBs;
   this->initTC();
 }

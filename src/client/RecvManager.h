@@ -3,11 +3,11 @@
 
 #include <arpa/inet.h>
 #include <lib/epollFunctions.h>
-#include <lib/threadclass.h>
+#include <lib/ThreadPool.h>
 #include <netinet/in.h>
 #include <cstdio>
 #include <strings.h>
-#include <lib/threadpool.h>
+#include <lib/ThreadPool.h>
 #include "receFile.h"
 
 #define MAX_EVENT_NUMBER 10000
@@ -16,7 +16,7 @@
 
 class RecvManager : public ThreadClass {
 public:
-  RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd);
+  RecvManager(ThreadPool *pool, int listen_sockfd);
 //  ~RecvManager(){}
   void run() override;
 private:
@@ -27,7 +27,7 @@ private:
   epoll_event events[MAX_EVENT_NUMBER];
 
   ReceFile receFiles[RECV_FILE_NUM];
-  ThreadPool<ThreadClass> *pool;
+  ThreadPool *pool;
   int listen_sockfd;
 };
 #endif // !LISTENER_H

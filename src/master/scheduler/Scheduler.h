@@ -8,7 +8,7 @@
 #include "../datastructures/coflow.h"
 #include "../datastructures/machine.h"
 #include "MachineManager.h"
-#include "lib/threadclass.h"
+#include "lib/ThreadPool.h"
 #include <queue>
 
 class Scheduler : public ThreadClass {

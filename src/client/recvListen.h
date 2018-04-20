@@ -6,13 +6,13 @@
 #define COFLOWSIM_RECVLISTEN_H
 
 #include "receFile.h"
-#include <lib/threadclass.h>
-#include <lib/threadpool.h>
+//#include <lib/threadclass.h>
+#include <lib/ThreadPool.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 class RecvListen : public ThreadClass {
 public:
-  RecvListen(int lSockfd, ThreadPool<ThreadClass> *pool) {
+  RecvListen(int lSockfd, ThreadPool *pool) {
     listenSockfd = lSockfd;
     receFiles = new ReceFile[65536];
     this->pool = pool;
@@ -34,6 +34,6 @@ public:
 private:
   int listenSockfd;
   ReceFile *receFiles;
-  ThreadPool<ThreadClass> *pool;
+  ThreadPool *pool;
 };
 #endif // COFLOWSIM_RECVLISTEN_H

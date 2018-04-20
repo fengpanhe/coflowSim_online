@@ -7,8 +7,8 @@
 
 #include <list>
 #include <lib/locker.h>
-#include <lib/threadclass.h>
-#include <lib/threadpool.h>
+//#include <lib/threadclass.h>
+#include <lib/ThreadPool.h>
 #include <socket/socketManage.h>
 #include "TrafficControlManager.h"
 using namespace std;
@@ -38,7 +38,7 @@ struct SendTask {
 class SendManager : public ThreadClass {
 public:
   SendManager(TrafficControlManager *tc_manager,
-              ThreadPool<ThreadClass> *pool,
+              ThreadPool *pool,
               SocketManage *masterSockManger,
               int task_number = 65536,
               int min_port = 1001,
@@ -63,7 +63,7 @@ private:
   int max_port;   // 最大端口号
 
   TrafficControlManager *tc_manager;
-  ThreadPool<ThreadClass> *pool;
+  ThreadPool *pool;
   SocketManage *masterSockManger;
 
 };

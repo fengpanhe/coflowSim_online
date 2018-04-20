@@ -6,7 +6,7 @@
 #define MASTER_SOCKETMANAGE_H
 
 #include "../lib/locker.h"
-#include "../lib/threadclass.h"
+#include "../lib/ThreadPool.h"
 #include <iostream>
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>

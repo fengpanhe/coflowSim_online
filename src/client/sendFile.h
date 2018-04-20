@@ -9,7 +9,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <lib/threadclass.h>
+#include <lib/ThreadPool.h>
 #include <socket/socketManage.h>
 #include <sstream>
 #include <strings.h>

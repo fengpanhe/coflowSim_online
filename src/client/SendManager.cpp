@@ -11,7 +11,7 @@
 #include "SendManager.h"
 
 SendManager::SendManager(TrafficControlManager *tc_manager,
-                         ThreadPool<ThreadClass> *pool,
+                         ThreadPool *pool,
                          SocketManage *masterSockManger,
                          int task_number,
                          int min_port,

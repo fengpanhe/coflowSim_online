@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <zconf.h>
-#include <lib/threadclass.h>
+#include <lib/ThreadPool.h>
 #include <netinet/in.h>
 using namespace std;
 

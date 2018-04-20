@@ -50,9 +50,9 @@ auto coflowSimClient_logger =
     spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
 int coflowSimClient() {
 
-  ThreadPool<ThreadClass> *sender_pool = nullptr;
-  ThreadPool<ThreadClass> *receiver_pool = nullptr;
-
+//  ThreadPool *sender_pool = nullptr;
+//  ThreadPool *receiver_pool = nullptr;
+  ThreadPool *pool = nullptr;
   int listenSockfd;
   struct sockaddr_in listenAddr {};
 
@@ -95,20 +95,25 @@ int coflowSimClient() {
   console->info("masterSockManger is ready!");
 
   // 创建线程池
-  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
+//  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
   try {
-    sender_pool = new ThreadPool<ThreadClass>(half_thread_number);
-    receiver_pool = new ThreadPool<ThreadClass>(half_thread_number);
+//    sender_pool = new ThreadPool(half_thread_number);
+//    receiver_pool = new ThreadPool(half_thread_number);
+    pool = new ThreadPool(thread_num);
   } catch (...) {
     return 1;
   }
 
+  printf("debug0\n");
   auto tc_manager = new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
-  auto *recv_manager = new RecvManager(receiver_pool, listenSockfd);
-  auto *send_manager = new SendManager(tc_manager, sender_pool, &masterSockManger);
-
-  receiver_pool->append(recv_manager);
-  sender_pool->append(send_manager);
+  printf("debug1\n");
+  auto *recv_manager = new RecvManager(pool, listenSockfd);
+  auto *send_manager = new SendManager(tc_manager, pool, &masterSockManger);
+  printf("debug2\n");
+  pool->append(recv_manager);
+  printf("debug3\n");
+  pool->append(send_manager);
+  printf("debug4\n");
 
   while (true) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);

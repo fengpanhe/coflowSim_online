@@ -3,7 +3,7 @@
   "master_server_port": 4003,
   "client_server_ip": "0.0.0.0",
   "client_server_port": 4003,
-  "thread_num": 8,
+  "thread_num": 0,
   "net_card_name": "eth0",
   "net_card_bandwidth_MBs": 100.0
 }

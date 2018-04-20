@@ -5,5 +5,5 @@
   "client_server_port": 4003,
   "thread_num": 0,
   "net_card_name": "eth0",
-  "net_card_bandwidth_MBs": 100.0
+  "net_card_bandwidth_MBs": 10.0
 }

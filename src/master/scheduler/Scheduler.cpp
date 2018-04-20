@@ -37,7 +37,7 @@ void Scheduler::run() {
         for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
              it++) {
           Flow *f = it->second;
-          f->setCurrentMbs(1);
+          f->setCurrentMbs(10);
           while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
                                      f->getMapperID(), f->getReducerID(),
                                      f->getFlowSizeMB(), f->getCurrentMbs()))

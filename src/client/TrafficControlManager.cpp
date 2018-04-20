@@ -26,7 +26,7 @@ TrafficControlManager::TrafficControlManager(char *net_card_name, double bandwid
 
 void TrafficControlManager::initTC() {
   char cmd[COMMAND_MAX_LEN];
-  sprintf(cmd, "tc qdisc add dev %s root handle %s htb default 1", this->net_card_name, root_class_id);
+  sprintf(cmd, "tc qdisc add dev %s root handle %s htb default 2", this->net_card_name, root_class_id);
   this->execShellCommmand(cmd);
   sprintf(cmd,
           "tc class replace dev %s parent 1: classid %s htb rate %gMbit",
@@ -35,7 +35,7 @@ void TrafficControlManager::initTC() {
           remain_bandwidth_MBs);
   this->execShellCommmand(cmd);
   // 默认的分类,设置为1Mbit带宽
-  this->addTcClass(1, 1);
+  this->addTcClass(2, 1);
 }
 
 bool TrafficControlManager::setIpPortBandwidth(int ip_port, double bandwidth) {
@@ -53,7 +53,7 @@ bool TrafficControlManager::execShellCommmand(char *command) {
   FILE *fstream = nullptr;
   char buff[1024];
   memset(buff, 0, sizeof(buff));
-//  printf("%s\n", command);
+
   if (nullptr==(fstream = popen(command, "r"))) {
     fprintf(stderr, "execute command failed: %s", strerror(errno));
     return false;
@@ -64,7 +64,9 @@ bool TrafficControlManager::execShellCommmand(char *command) {
     printf("%s", buff);
   }
   pclose(fstream);
-
+  if (flag){
+    printf("%s\n", command);
+  }
   return true;
 }
 

@@ -104,16 +104,11 @@ int coflowSimClient() {
     return 1;
   }
 
-  printf("debug0\n");
   auto tc_manager = new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
-  printf("debug1\n");
   auto *recv_manager = new RecvManager(pool, listenSockfd);
   auto *send_manager = new SendManager(tc_manager, pool, &masterSockManger);
-  printf("debug2\n");
   pool->append(recv_manager);
-  printf("debug3\n");
   pool->append(send_manager);
-  printf("debug4\n");
 
   while (true) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);

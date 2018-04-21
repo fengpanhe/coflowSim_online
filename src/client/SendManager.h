@@ -7,7 +7,6 @@
 
 #include <list>
 #include <lib/locker.h>
-//#include <lib/threadclass.h>
 #include <lib/ThreadPool.h>
 #include <socket/socketManage.h>
 #include "TrafficControlManager.h"

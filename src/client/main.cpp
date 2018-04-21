@@ -1,6 +1,5 @@
 #include "lib/epollFunctions.h"
 #include "receFile.h"
-#include "sendFile.h"
 #include "socket/socketManage.h"
 #include "spdlog/spdlog.h"
 #include <arpa/inet.h>
@@ -14,7 +13,6 @@
 
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
-#include "recvListen.h"
 #include "RecvManager.h"
 #include "SendManager.h"
 using namespace rapidjson;

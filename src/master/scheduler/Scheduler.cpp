@@ -19,7 +19,7 @@ void Scheduler::run() {
   bool flag = false;
   int coflowFinishedNum = 0;
 
-  while (true) {
+  while (!this->run_stop) {
     registerCoflow(clock() / TIME_CLOCK);
 
     for (int i = 0; i < registerIndex; ++i) {

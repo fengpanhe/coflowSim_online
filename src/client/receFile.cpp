@@ -2,8 +2,8 @@
 // Created by he on 4/17/18.
 //
 
-#include <lib/epollFunctions.h>
 #include "receFile.h"
+#include <lib/epollFunctions.h>
 int ReceFile::rf_epollfd = -1;
 void ReceFile::initSocket(int sockfd, const sockaddr_in &addr) {
   m_Sockfd = sockfd;
@@ -47,12 +47,13 @@ void ReceFile::run() {
   bzero(buffer, RECEFILE_BUFFER_SIZE);
   int bytes_read = 0;
   while (true) {
-    bytes_read = static_cast<int>(recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0));
+    bytes_read =
+        static_cast<int>(recv(m_Sockfd, buffer, RECEFILE_BUFFER_SIZE, 0));
     if (bytes_read < 0) {
       perror("ReceFile error: bytes_read < 0 \n");
       break;
     }
-    if(bytes_read == 0){
+    if (bytes_read == 0) {
       this->closeConn();
       break;
     }

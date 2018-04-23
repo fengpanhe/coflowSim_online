@@ -10,10 +10,10 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <sstream>
-#include <zconf.h>
 #include <lib/ThreadPool.h>
 #include <netinet/in.h>
+#include <sstream>
+#include <zconf.h>
 using namespace std;
 
 #define RECEFILE_BUFFER_SIZE 1024
@@ -25,8 +25,9 @@ public:
   void initSocket(int sockfd, const sockaddr_in &addr);
   void run() override;
   void closeConn(bool real_close = true);
+
 private:
   int m_Sockfd;
-//  sockaddr_in m_address;
+  //  sockaddr_in m_address;
 };
 #endif // COFLOWSIM_RECEFILE_H

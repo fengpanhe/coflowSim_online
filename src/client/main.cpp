@@ -11,10 +11,10 @@
 #include <sys/epoll.h>
 #include <zconf.h>
 
-#include "rapidjson/document.h"
-#include "rapidjson/filereadstream.h"
 #include "RecvManager.h"
 #include "SendManager.h"
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
 using namespace rapidjson;
 using namespace std;
 #define CONN_PORT 4002
@@ -48,8 +48,8 @@ auto coflowSimClient_logger =
     spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
 int coflowSimClient() {
 
-//  ThreadPool *sender_pool = nullptr;
-//  ThreadPool *receiver_pool = nullptr;
+  //  ThreadPool *sender_pool = nullptr;
+  //  ThreadPool *receiver_pool = nullptr;
   ThreadPool *pool = nullptr;
   int listenSockfd;
   struct sockaddr_in listenAddr {};
@@ -93,16 +93,17 @@ int coflowSimClient() {
   console->info("masterSockManger is ready!");
 
   // 创建线程池
-//  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
+  //  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
   try {
-//    sender_pool = new ThreadPool(half_thread_number);
-//    receiver_pool = new ThreadPool(half_thread_number);
+    //    sender_pool = new ThreadPool(half_thread_number);
+    //    receiver_pool = new ThreadPool(half_thread_number);
     pool = new ThreadPool(thread_num);
   } catch (...) {
     return 1;
   }
 
-  auto tc_manager = new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
+  auto tc_manager =
+      new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
   auto *recv_manager = new RecvManager(pool, listenSockfd);
   auto *send_manager = new SendManager(tc_manager, pool, &masterSockManger);
   pool->append(recv_manager);

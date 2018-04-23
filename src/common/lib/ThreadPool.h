@@ -5,12 +5,11 @@
 #ifndef COFLOWSIM_THREADPOOL_H
 #define COFLOWSIM_THREADPOOL_H
 #include "locker.h"
-#include "spdlog/spdlog.h"
 #include <cstdio>
 #include <exception>
 #include <list>
-#include <vector>
 #include <pthread.h>
+#include <vector>
 
 class ThreadClass;
 
@@ -26,9 +25,8 @@ private:
   bool increase_a_thread();
 
 private:
-  int max_thread_num_;    // 最大线程数量，若为零，则表示不限制线程的数量
+  int max_thread_num_; // 最大线程数量，若为零，则表示不限制线程的数量
   int max_task_num_;
-//  pthread_t *threads_;
   std::vector<pthread_t> threads_;
   int created_thread_num_;
   locker threads_locker_;
@@ -40,17 +38,13 @@ private:
   bool stop_;
 };
 
-
 class ThreadClass {
 public:
-  ThreadClass(){
-    run_stop = false;
-  }
-  void stop(){
-    run_stop = true;
-  }
+  ThreadClass() { run_stop = false; }
+  void stop() { run_stop = true; }
   virtual void run() = 0;
+
 protected:
   bool run_stop;
 };
-#endif //COFLOWSIM_THREADPOOL_H
+#endif // COFLOWSIM_THREADPOOL_H

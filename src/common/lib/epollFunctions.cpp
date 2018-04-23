@@ -19,7 +19,7 @@ void addfd(int epollfd, int fd, bool one_shot, bool non_block) {
     event.events |= EPOLLONESHOT;
   }
   epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
-  if (non_block){
+  if (non_block) {
     setnonblocking(fd);
   }
 }

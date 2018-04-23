@@ -5,8 +5,8 @@
 #ifndef MASTER_SOCKETMANAGE_H
 #define MASTER_SOCKETMANAGE_H
 
+#include "../lib/ThreadPool.h"
 #include "../lib/locker.h"
-#include "../lib/threadclass.h"
 #include <iostream>
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>
@@ -62,6 +62,5 @@ private:
 protected:
   int m_Sockfd;
 };
-
 
 #endif // MASTER_SOCKETMANAGE_H

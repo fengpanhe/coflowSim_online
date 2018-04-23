@@ -1,14 +1,13 @@
 #ifndef COFLOWSIM_LISTENER_H
 #define COFLOWSIM_LISTENER_H
 
-#include <arpa/inet.h>
-#include <lib/epollFunctions.h>
-#include <lib/threadclass.h>
-#include <netinet/in.h>
-#include <cstdio>
-#include <strings.h>
-#include <lib/threadpool.h>
 #include "receFile.h"
+#include <arpa/inet.h>
+#include <cstdio>
+#include <lib/ThreadPool.h>
+#include <lib/epollFunctions.h>
+#include <netinet/in.h>
+#include <strings.h>
 
 #define MAX_EVENT_NUMBER 10000
 #define BACKLOG 65535
@@ -16,18 +15,19 @@
 
 class RecvManager : public ThreadClass {
 public:
-  RecvManager(ThreadPool<ThreadClass> *pool, int listen_sockfd);
-//  ~RecvManager(){}
+  RecvManager(ThreadPool *pool, int listen_sockfd);
+  //  ~RecvManager(){}
   void run() override;
+
 private:
   bool closeListen(int sockfd);
-  int createListen(char * listen_ip, int port);
+  int createListen(char *listen_ip, int port);
 
   int epollfd;
   epoll_event events[MAX_EVENT_NUMBER];
 
   ReceFile receFiles[RECV_FILE_NUM];
-  ThreadPool<ThreadClass> *pool;
+  ThreadPool *pool;
   int listen_sockfd;
 };
 #endif // !LISTENER_H

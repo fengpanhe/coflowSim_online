@@ -6,10 +6,10 @@
 #ifndef COFLOWSIM_TRAFFICCONTROLMANAGER_H
 #define COFLOWSIM_TRAFFICCONTROLMANAGER_H
 
-#include <map>
-#include <list>
-#include <string.h>
 #include <lib/locker.h>
+#include <list>
+#include <map>
+#include <string.h>
 using namespace std;
 
 #define NET_CARD_NAME_MAX_LEN 1024
@@ -25,8 +25,8 @@ public:
 
   // 设置ip端口的带宽
   bool setIpPortBandwidth(int ip_port, double bandwidth);
-private:
 
+private:
   // 执行Linux shell命令
   bool execShellCommmand(char *command);
   // 初始化tc队列
@@ -39,7 +39,8 @@ private:
 
   // 添加一个tc过滤器，要限制参数ip的端口，流向的类id；优先级与ip端口同，便于管理
   bool addTcFilter(int ip_port, int flow_classid);
-  // 改变一个tc过滤器，要限制参数ip的端口，流向的类id； 优先级与ip端口同，便于管理
+  // 改变一个tc过滤器，要限制参数ip的端口，流向的类id；
+  // 优先级与ip端口同，便于管理
   bool changeTcFilter(int ip_port, int flow_classid);
   // 删除优先级为 ip_port 的所有的filter
   bool deleteTcFilter(int ip_port);
@@ -48,4 +49,4 @@ private:
   double remain_bandwidth_MBs;
 };
 
-#endif //COFLOWSIM_TRAFFICCONTROLMANAGER_H
+#endif // COFLOWSIM_TRAFFICCONTROLMANAGER_H

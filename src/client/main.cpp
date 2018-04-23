@@ -1,6 +1,5 @@
 #include "lib/epollFunctions.h"
 #include "receFile.h"
-#include "sendFile.h"
 #include "socket/socketManage.h"
 #include "spdlog/spdlog.h"
 #include <arpa/inet.h>
@@ -12,11 +11,10 @@
 #include <sys/epoll.h>
 #include <zconf.h>
 
-#include "rapidjson/document.h"
-#include "rapidjson/filereadstream.h"
-#include "recvListen.h"
 #include "RecvManager.h"
 #include "SendManager.h"
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
 using namespace rapidjson;
 using namespace std;
 #define CONN_PORT 4002
@@ -50,9 +48,9 @@ auto coflowSimClient_logger =
     spdlog::basic_logger_mt("coflowSimClient_logger", "coflowSimClient.log");
 int coflowSimClient() {
 
-  ThreadPool<ThreadClass> *sender_pool = nullptr;
-  ThreadPool<ThreadClass> *receiver_pool = nullptr;
-
+  //  ThreadPool *sender_pool = nullptr;
+  //  ThreadPool *receiver_pool = nullptr;
+  ThreadPool *pool = nullptr;
   int listenSockfd;
   struct sockaddr_in listenAddr {};
 
@@ -95,20 +93,21 @@ int coflowSimClient() {
   console->info("masterSockManger is ready!");
 
   // 创建线程池
-  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
+  //  int half_thread_number = thread_num > 4 ? thread_num / 2 : 2;
   try {
-    sender_pool = new ThreadPool<ThreadClass>(half_thread_number);
-    receiver_pool = new ThreadPool<ThreadClass>(half_thread_number);
+    //    sender_pool = new ThreadPool(half_thread_number);
+    //    receiver_pool = new ThreadPool(half_thread_number);
+    pool = new ThreadPool(thread_num);
   } catch (...) {
     return 1;
   }
 
-  auto tc_manager = new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
-  auto *recv_manager = new RecvManager(receiver_pool, listenSockfd);
-  auto *send_manager = new SendManager(tc_manager, sender_pool, &masterSockManger);
-
-  receiver_pool->append(recv_manager);
-  sender_pool->append(send_manager);
+  auto tc_manager =
+      new TrafficControlManager(net_card_name, net_card_bandwidth_MBs);
+  auto *recv_manager = new RecvManager(pool, listenSockfd);
+  auto *send_manager = new SendManager(tc_manager, pool, &masterSockManger);
+  pool->append(recv_manager);
+  pool->append(send_manager);
 
   while (true) {
     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);

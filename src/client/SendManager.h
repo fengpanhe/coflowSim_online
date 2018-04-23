@@ -5,12 +5,11 @@
 #ifndef COFLOWSIM_SENDMANAGER_H
 #define COFLOWSIM_SENDMANAGER_H
 
-#include <list>
-#include <lib/locker.h>
-#include <lib/threadclass.h>
-#include <lib/threadpool.h>
-#include <socket/socketManage.h>
 #include "TrafficControlManager.h"
+#include <lib/ThreadPool.h>
+#include <lib/locker.h>
+#include <list>
+#include <socket/socketManage.h>
 using namespace std;
 
 #define FILE_NAME_MAX_SIZE 32
@@ -37,41 +36,36 @@ struct SendTask {
 
 class SendManager : public ThreadClass {
 public:
-  SendManager(TrafficControlManager *tc_manager,
-              ThreadPool<ThreadClass> *pool,
-              SocketManage *masterSockManger,
-              int task_number = 65536,
-              int min_port = 1001,
-              int max_port = 65535);
+  SendManager(TrafficControlManager *tc_manager, ThreadPool *pool,
+              SocketManage *masterSockManger, int task_number = 65536,
+              int min_port = 1001, int max_port = 65535);
   bool appendTask(char *ins, int ins_len);
   void run() override;
 
 private:
+  int max_task_number; // 最大任务数量
 
-  int max_task_number;  // 最大任务数量
-
-  list<struct SendTask *> send_task_wait_queue;   // 发送任务等待队列
+  list<struct SendTask *> send_task_wait_queue; // 发送任务等待队列
   locker wait_queue_locker;
   sem wait_queue_sem;
 
   list<struct SendTask *> send_task_running_queue; // 发送任务正在进行队列
   locker running_queue_locker;
 
-  bool run_stop;  // 运行停止
+  bool run_stop; // 运行停止
 
-  int min_port;   // 最小端口号
-  int max_port;   // 最大端口号
+  int min_port; // 最小端口号
+  int max_port; // 最大端口号
 
   TrafficControlManager *tc_manager;
-  ThreadPool<ThreadClass> *pool;
+  ThreadPool *pool;
   SocketManage *masterSockManger;
-
 };
 
 #define SENDER_BUFFER_SIZE 1024
 class Sender : public ThreadClass {
 public:
-  Sender(struct SendTask * send_task, int sockfd) {
+  Sender(struct SendTask *send_task, int sockfd) {
     this->send_task = send_task;
     this->sockfd = sockfd;
   }
@@ -91,9 +85,10 @@ public:
     send_task->send_state = SEND_END;
     close(sockfd);
   }
+
 private:
-  struct SendTask * send_task;
+  struct SendTask *send_task;
   int sockfd;
 };
 
-#endif //COFLOWSIM_SENDMANAGER_H
+#endif // COFLOWSIM_SENDMANAGER_H

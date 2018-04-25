@@ -155,7 +155,6 @@ bool SocketManage::sendMessage() {
 
   if (temp == m_sendBufSize) {
     modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLIN);
-    //    printf("sendmsg: \"%s\" \n", m_sendBuf);
     socketManage_logger_file->info("sendmsg: \"{}\" ", m_sendBuf);
     initSendBuf();
     return true;
@@ -182,8 +181,6 @@ bool SocketManage::setSendMsg(char *msg, int msgSize) {
     m_sendBuf[m_sendBufSize++] = msg[i];
   }
   m_sendBuf[m_sendBufSize] = '\0';
-
-  //  m_sendBufSize = (msgSize/MSG_LEN + 1)*MSG_LEN;
 
   modfd(SocketManage::sEpollfd, m_Sockfd, EPOLLOUT);
   m_sendBufLocker.unlock();
@@ -212,25 +209,25 @@ bool SocketManage::getRecvBuf(char *&buf, int &buflen) {
   m_recvBufLocker.unlock();
   return false;
 }
+
 int SocketManage::getM_recvIdx() const { return m_recvIdx; }
 void SocketManage::setM_recvIdx(int m_recvIdx) {
   SocketManage::m_recvIdx = m_recvIdx;
 }
+
 bool SocketManage::recvMsg() {
   m_recvBufLocker.lock();
   if (!this->receiveMessage()) {
     cout << "error:recvMsg()" << endl;
   }
-  //  printf("recvmsg: \"%s\" \n", m_recvBuf);
   m_recvBufLocker.unlock();
   return true;
 }
+
 bool SocketManage::sendMsg() {
   m_sendBufLocker.lock();
   if (m_sendBufSize > 0) {
-    //    printf("%d send msg 1 %s \n", m_Sockfd, m_sendBuf);
     this->sendMessage();
-    //        printf("%d send msg 2\n", m_Sockfd);
     m_sendBufLocker.unlock();
     return true;
   }

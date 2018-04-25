@@ -29,8 +29,12 @@ public:
 
   bool setCoflows(vector<Coflow *> *coflows);
 
-  // 模拟coflow的注册过程
+  // coflow的注册
   void registerCoflow(long currentTime);
+  // 判断那些coflow可以运行
+  void admitCoflow();
+  // 将可以运行的coflow生成任务
+  void generateTask();
 
 private:
   vector<Coflow *> *sCoflows;

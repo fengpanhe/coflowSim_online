@@ -20,32 +20,9 @@ void Scheduler::run() {
   int coflowFinishedNum = 0;
 
   while (!this->run_stop) {
-    registerCoflow(clock() / TIME_CLOCK);
-
-    for (int i = 0; i < registerIndex; ++i) {
-      // TODO 选出可以发送的coflow，改状态为RUNNING
-      Coflow * co = sCoflows->at(i);
-      if (co->getCoflowState() == REGISTED){
-        co->setCoflowState(RUNNING);
-      }
-
-    }
-
-    for (int i = 0; i < registerIndex; ++i) {
-      Coflow *co = sCoflows->at(i);
-      if (co->getCoflowState() == RUNNING) {
-        for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
-             it++) {
-          Flow *f = it->second;
-          f->setCurrentMbs(10);
-          while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
-                                     f->getMapperID(), f->getReducerID(),
-                                     f->getFlowSizeMB(), f->getCurrentMbs()))
-            ;
-        }
-        co->setCoflowState(RUNNINGED);
-      }
-    }
+    this->registerCoflow(clock() / TIME_CLOCK);
+    this->admitCoflow();
+    this->generateTask();
 
     for (auto &it : machines->m_physicsMachines) {
       if (!it->recvMsg()) {
@@ -90,6 +67,7 @@ bool Scheduler::setCoflows(vector<Coflow *> *coflows) {
   sCoflows = coflows;
   return true;
 }
+
 void Scheduler::registerCoflow(long currentTime) {
   static auto registerCoflow_console =
       spdlog::stdout_color_mt("registerCoflow");
@@ -107,6 +85,38 @@ void Scheduler::registerCoflow(long currentTime) {
       registerIndex++;
     } else {
       break;
+    }
+  }
+}
+
+void Scheduler::admitCoflow() {
+  for (int i = 0; i < registerIndex; ++i) {
+    // TODO 选出可以发送的coflow，改状态为RUNNING
+    Coflow *co = sCoflows->at(i);
+    if (co->getCoflowState() == REGISTED) {
+      co->setCoflowState(RUNNING);
+      for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
+           it++) {
+        Flow *f = it->second;
+        f->setCurrentMbs(10);
+      }
+    }
+  }
+}
+
+void Scheduler::generateTask() {
+  for (int i = 0; i < registerIndex; ++i) {
+    Coflow *co = sCoflows->at(i);
+    if (co->getCoflowState() == RUNNING) {
+      for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
+           it++) {
+        Flow *f = it->second;
+        while (!machines->sendTask(co->getCoflowID(), f->getFlowID(),
+                                   f->getMapperID(), f->getReducerID(),
+                                   f->getFlowSizeMB(), f->getCurrentMbs()))
+          ;
+      }
+      co->setCoflowState(RUNNINGED);
     }
   }
 }

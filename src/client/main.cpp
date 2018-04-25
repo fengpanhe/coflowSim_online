@@ -1,7 +1,4 @@
-#include "lib/epollFunctions.h"
-#include "receFile.h"
-#include "socket/socketManage.h"
-#include "spdlog/spdlog.h"
+
 #include <arpa/inet.h>
 #include <assert.h>
 #include <cstring>
@@ -13,8 +10,12 @@
 
 #include "RecvManager.h"
 #include "SendManager.h"
+#include "lib/epollFunctions.h"
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
+#include "receFile.h"
+#include "socket/socketManage.h"
+#include "spdlog/spdlog.h"
 using namespace rapidjson;
 using namespace std;
 #define CONN_PORT 4002

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(CoflowSim)
+project(CoflowSim_online)
 
 set(CMAKE_CXX_STANDARD 11)
 

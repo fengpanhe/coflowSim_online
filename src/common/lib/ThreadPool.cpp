@@ -86,11 +86,13 @@ bool ThreadPool::increase_a_thread() {
   if (pthread_create(&thread, nullptr, worker, this) != 0) {
     throw std::exception();
   }
-  if (pthread_detach(thread)) {
-    throw std::exception();
-  }
   threads_locker_.lock();
   threads_.push_back(thread);
   created_thread_num_++;
+  printf("The current number of threads is %d.\n", created_thread_num_);
   threads_locker_.unlock();
+  if (pthread_detach(thread)) {
+    throw std::exception();
+  }
+  return true;
 }

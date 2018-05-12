@@ -12,22 +12,6 @@ ThreadPool::ThreadPool(int max_thread_num, int max_task_num) {
   if ((this->max_thread_num_ < 0) || (this->max_task_num_ <= 0)) {
     throw std::exception();
   }
-
-  //  threads_ = new pthread_t[this->max_thread_num_];
-  //  if (!threads_) {
-  //    throw std::exception();
-  //  }
-  //
-  //  for (int i = 0; i < this->max_thread_num_; ++i) {
-  //    if (pthread_create(threads_ + i, nullptr, worker, this) != 0) {
-  //      delete[] threads_;
-  //      throw std::exception();
-  //    }
-  //    if (pthread_detach(threads_[i])) {
-  //      delete[] threads_;
-  //      throw std::exception();
-  //    }
-  //  }
 }
 
 ThreadPool::~ThreadPool() { stop_ = true; }
@@ -63,9 +47,7 @@ void *ThreadPool::worker(void *arg) {
 
 void ThreadPool::run() {
   while (!stop_) {
-    free_thread_stat_.post();
     task_queue_stat_.wait();
-
     task_queue_locker_.lock();
     if (task_queue_.empty()) {
       task_queue_locker_.unlock();
@@ -78,6 +60,7 @@ void ThreadPool::run() {
       continue;
     }
     task->run();
+    free_thread_stat_.post();
   }
 }
 
@@ -91,8 +74,9 @@ bool ThreadPool::increase_a_thread() {
   created_thread_num_++;
   printf("The current number of threads is %d.\n", created_thread_num_);
   threads_locker_.unlock();
+  free_thread_stat_.post();
   if (pthread_detach(thread)) {
     throw std::exception();
   }
-  return true;
+  //  return true;
 }

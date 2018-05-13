@@ -15,9 +15,11 @@
 #include "socket/socketManage.h"
 #include "traceProducer/CoflowBenchmarkTraceProducer.h"
 
+#include "handler/IndexHandler.h"
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 #include "spdlog/spdlog.h"
+#include "webserver/WebServer.h"
 using namespace rapidjson;
 
 #define BACKLOG 65535
@@ -233,38 +235,43 @@ int coflowSimMaster() {
   }
   pool->append(scheduler1);
 
-  while (true) {
+  WebServer web_server("../html", 8);
+  web_server.addHandler("/index", new IndexRequestHandler());
+  web_server.setListen("127.0.0.1", 3000);
+  web_server.start();
 
-    int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
-    if ((number < 0) && (errno != EINTR)) {
-      console->error("epoll failure\n");
-      break;
-    }
-    for (int i = 0; i < number; i++) {
-      int sockfd = events[i].data.fd;
-      if (sockfd == listenSockfd) {
-        struct sockaddr_in client_address {};
-        socklen_t client_addrlength = sizeof(client_address);
-        int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
-                            &client_addrlength);
-        if (connfd < 0) {
-          console->error("errno is: {}\n", errno);
-          continue;
-        }
-        console->info("accept connfd: {}", connfd);
-        //        machineManager1->addOnePhysicsMachine(connfd, connfd,
-        //        client_address);
-      } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
-        //        machineManager1->removeOnePhysicsMachine(sockfd);
-      } else if (events[i].events & EPOLLIN) {
-        // machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
-        // pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
-      } else if (events[i].events & EPOLLOUT) {
-        // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
-      } else {
-      }
-    }
-  }
+  // while (true) {
+
+  //   int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
+  //   if ((number < 0) && (errno != EINTR)) {
+  //     console->error("epoll failure\n");
+  //     break;
+  //   }
+  //   for (int i = 0; i < number; i++) {
+  //     int sockfd = events[i].data.fd;
+  //     if (sockfd == listenSockfd) {
+  //       struct sockaddr_in client_address {};
+  //       socklen_t client_addrlength = sizeof(client_address);
+  //       int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
+  //                           &client_addrlength);
+  //       if (connfd < 0) {
+  //         console->error("errno is: {}\n", errno);
+  //         continue;
+  //       }
+  //       console->info("accept connfd: {}", connfd);
+  //       //        machineManager1->addOnePhysicsMachine(connfd, connfd,
+  //       //        client_address);
+  //     } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+  //       //        machineManager1->removeOnePhysicsMachine(sockfd);
+  //     } else if (events[i].events & EPOLLIN) {
+  //       // machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
+  //       // pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
+  //     } else if (events[i].events & EPOLLOUT) {
+  //       // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
+  //     } else {
+  //     }
+  //   }
+  // }
 }
 
 int main(int argc, char const *argv[]) {

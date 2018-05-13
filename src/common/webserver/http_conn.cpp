@@ -116,6 +116,7 @@ bool http_conn::read() {
 }
 
 http_conn::HTTP_CODE http_conn::parse_request_line(char *text) {
+
   url_ = strpbrk(text, " \t");
   if (!url_) {
     return BAD_REQUEST;
@@ -182,7 +183,7 @@ http_conn::HTTP_CODE http_conn::parse_headers(char *text) {
     text += strspn(text, " \t");
     host_ = text;
   } else {
-    printf("oop! unknow header %s\n", text);
+    // printf("oop! unknow header %s\n", text);
   }
 
   return NO_REQUEST;
@@ -206,10 +207,11 @@ http_conn::HTTP_CODE http_conn::process_read() {
          ((line_status = parse_line()) == LINE_OK)) {
     text = get_line();
     start_line_ = checked_idx_;
-    printf("got 1 http line: %s\n", text);
+    // printf("got 1 http line: %s\n", text);
 
     switch (check_state_) {
     case CHECK_STATE_REQUESTLINE: {
+      printf("sockfd: %d -- request_line: %s\n", this->sockfd_, text);
       ret = parse_request_line(text);
       if (ret == BAD_REQUEST) {
         return BAD_REQUEST;
@@ -229,7 +231,8 @@ http_conn::HTTP_CODE http_conn::process_read() {
     case CHECK_STATE_CONTENT: {
       ret = parse_content(text);
       if (ret == YES_REQUEST) {
-        printf("parse_content\n");
+        printf("sockfd: %d -- body_content: %s\n", this->sockfd_,
+               this->content_);
         return do_request();
       }
       line_status = LINE_OPEN;

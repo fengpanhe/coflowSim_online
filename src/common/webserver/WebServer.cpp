@@ -78,7 +78,7 @@ void WebServer::start() {
     for (int i = 0; i < number; i++) {
       int sockfd = this->events_[i].data.fd;
       if (sockfd == this->listenfd_) {
-        printf("listenfd");
+        printf("listenfd\n");
         struct sockaddr_in client_address {};
         socklen_t client_addrlength = sizeof(client_address);
         int connfd = accept(this->listenfd_, (struct sockaddr *)&client_address,
@@ -91,14 +91,14 @@ void WebServer::start() {
           show_error(connfd, "Internal server busy");
           continue;
         }
-        printf("sockfd:%d", connfd);
+        printf("sockfd:%d\n", connfd);
         this->users_[connfd].init(connfd, client_address);
       } else if (this->events_[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
         this->users_[sockfd].close_conn();
       } else if (this->events_[i].events & EPOLLIN) {
         if (this->users_[sockfd].read()) {
           this->pool_->append(this->users_ + sockfd);
-          printf("task_num: %d\n", ++task_num);
+          // printf("task_num: %d\n", ++task_num);
         } else {
           this->users_[sockfd].close_conn();
         }

@@ -10,6 +10,7 @@
 #include "MachineManager.h"
 #include "lib/ThreadPool.h"
 #include <queue>
+#include <rapidjson/document.h>
 
 class Scheduler : public ThreadClass {
 public:
@@ -28,13 +29,14 @@ public:
   bool onCoflowUnregister(Coflow *c);
 
   bool setCoflows(vector<Coflow *> *coflows);
+  void setMachines(MachineManager *machines);
 
   // coflow的注册
   void registerCoflow(long currentTime);
   // 判断那些coflow可以运行
   void admitCoflow();
   // 将可以运行的coflow生成任务
-  void generateTask();
+  void generateTask(long currentTime);
 
 private:
   vector<Coflow *> *sCoflows;
@@ -51,9 +53,6 @@ private:
   long startTime;
 
   char *recvbuf;
-
-public:
-  void setMachines(MachineManager *machines);
 };
 
 #endif // MASTER_SCHEDULER_H

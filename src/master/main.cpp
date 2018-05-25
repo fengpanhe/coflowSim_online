@@ -15,11 +15,14 @@
 #include "socket/socketManage.h"
 #include "traceProducer/CoflowBenchmarkTraceProducer.h"
 
+#include "handler/CoflowJsonHandler.h"
 #include "handler/IndexHandler.h"
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
+#include "rapidjson/stringbuffer.h"
 #include "spdlog/spdlog.h"
 #include "webserver/WebServer.h"
+#include <rapidjson/writer.h>
 using namespace rapidjson;
 
 #define BACKLOG 65535
@@ -219,6 +222,36 @@ int coflowSimMaster() {
   console->info("coflow_num: {}", coflow_num);
   console->info("flow_num: {}", flow_num);
 
+  //  rapidjson::Document *coflows_json = new Document();
+  //  coflows_json->SetObject();
+  //  rapidjson::Document::AllocatorType& allocator =
+  //  coflows_json->GetAllocator();
+  //
+  //  coflows_json->AddMember("id", rapidjson::Value(12), allocator);
+  //  coflows_json->AddMember("name", rapidjson::Value("asd"), allocator);
+  //
+  //  coflows_json->AddMember("ar", Value(kArrayType), allocator);
+  //  for(int i = 0; i < 5; i++){
+  //    Value tmp_ob(kObjectType);
+  //    tmp_ob.AddMember("id", rapidjson::Value(i), allocator);
+  //    tmp_ob.AddMember("name", rapidjson::Value("asd"), allocator);
+  //    coflows_json->operator[]("ar").PushBack(tmp_ob, allocator);
+  //  }
+  //  coflows_json->operator[]("ar").operator[](0).operator[]("id") = 7;
+  //  StringBuffer buffer;
+  //  Writer<StringBuffer> writer(buffer);
+  //  coflows_json->Accept(writer);
+  //  const string str = buffer.GetString();
+  //  cout <<  str << endl;
+
+  //  stringstream ssc;
+  //  ssc << "{\"coflow\":[";
+  //  ssc << coflows->at(0)->getCoflowJson();
+  //  ssc << "]}";
+  //  char strjson[1024];
+  //  ssc >> strjson;
+  //  cout << strjson <<endl;
+
   // machineManager处理
   machineManager1->setLogicMachineNum(150);
   parseMachineDefine(machine_define_path, machineManager1);
@@ -235,43 +268,45 @@ int coflowSimMaster() {
   }
   pool->append(scheduler1);
 
-  WebServer web_server("../html", 8);
+  WebServer web_server("../web", 0);
   web_server.addHandler("/index", new IndexRequestHandler());
+  web_server.addHandler("/coflowjson", new CoflowJsonHandler(coflows));
   web_server.setListen("127.0.0.1", 3000);
   web_server.start();
 
-  // while (true) {
-
-  //   int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
-  //   if ((number < 0) && (errno != EINTR)) {
-  //     console->error("epoll failure\n");
-  //     break;
-  //   }
-  //   for (int i = 0; i < number; i++) {
-  //     int sockfd = events[i].data.fd;
-  //     if (sockfd == listenSockfd) {
-  //       struct sockaddr_in client_address {};
-  //       socklen_t client_addrlength = sizeof(client_address);
-  //       int connfd = accept(listenSockfd, (struct sockaddr *)&client_address,
-  //                           &client_addrlength);
-  //       if (connfd < 0) {
-  //         console->error("errno is: {}\n", errno);
-  //         continue;
+  //   while (true) {
+  //
+  //     int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
+  //     if ((number < 0) && (errno != EINTR)) {
+  //       console->error("epoll failure\n");
+  //       break;
+  //     }
+  //     for (int i = 0; i < number; i++) {
+  //       int sockfd = events[i].data.fd;
+  //       if (sockfd == listenSockfd) {
+  //         struct sockaddr_in client_address {};
+  //         socklen_t client_addrlength = sizeof(client_address);
+  //         int connfd = accept(listenSockfd, (struct sockaddr
+  //         *)&client_address,
+  //                             &client_addrlength);
+  //         if (connfd < 0) {
+  //           console->error("errno is: {}\n", errno);
+  //           continue;
+  //         }
+  //         console->info("accept connfd: {}", connfd);
+  //         //        machineManager1->addOnePhysicsMachine(connfd, connfd,
+  //         //        client_address);
+  //       } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+  //         //        machineManager1->removeOnePhysicsMachine(sockfd);
+  //       } else if (events[i].events & EPOLLIN) {
+  //         // machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
+  //         // pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
+  //       } else if (events[i].events & EPOLLOUT) {
+  //         // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
+  //       } else {
   //       }
-  //       console->info("accept connfd: {}", connfd);
-  //       //        machineManager1->addOnePhysicsMachine(connfd, connfd,
-  //       //        client_address);
-  //     } else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
-  //       //        machineManager1->removeOnePhysicsMachine(sockfd);
-  //     } else if (events[i].events & EPOLLIN) {
-  //       // machineManager1->getPhyMachineByMachineID(sockfd)->recvMsg();
-  //       // pool->append(machineManager1->getPhyMachineByMachineID(sockfd));
-  //     } else if (events[i].events & EPOLLOUT) {
-  //       // machineManager1->getPhyMachineByMachineID(sockfd)->sendMsg();
-  //     } else {
   //     }
   //   }
-  // }
 }
 
 int main(int argc, char const *argv[]) {

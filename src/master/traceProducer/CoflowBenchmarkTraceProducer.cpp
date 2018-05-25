@@ -107,5 +107,9 @@ Coflow *CoflowBenchmarkTraceProducer::prepareOneCoflow(char *line) {
       coflow->addFlow(flowID++, mapperIDs[i], it.first, it.second / mapperNum);
     }
   }
+  coflow->calcCoflowLength();
+  coflow->calcCoflowWidth();
+  coflow->calcCoflowSize();
+  coflow->calcCoflowSkew();
   return coflow;
 }

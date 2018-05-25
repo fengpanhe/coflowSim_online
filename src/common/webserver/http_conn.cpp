@@ -300,11 +300,11 @@ void http_conn::unmap() {
     munmap(file_address_, static_cast<size_t>(file_stat_.st_size));
     file_address_ = nullptr;
   }
-  if (this->response_content_address_) {
-    delete response_content_address_;
-    response_content_address_ = nullptr;
-    response_content_length_ = 0;
-  }
+  // if (this->response_content_address_) {
+  //   delete response_content_address_;
+  //   response_content_address_ = nullptr;
+  //   response_content_length_ = 0;
+  // }
 }
 
 bool http_conn::write() {
@@ -511,10 +511,10 @@ const char *http_conn::getContent(int &content_len_) {
   content_len_ = this->content_length_;
   return this->content_;
 }
-bool http_conn::setResponseContent(const char *content) {
+bool http_conn::setResponseContent(char *content) {
   response_content_length_ = static_cast<int>(strlen(content));
-  response_content_address_ = new char[response_content_length_];
-  strcpy(this->response_content_address_, content);
+  response_content_address_ = content;
+  // strcpy(this->response_content_address_, content);
   return true;
 }
 bool http_conn::setDocRootPath(const char *root_path) {

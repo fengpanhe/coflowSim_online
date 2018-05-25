@@ -22,7 +22,7 @@ void Scheduler::run() {
   while (!this->run_stop) {
     this->registerCoflow(clock() / TIME_CLOCK);
     this->admitCoflow();
-    this->generateTask();
+    this->generateTask(clock() / TIME_CLOCK);
 
     for (auto &it : machines->m_physicsMachines) {
       if (!it->recvMsg()) {
@@ -37,7 +37,7 @@ void Scheduler::run() {
               long ctime = clock() / TIME_CLOCK;
               cout << "coflow " << coflowID << " end, time "
                    << ctime - startTime << endl;
-              outfile << coflowID << " " << sCoflows->at(i)->getStartTime()
+              outfile << coflowID << " " << sCoflows->at(i)->getRegisterTime()
                       << " " << ctime - startTime << endl;
               coflowFinishedNum++;
               if (coflowFinishedNum >= sCoflows->size()) {
@@ -78,10 +78,11 @@ void Scheduler::registerCoflow(long currentTime) {
   while (true) {
     if (registerIndex >= CoflowNum)
       return;
-    if (sCoflows->at(registerIndex)->getStartTime() <= t) {
-      sCoflows->at(registerIndex)->setCoflowState(REGISTED);
-      cout << t << ", coflow " << sCoflows->at(registerIndex)->getCoflowID()
-           << " is registered!" << endl;
+    Coflow *co = sCoflows->at(static_cast<unsigned long>(registerIndex));
+    if (co->getRegisterTime() <= t) {
+      co->setCoflowState(REGISTED);
+      cout << t << ", coflow " << co->getCoflowID() << " is registered!"
+           << endl;
       registerIndex++;
     } else {
       break;
@@ -104,10 +105,11 @@ void Scheduler::admitCoflow() {
   }
 }
 
-void Scheduler::generateTask() {
+void Scheduler::generateTask(long currentTime) {
   for (int i = 0; i < registerIndex; ++i) {
     Coflow *co = sCoflows->at(i);
     if (co->getCoflowState() == RUNNING) {
+      co->setCoflowState(RUNNINGED);
       for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
            it++) {
         Flow *f = it->second;
@@ -116,7 +118,7 @@ void Scheduler::generateTask() {
                                    f->getFlowSizeMB(), f->getCurrentMbs()))
           ;
       }
-      co->setCoflowState(RUNNINGED);
+      co->setStartTime(currentTime);
     }
   }
 }

@@ -85,7 +85,7 @@ public:
   // 得到请求消息的响应主体
   const char *getContent(int &content_len_);
   // 填充响应消息的主体
-  bool setResponseContent(const char *content);
+  bool setResponseContent(char *content);
 
   // 添加对匹配的url的处理对象
   static bool addHandler(const char *match_url,

@@ -24,10 +24,12 @@ void Scheduler::run() {
     this->admitCoflow();
     this->generateTask(clock() / TIME_CLOCK);
 
+
     for (auto &it : machines->m_physicsMachines) {
       if (!it->recvMsg()) {
         continue;
       }
+
       it->parseFlowsFinishedInfo();
       int coflowID, flowID, endtime;
       while (it->getOneFlowEndInfo(coflowID, flowID, endtime)) {
@@ -53,8 +55,6 @@ void Scheduler::run() {
         }
       }
     }
-    if (flag)
-      break;
   }
   outfile.close();
 }
@@ -73,7 +73,7 @@ void Scheduler::registerCoflow(long currentTime) {
       spdlog::stdout_color_mt("registerCoflow");
 
   long t = currentTime - startTime;
-  int CoflowNum = sCoflows->size();
+  int CoflowNum = static_cast<int>(sCoflows->size());
 
   while (true) {
     if (registerIndex >= CoflowNum)
@@ -81,8 +81,7 @@ void Scheduler::registerCoflow(long currentTime) {
     Coflow *co = sCoflows->at(static_cast<unsigned long>(registerIndex));
     if (co->getRegisterTime() <= t) {
       co->setCoflowState(REGISTED);
-      cout << t << ", coflow " << co->getCoflowID() << " is registered!"
-           << endl;
+      printf("%ld,coflow %d is registered!\n", t, co->getCoflowID());
       registerIndex++;
     } else {
       break;
@@ -90,19 +89,42 @@ void Scheduler::registerCoflow(long currentTime) {
   }
 }
 
+
+
 void Scheduler::admitCoflow() {
+  Coflow * min_cct_co = nullptr;
+  double min_cct = -1;
+
+  Coflow *co;
+  double cct;
   for (int i = 0; i < registerIndex; ++i) {
-    // TODO 选出可以发送的coflow，改状态为RUNNING
-    Coflow *co = sCoflows->at(i);
+    // 选出可以预测时间最短的coflow
+    co = sCoflows->at(i);
     if (co->getCoflowState() == REGISTED) {
-      co->setCoflowState(RUNNING);
-      for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
-           it++) {
-        Flow *f = it->second;
-        f->setCurrentMbs(10);
+      cct = this->predictCCT(co);
+      if(cct != -1) {
+        if(min_cct == -1) min_cct = cct;
+        if (cct <= min_cct) {
+          min_cct = cct;
+          min_cct_co = co;
+        }
       }
     }
   }
+//  printf("\n");
+
+  if(min_cct_co == nullptr || min_cct == LONG_MAX){
+    return;
+  }
+  Flow *f;
+  for (FLOWS_MAP_TYPE_IT it = min_cct_co->flowsBegin(); it != min_cct_co->flowsEnd();
+       it++) {
+    f = it->second;
+    f->setCurrentMbs(f->getFlowSizeMB() / min_cct);
+//    f->setCurrentMbs(100);
+  }
+  min_cct_co->setCoflowState(RUNNING);
+
 }
 
 void Scheduler::generateTask(long currentTime) {
@@ -117,8 +139,45 @@ void Scheduler::generateTask(long currentTime) {
                                    f->getMapperID(), f->getReducerID(),
                                    f->getFlowSizeMB(), f->getCurrentMbs()))
           ;
+        printf("%d %d %lf %lf\n", co->getCoflowID(), f->getFlowID(), f->getFlowSizeMB(), f->getCurrentMbs());
       }
       co->setStartTime(currentTime);
+      printf("coflow %d is RUNNING!\n", co->getCoflowID());
     }
   }
+}
+
+double Scheduler::predictCCT(Coflow *co) {
+  unordered_map<int, double> mapper_and_flows_size;
+  unordered_map<int, double>::iterator mf_it;
+  Flow *f;
+  int machine_id;
+  for (FLOWS_MAP_TYPE_IT it = co->flowsBegin(); it != co->flowsEnd();
+       it++) {
+    f = it->second;
+    machine_id = machines->m_logicMap[f->getMapperID()]->getMachineID();
+    mf_it = mapper_and_flows_size.find(machine_id);
+    if (mf_it == mapper_and_flows_size.end()) {
+      mapper_and_flows_size[machine_id] = f->getFlowSizeMB();
+    } else{
+      mapper_and_flows_size[machine_id] += f->getFlowSizeMB();
+    }
+  }
+  double max_cct = -1;
+  double cct;
+  for(auto &it : machines->m_physicsMachines){
+    mf_it = mapper_and_flows_size.find(it->getMachineID());
+    if (mf_it != mapper_and_flows_size.end()){
+      if(it->getRemainBandwidth() <= 0){
+        cct = -1;
+        return cct;
+      } else{
+        cct = mf_it->second / it->getRemainBandwidth();
+        if(cct > max_cct){
+          max_cct = cct;
+        }
+      }
+    }
+  }
+  return max_cct;
 }

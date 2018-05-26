@@ -30,7 +30,7 @@ void TrafficControlManager::initTC() {
   sprintf(cmd, "tc qdisc add dev %s root handle %s htb default 2",
           this->net_card_name, root_class_id);
   this->execShellCommmand(cmd);
-  sprintf(cmd, "tc class replace dev %s parent 1: classid %s htb rate %gMbit",
+  sprintf(cmd, "tc class replace dev %s parent 1: classid %s htb rate %lfMbit",
           net_card_name, root_class_id, remain_bandwidth_MBs);
   this->execShellCommmand(cmd);
   // 默认的分类,设置为1Mbit带宽
@@ -51,6 +51,7 @@ bool TrafficControlManager::setIpPortBandwidth(int ip_port, double bandwidth) {
 }
 
 bool TrafficControlManager::execShellCommmand(char *command) {
+//  printf("%s\n", command);
   FILE *fstream = nullptr;
   char buff[1024];
   memset(buff, 0, sizeof(buff));
@@ -73,13 +74,13 @@ bool TrafficControlManager::execShellCommmand(char *command) {
 
 bool TrafficControlManager::addTcClass(int class_id, double bandwidth) {
   char cmd[COMMAND_MAX_LEN];
-  sprintf(cmd, "tc class replace dev %s parent %s classid 1:%x htb rate %gMbit",
+  sprintf(cmd, "tc class replace dev %s parent %s classid 1:%x htb rate %lfMbit",
           net_card_name, root_class_id, class_id, bandwidth);
   return this->execShellCommmand(cmd);
 }
 bool TrafficControlManager::changeTcClass(int class_id, double bandwidth) {
   char cmd[COMMAND_MAX_LEN];
-  sprintf(cmd, "tc class replace dev %s parent %s classid 1:%x htb rate %gMbit",
+  sprintf(cmd, "tc class replace dev %s parent %s classid 1:%x htb rate %lfMbit",
           net_card_name, root_class_id, class_id, bandwidth);
   return this->execShellCommmand(cmd);
 }

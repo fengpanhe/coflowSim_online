@@ -42,6 +42,7 @@ private:
   vector<Coflow *> *sCoflows;
   int registerIndex;
 
+  double predictCCT(Coflow * co);
   // vector<Coflow *> *registedCoflows;
   // vector<Coflow *> *mRunningCoflows;
   // vector<Coflow *> *mFinishedCoflows;

@@ -45,17 +45,17 @@ bool Coflow::flowEnd(int flowID, int endtime) {
 
   it->second->setFlowState(FLOWEND);
   it->second->setEndTime(endtime);
-  endflowNum++;
+  end_flow_num_++;
   this->sended_size_ += it->second->getFlowSizeMB();
   //   for (auto &it : flowCollection) {
   //     if (it->getFlowID() == flowID) {
   //       it->setFlowState(FLOWEND);
   //       it->setEndTime(endtime);
-  //       endflowNum++;
+  //       end_flow_num_++;
   //       break;
   //     }
   //   }
-  if (endflowNum >= flowCollection.size()) {
+  if (end_flow_num_ >= flowCollection.size()) {
     this->end_time_ = endtime;
     return true;
   }
@@ -128,10 +128,10 @@ string Coflow::getCoflowJson() {
   string str = buffer.GetString();
   return str;
 }
-double Coflow::getStartTime() const { return start_time_; }
-void Coflow::setStartTime(double start_time) { this->start_time_ = start_time; }
-double Coflow::getEndTime() const { return end_time_; }
-void Coflow::setEndTime(double end_time_) { Coflow::end_time_ = end_time_; }
-int Coflow::getEndflowNum() const { return endflowNum; }
-void Coflow::setEndflowNum(int endflowNum) { Coflow::endflowNum = endflowNum; }
+long Coflow::getStartTime() const { return start_time_; }
+void Coflow::setStartTime(long start_time) { this->start_time_ = start_time; }
+long Coflow::getEndTime() const { return end_time_; }
+void Coflow::setEndTime(long end_time_) { Coflow::end_time_ = end_time_; }
+int Coflow::getEndflowNum() const { return end_flow_num_; }
+void Coflow::setEndflowNum(int endflowNum) { Coflow::end_flow_num_ = endflowNum; }
 double Coflow::getSendedSize() const { return sended_size_; }

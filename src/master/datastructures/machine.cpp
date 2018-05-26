@@ -40,9 +40,9 @@ bool Machine::createConnect() {
   SocketManage::createConnect(this->socketip, this->socketport);
 }
 
-int Machine::getRemainBandwidth() const { return remainBandwidth; }
+double Machine::getRemainBandwidth() const { return remainBandwidth; }
 
-void Machine::setRemainBandwidth(int remainBandwidth) {
+void Machine::setRemainBandwidth(double remainBandwidth) {
   Machine::remainBandwidth = remainBandwidth;
 }
 
@@ -95,9 +95,11 @@ bool Machine::parseFlowsFinishedInfo() {
       FlowEndInfo *flowEndInfo = new FlowEndInfo();
       ss >> flowEndInfo->coflowID;
       ss >> flowEndInfo->flowID;
+      ss >> flowEndInfo->speed_Mbs;
       ss >> flowEndInfo->endTime;
       ss.clear();
       flowsFinishedInfo.push(flowEndInfo);
+      this->remainBandwidth += flowEndInfo->speed_Mbs;
     }
   }
   if (flowEndIndex < flowStartIndex) {
@@ -112,5 +114,13 @@ bool Machine::parseFlowsFinishedInfo() {
     tmprecv[0] = '\0';
     tmprecvIndex = 0;
   }
+  return true;
+}
+bool Machine::sendTaskIns(int coflowID, int flowID, char * reducer_ip, int reducer_port, double flowSizeMB, double sendSpeedMbs) {
+  char ch[100];
+  sprintf(ch, "(%d %d %s %d %d_%d.txt %lf %lf)", coflowID, flowID, reducer_ip, reducer_port, coflowID, flowID, flowSizeMB, sendSpeedMbs);
+  this->setSendMsg(ch, static_cast<int>(strlen(ch)));
+  this->sendMsg();
+  this->remainBandwidth -= sendSpeedMbs;
   return true;
 }

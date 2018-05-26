@@ -35,7 +35,7 @@ double Flow::getCurrentMbs() const {
 }
 
 void Flow::setCurrentMbs(double currentMbs) {
-    Flow::currentMbs = currentMbs;
+    this->currentMbs = currentMbs;
 }
 const int Flow::getFlowID() const
 {

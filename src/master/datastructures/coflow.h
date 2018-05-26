@@ -24,10 +24,10 @@ typedef FLOWS_MAP_TYPE::iterator FLOWS_MAP_TYPE_IT;
 
 class Coflow {
 public:
-  Coflow(int coflowID, double registerTime)
+  Coflow(int coflowID, long registerTime)
       : coflowID(coflowID), registerTime(registerTime) {
     coflowState = UNREGISTER;
-    endflowNum = 0;
+    end_flow_num_ = 0;
     sended_size_ = 0;
     this->start_time_ = -1;
     this->end_time_ = -1;
@@ -43,8 +43,8 @@ public:
   const int getCoflowID() const;
 
   const double getRegisterTime() const;
-  double getStartTime() const;
-  void setStartTime(double start_time);
+  long getStartTime() const;
+  void setStartTime(long start_time);
 
   void calcCoflowLength();
   void calcCoflowWidth();
@@ -55,8 +55,8 @@ public:
   int getCoflowWidth() const;
   double getCoflowSizeMbit() const;
   double getCoflowSkew() const;
-  double getEndTime() const;
-  void setEndTime(double end_time_);
+  long getEndTime() const;
+  void setEndTime(long end_time_);
   int getEndflowNum() const;
   void setEndflowNum(int endflowNum);
   double getSendedSize() const;
@@ -74,9 +74,9 @@ public:
 
 private:
   const int coflowID;
-  const double registerTime;
-  double start_time_;
-  double end_time_;
+  const long registerTime;
+  long start_time_;
+  long end_time_;
   int coflowState;
 
   double coflow_length_;
@@ -86,7 +86,7 @@ private:
 
   // vector<Flow *> flowCollection;
   FLOWS_MAP_TYPE flowCollection;
-  int endflowNum;
+  int end_flow_num_;
   double sended_size_;
 
 //  int endtime;

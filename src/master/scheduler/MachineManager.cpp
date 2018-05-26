@@ -6,14 +6,16 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
 
 MachineManager::MachineManager() {
   m_logicMachineNum = -1;
   m_physicsMachinesNum = 0;
 }
 
-int MachineManager::addOnePhysicsMachine(char *sockip, int sockport) {
+int MachineManager::addOnePhysicsMachine(char *sockip, int sockport, double bandwidth) {
   Machine *machine = new Machine(m_physicsMachinesNum++, sockip, sockport);
+  machine->setRemainBandwidth(bandwidth);
   m_physicsMachines.push_back(machine);
   updateLogicMap();
   return m_physicsMachinesNum - 1;
@@ -44,61 +46,7 @@ bool MachineManager::sendTask(int coflowID, int flowID, int mapperID,
                               double sendSpeedMbs) {
   Machine *m = m_logicMap[mapperID];
   Machine *r = m_logicMap[reducerID];
-  char ch[100] = "a";
-  memset(ch, '\0', 100);
-  ch[0] = '(';
-  stringstream ss;
-
-  ss << coflowID;
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << flowID;
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << r->getSocketip();
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << r->getSocketport();
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << coflowID;
-  ss << "_";
-  ss << flowID;
-  ss << "_";
-  ss << flowSizeMB;
-  ss << "_";
-  ss << sendSpeedMbs;
-  ss << ".txt";
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << flowSizeMB;
-  ss >> ch + strlen(ch);
-  ss.clear();
-
-  ch[strlen(ch)] = ' ';
-
-  ss << sendSpeedMbs;
-  ss >> ch + strlen(ch);
-  ss.clear();
-  ch[strlen(ch)] = ')';
-  //  cout << ch << endl;
-  m->setSendMsg(ch, strlen(ch));
-  m->sendMsg();
+  m->sendTaskIns(coflowID, flowID, r->getSocketip(), r->getSocketport(), flowSizeMB, sendSpeedMbs);
   return true;
 }
 

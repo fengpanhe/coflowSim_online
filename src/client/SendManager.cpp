@@ -88,7 +88,8 @@ void SendManager::run() {
     // 循环扫描 send_task_running_queue，处理标记SEND_END的task，回传完成信息给master
     for (auto &it : this->send_task_running_queue) {
       if (it->send_state==SEND_END) {
-        sprintf(reply_master_str_tmp, "(%d %d %ld)", it->coflow_id, it->flow_id, it->end_time);
+        sprintf(reply_master_str_tmp, "(%d %d %lf %ld)", it->coflow_id, it->flow_id, it->speed_Mbs,it->end_time);
+        printf("sendTask end: (%d %d %lf %ld)\n", it->coflow_id, it->flow_id, it->speed_Mbs,it->end_time);
         while (!masterSockManger->setSendMsg(reply_master_str_tmp, static_cast<int>(strlen(reply_master_str_tmp))));
         masterSockManger->sendMsg();
         it->send_state = TASK_END;
@@ -130,6 +131,7 @@ bool SendManager::appendTask(char *ins, int ins_len) {
   ss >> send_task->speed_Mbs;
   ss.clear();
   send_task->send_state = SEND_WAIT;
+  printf("append: %d %d %s:%d %lf %lf\n", send_task->coflow_id, send_task->flow_id, send_task->destination_ip, send_task->destination_port, send_task->flow_size_MB, send_task->speed_Mbs);
   wait_queue_locker.lock();
   if (send_task_wait_queue.size() > max_task_number) {
     printf("warning: send_task_queue_size(%d) > max_task_number(%d)",

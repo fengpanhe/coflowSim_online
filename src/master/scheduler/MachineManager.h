@@ -15,7 +15,7 @@ public:
   MachineManager();
 
   // 返回machineID
-  int addOnePhysicsMachine(char *sockip, int sockport);
+  int addOnePhysicsMachine(char *sockip, int sockport, double bandwidth);
   bool startConn();
   Machine *getPhyMachineByMachineID(int machineID);
 

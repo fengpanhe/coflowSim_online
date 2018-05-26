@@ -155,6 +155,7 @@ bool parseMachineDefine(char const *machineDefinePath,
     assert(client.IsObject());
     char client_ip[64];
     int client_port;
+    double bandwidth;
     assert(client.HasMember("ip"));
     assert(client["ip"].IsString());
     ss << client["ip"].GetString();
@@ -166,7 +167,14 @@ bool parseMachineDefine(char const *machineDefinePath,
     ss << client["port"].GetInt();
     ss >> client_port;
     ss.clear();
-    machineManager->addOnePhysicsMachine(client_ip, client_port);
+
+    assert(client.HasMember("bandwidth"));
+    assert(client["bandwidth"].IsDouble());
+    ss << client["bandwidth"].GetDouble();
+    ss >> bandwidth;
+    ss.clear();
+    machineManager->addOnePhysicsMachine(client_ip, client_port, bandwidth);
+    printf("%s %d %lf\n", client_ip, client_port, bandwidth);
   }
 
   //  const Value &clients_ip = document["clients_ip"];
